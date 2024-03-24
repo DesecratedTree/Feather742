@@ -53,6 +53,7 @@ import com.feather.game.player.controlers.NomadsRequiem;
 import com.feather.game.player.controlers.Wilderness;
 import com.feather.game.player.dialogues.MiningGuildDwarf;
 import com.feather.game.player.dialogues.quests.CooksAssistant;
+import com.feather.game.route.RouteEvent;
 import com.feather.game.tasks.WorldTask;
 import com.feather.game.tasks.WorldTasksManager;
 import com.feather.io.InputStream;
@@ -67,61 +68,32 @@ public final class ObjectHandler {
 	}
 
 	public static void handleOption(final Player player, InputStream stream, int option) {
-		if (!player.hasStarted() || !player.clientHasLoadedMapRegion()
-				|| player.isDead())
+		if (!player.hasStarted() || !player.clientHasLoadedMapRegion() || player.isDead()) {
 			return;
-		long currentTime = Utils.currentTimeMillis();
-		if (player.getLockDelay() >= currentTime
-				|| player.getEmotesManager().getNextEmoteEnd() >= currentTime)
+		}
+		if (player.isLocked() || player.getEmotesManager().getNextEmoteEnd() >= Utils.currentTimeMillis()) {
 			return;
+		}
 		boolean forceRun = stream.readUnsignedByte128() == 1;
 		final int id = stream.readIntLE();
 		int x = stream.readUnsignedShortLE();
 		int y = stream.readUnsignedShortLE128();
-		int rotation = 0;
-		if (player.isAtDynamicRegion()) {
-			rotation = World.getRotation(player.getPlane(), x, y);
-			if(rotation == 1) {
-				ObjectDefinitions defs = ObjectDefinitions
-						.getObjectDefinitions(id);
-				y += defs.getSizeY() - 1;
-			}else if(rotation == 2) {
-				ObjectDefinitions defs = ObjectDefinitions
-						.getObjectDefinitions(id);
-				x += defs.getSizeY() - 1;
-			}
-		}
 		final WorldTile tile = new WorldTile(x, y, player.getPlane());
 		final int regionId = tile.getRegionId();
-		if (!player.getMapRegionsIds().contains(regionId))
+		if (!player.getMapRegionsIds().contains(regionId)) {
 			return;
-		WorldObject mapObject = World.getRegion(regionId).getObject(id, tile);
-		if (mapObject == null || mapObject.getId() != id) 
-			return;
-		if (player.isAtDynamicRegion()
-				&& World.getRotation(player.getPlane(), x, y) != 0) { //temp fix
-			ObjectDefinitions defs = ObjectDefinitions
-					.getObjectDefinitions(id);
-			if (defs.getSizeX() > 1 || defs.getSizeY() > 1) {
-				for (int xs = 0; xs < defs.getSizeX() + 1
-						&& (mapObject == null || mapObject.getId() != id); xs++) {
-					for (int ys = 0; ys < defs.getSizeY() + 1
-							&& (mapObject == null || mapObject.getId() != id); ys++) {
-						tile.setLocation(x + xs, y + ys, tile.getPlane());
-						mapObject = World.getRegion(regionId).getObject(id,
-								tile);
-					}
-				}
-			}
-			if (mapObject == null || mapObject.getId() != id)
-				return;
 		}
-		final WorldObject object = !player.isAtDynamicRegion() ? mapObject
-				: new WorldObject(id, mapObject.getType(),
-						(mapObject.getRotation() + rotation % 4), x, y, player.getPlane());
-		player.stopAll(false);
-		if(forceRun)
-			player.setRun(forceRun);
+		final WorldObject object = World.getRegion(regionId).getObject(id, tile);
+		if (object == null || object.getId() != id) {
+			return;
+		}
+		if (forceRun) {
+			player.setRun(true);
+		}
+		player.setRouteEvent(new RouteEvent(object, () -> {
+			player.stopAll();
+			player.faceObject(object);
+		}));
 		switch(option) {
 		case 1:
 			handleOption1(player, object);

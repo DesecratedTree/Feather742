@@ -5,6 +5,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.feather.Settings;
+import com.feather.discord.Discord;
 import com.feather.game.World;
 import com.feather.game.minigames.clanwars.ClanWars;
 import com.feather.game.player.FriendsIgnores;
@@ -15,7 +16,6 @@ import com.feather.utils.SerializableFilesManager;
 import com.feather.utils.Utils;
 
 public class FriendChatsManager {
-
 	private String owner;
 	private String ownerDisplayName;
 	private FriendsIgnores settings;

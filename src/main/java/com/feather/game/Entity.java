@@ -129,6 +129,8 @@ public abstract class Entity extends WorldTile {
 	}
 
 	public abstract void handleIngoingHit(Hit hit);
+
+
 	
 	public void reset(boolean attributes) {
 		setHitpoints(getMaxHitpoints());

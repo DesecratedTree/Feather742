@@ -11,6 +11,7 @@ import com.feather.cache.parser.ItemsEquipIds;
 import com.feather.cache.parser.NPCDefinitions;
 import com.feather.cache.parser.ObjectDefinitions;
 import com.feather.cores.CoresManager;
+import com.feather.discord.Discord;
 import com.feather.game.Region;
 import com.feather.game.RegionBuilder;
 import com.feather.game.World;
@@ -24,48 +25,28 @@ import com.feather.game.player.cutscenes.CutscenesHandler;
 import com.feather.game.player.dialogues.DialogueHandler;
 import com.feather.game.worldlist.WorldList;
 import com.feather.net.ServerChannelHandler;
-import com.feather.utils.DTRank;
-import com.feather.utils.DisplayNames;
-import com.feather.utils.IPBanL;
-import com.feather.utils.ItemBonuses;
-import com.feather.utils.ItemExamines;
-import com.feather.utils.Logger;
-import com.feather.utils.MapArchiveKeys;
-import com.feather.utils.MapAreas;
-import com.feather.utils.MusicHints;
-import com.feather.utils.NPCBonuses;
-import com.feather.utils.NPCCombatDefinitionsL;
-import com.feather.utils.NPCDrops;
-import com.feather.utils.NPCSpawns;
-import com.feather.utils.ObjectSpawns;
-import com.feather.utils.PkRank;
-import com.feather.utils.SerializableFilesManager;
-import com.feather.utils.ShopsHandler;
-import com.feather.utils.Utils;
+import com.feather.utils.*;
 import com.feather.utils.huffman.Huffman;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 
 public final class Launcher {
 
 	public static void main(String[] args) throws Exception {
+
 		Settings.HOSTED = false;
-		  Settings.DEBUG = true;
-		  long currentTime = Utils.currentTimeMillis();
-		  if (Settings.HOSTED) {
-		   // System.setErr(new PrintStream(new
-		   // FileOutputStream("data/auto/err.txt")));
-		   // System.setOut(new PrintStream(new
-		   // FileOutputStream("data/auto/out.txt")));
-		  }
-		  Logger.log("Launcher", "Initing Cache...");
-		  Cache.init();
-		  ItemsEquipIds.init();
-		  Huffman.init();
-		  Logger.log("Launcher", "Initing Data Files...");
-		  DisplayNames.init();
-		  IPBanL.init();
-		  PkRank.init();
-		  DTRank.init();
-		  MapArchiveKeys.init();
+		Settings.DEBUG = true;
+		long currentTime = Utils.currentTimeMillis();
+
+		Logger.log("Launcher", "Initing Cache...");
+		Cache.init();
+		ItemsEquipIds.init();
+		Huffman.init();
+		Logger.log("Launcher", "Initing Data Files...");
+		DisplayNames.init();
+		IPBanL.init();
+		PkRank.init();
+		DTRank.init();
+		MapArchiveKeys.init();
 		MapAreas.init();
 		ObjectSpawns.init();
 		NPCSpawns.init();
@@ -73,6 +54,7 @@ public final class Launcher {
 		NPCBonuses.init();
 		NPCDrops.init();
 		ItemExamines.init();
+
 		ItemBonuses.init();
 		MusicHints.init();
 		ShopsHandler.init();
@@ -115,6 +97,8 @@ public final class Launcher {
 		if (Settings.HOSTED)
 			addUpdatePlayersOnlineTask();
 		addCleanMemoryTask();
+		/*Logger.log("Launcher", "Initing Discord Bot...");
+		Discord.init();*/
 		// Donations.init();
 	}
 

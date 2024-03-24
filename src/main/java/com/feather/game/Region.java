@@ -1053,4 +1053,7 @@ public class Region {
 		this.loadedNPCSpawns = loadedNPCSpawns;
 	}
 
+	public RegionMap getRegionMap() {
+		return map;
+	}
 }

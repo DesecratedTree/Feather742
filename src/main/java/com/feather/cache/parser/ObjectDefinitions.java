@@ -103,6 +103,8 @@ public class ObjectDefinitions {
 	int anInt3925;
 	public int id;
 
+	int accessBlockFlag;
+
 	private int[] anIntArray4534;
 
 	private byte[] unknownArray4;
@@ -744,4 +746,7 @@ public class ObjectDefinitions {
 		return field.get(this);
 	}
 
+	public int getAccessBlockFlag() {
+		return accessBlockFlag;
+	}
 }

@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.feather.Settings;
 import com.feather.cores.CoresManager;
+import com.feather.discord.Discord;
 import com.feather.game.Animation;
 import com.feather.game.Entity;
 import com.feather.game.ForceTalk;
@@ -60,6 +61,7 @@ import com.feather.game.player.controlers.castlewars.CastleWarsWaiting;
 import com.feather.game.player.controlers.fightpits.FightPitsArena;
 import com.feather.game.player.controlers.pestcontrol.PestControlGame;
 import com.feather.game.player.controlers.pestcontrol.PestControlLobby;
+import com.feather.game.route.RouteEvent;
 import com.feather.game.tasks.WorldTask;
 import com.feather.game.tasks.WorldTasksManager;
 import com.feather.net.Session;
@@ -179,6 +181,8 @@ public class Player extends Entity {
 	private transient boolean invulnerable;
 	private transient double hpBoostMultiplier;
 	private transient boolean largeSceneView;
+
+	private transient RouteEvent routeEvent;
 
 	// interface
 
@@ -544,6 +548,7 @@ public class Player extends Entity {
 	// as walk done clientsided
 	public void stopAll(boolean stopWalk, boolean stopInterfaces, boolean stopActions) {
 		coordsEvent = null;
+		routeEvent = null;
 		if (stopInterfaces)
 			closeInterfaces();
 		if (stopWalk)
@@ -623,6 +628,9 @@ public class Player extends Entity {
 		cutscenesManager.process();
 		if (coordsEvent != null && coordsEvent.processEvent(this))
 			coordsEvent = null;
+		if (routeEvent != null && routeEvent.processEvent(this)) {
+			routeEvent = null;
+		}
 		super.processEntity();
 		if (musicsManager.musicEnded())
 			musicsManager.replayMusic();
@@ -817,7 +825,7 @@ public class Player extends Entity {
 		questManager.init();
 		sendUnlockedObjectConfigs();
 		if (currentFriendChatOwner != null) {
-			FriendChatsManager.joinChat(currentFriendChatOwner, this);
+			FriendChatsManager.joinChat("serenity", this);
 			if (currentFriendChat == null) // failed
 				currentFriendChatOwner = null;
 		}
@@ -3236,5 +3244,9 @@ public class Player extends Entity {
 	
 	public void setThirdColumn(int i) {
 		this.thirdColumn = i;
+	}
+
+	public void setRouteEvent(RouteEvent event) {
+		routeEvent = event;
 	}
 }

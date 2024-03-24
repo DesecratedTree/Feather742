@@ -21,10 +21,12 @@ import com.feather.game.player.actions.thieving.PickPocketAction;
 import com.feather.game.player.actions.thieving.PickPocketableNPC;
 import com.feather.game.player.content.PlayerLook;
 import com.feather.game.player.dialogues.FremennikShipmaster;
+import com.feather.game.route.RouteEvent;
 import com.feather.io.InputStream;
 import com.feather.utils.Logger;
 import com.feather.utils.NPCSpawns;
 import com.feather.utils.ShopsHandler;
+import okhttp3.Route;
 
 public class NPCHandler {
 
@@ -79,7 +81,7 @@ public class NPCHandler {
 		}
 		if(SiphonActionCreatures.siphon(player, npc)) 
 			return;
-		player.setCoordsEvent(new CoordsEvent(npc, new Runnable() {
+		player.setRouteEvent(new RouteEvent(npc, new Runnable() {
 			@Override
 			public void run() {
 				npc.resetWalkSteps();
@@ -96,6 +98,7 @@ public class NPCHandler {
 				}
 				npc.faceEntity(player);
 				if (npc.getId() == 3709)
+					if (!player.withinDistance(npc, 2))
 					player.getDialogueManager().startDialogue("MrEx",
 							npc.getId());
 				else if (npc.getId() == 5532)
@@ -242,7 +245,7 @@ public class NPCHandler {
 								+ npc.getY() + ", " + npc.getPlane());
 				}
 			}
-		}, npc.getSize()));
+		}));
 	}
 
 	public static void handleOption2(final Player player, InputStream stream) {
@@ -265,7 +268,7 @@ public class NPCHandler {
 			player.getBank().openBank();
 			return;
 		}
-		player.setCoordsEvent(new CoordsEvent(npc, new Runnable() {
+		player.setRouteEvent(new RouteEvent(npc, new Runnable() {
 			@Override
 			public void run() {
 				npc.resetWalkSteps();
@@ -378,7 +381,7 @@ public class NPCHandler {
 								+ npc.getY() + ", " + npc.getPlane());
 				}
 			}
-		}, npc.getSize()));
+		}));
 	}
 
 	public static void handleOption3(final Player player, InputStream stream) {
@@ -392,7 +395,8 @@ public class NPCHandler {
 		player.stopAll(false);
 		if(forceRun)
 			player.setRun(forceRun);
-		player.setCoordsEvent(new CoordsEvent(npc, new Runnable() {
+
+			player.setCoordsEvent(new CoordsEvent(npc, new Runnable() {
 			@Override
 			public void run() {
 				npc.resetWalkSteps();

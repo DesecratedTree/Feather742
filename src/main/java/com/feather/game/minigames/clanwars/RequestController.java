@@ -7,6 +7,7 @@ import com.feather.game.minigames.clanwars.ClanWars.Rules;
 import com.feather.game.player.CoordsEvent;
 import com.feather.game.player.Player;
 import com.feather.game.player.controlers.Controler;
+import com.feather.game.route.RouteEvent;
 
 /**
  * A controller subclass handling the clan wars requesting.
@@ -201,7 +202,7 @@ public final class RequestController extends Controler {
 	@Override
 	public boolean canPlayerOption1(final Player target) {
 		player.stopAll(false);
-		player.setCoordsEvent(new CoordsEvent(target, new Runnable() {
+		player.setRouteEvent(new RouteEvent(target, new Runnable() {
 			@Override
 			public void run() {
 				if (!canRequest(player, target, true)) {
@@ -229,7 +230,7 @@ public final class RequestController extends Controler {
 				target.getPackets().sendClanWarsRequestMessage(player);
 				player.getPackets().sendGameMessage("Sending challenge request...");
 			}			
-		}, player.getSize()));
+		}));
 		return true;
 	}
 	
