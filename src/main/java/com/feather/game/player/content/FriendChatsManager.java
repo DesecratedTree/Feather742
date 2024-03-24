@@ -5,7 +5,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.feather.Settings;
-import com.feather.discord.Discord;
 import com.feather.game.World;
 import com.feather.game.minigames.clanwars.ClanWars;
 import com.feather.game.player.FriendsIgnores;

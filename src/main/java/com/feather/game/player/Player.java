@@ -13,7 +13,6 @@ import java.util.concurrent.TimeUnit;
 
 import com.feather.Settings;
 import com.feather.cores.CoresManager;
-import com.feather.discord.Discord;
 import com.feather.game.Animation;
 import com.feather.game.Entity;
 import com.feather.game.ForceTalk;

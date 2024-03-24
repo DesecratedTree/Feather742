@@ -11,7 +11,6 @@ import com.feather.cache.parser.ItemsEquipIds;
 import com.feather.cache.parser.NPCDefinitions;
 import com.feather.cache.parser.ObjectDefinitions;
 import com.feather.cores.CoresManager;
-import com.feather.discord.Discord;
 import com.feather.game.Region;
 import com.feather.game.RegionBuilder;
 import com.feather.game.World;
