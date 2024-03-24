@@ -17,8 +17,6 @@ public class DialogueManager {
 			return;
 		if (lastDialogue != null)
 			lastDialogue.finish();
-		if (!player.withinDistance(player., 1))
-			return;
 		lastDialogue = DialogueHandler.getDialogue(key);
 		if (lastDialogue == null)
 			return;
