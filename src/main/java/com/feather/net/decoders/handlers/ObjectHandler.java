@@ -68,51 +68,71 @@ public final class ObjectHandler {
 	}
 
 	public static void handleOption(final Player player, InputStream stream, int option) {
-		if (!player.hasStarted() || !player.clientHasLoadedMapRegion() || player.isDead()) {
+		if (!canInteract(player)) {
 			return;
 		}
-		if (player.isLocked() || player.getEmotesManager().getNextEmoteEnd() >= Utils.currentTimeMillis()) {
-			return;
-		}
+
 		boolean forceRun = stream.readUnsignedByte128() == 1;
-		final int id = stream.readIntLE();
+		int objectId = stream.readIntLE();
 		int x = stream.readUnsignedShortLE();
 		int y = stream.readUnsignedShortLE128();
-		final WorldTile tile = new WorldTile(x, y, player.getPlane());
-		final int regionId = tile.getRegionId();
-		if (!player.getMapRegionsIds().contains(regionId)) {
+
+		WorldTile tile = new WorldTile(x, y, player.getPlane());
+		if (!isWithinMapRegion(player, tile)) {
 			return;
 		}
-		final WorldObject object = World.getRegion(regionId).getObject(id, tile);
-		if (object == null || object.getId() != id) {
+
+		WorldObject object = getObject(player, objectId, tile);
+		if (object == null) {
 			return;
 		}
+
 		if (forceRun) {
 			player.setRun(true);
 		}
+
 		player.setRouteEvent(new RouteEvent(object, () -> {
 			player.stopAll();
 			player.faceObject(object);
+			handleOptionAction(player, option, object);
 		}));
+	}
+
+	private static boolean canInteract(Player player) {
+		return player.hasStarted() && player.clientHasLoadedMapRegion() && !player.isDead() &&
+				!player.isLocked() && player.getEmotesManager().getNextEmoteEnd() < Utils.currentTimeMillis();
+	}
+
+	private static boolean isWithinMapRegion(Player player, WorldTile tile) {
+		int regionId = tile.getRegionId();
+		return player.getMapRegionsIds().contains(regionId);
+	}
+
+	private static WorldObject getObject(Player player, int objectId, WorldTile tile) {
+		int regionId = tile.getRegionId();
+		return World.getRegion(regionId).getObject(objectId, tile);
+	}
+
+	private static void handleOptionAction(Player player, int option, WorldObject object) {
 		switch(option) {
-		case 1:
-			handleOption1(player, object);
-			break;
-		case 2:
-			handleOption2(player, object);
-			break;
-		case 3:
-			handleOption3(player, object);
-			break;
-		case 4:
-			handleOption4(player, object);
-			break;
-		case 5:
-			handleOption5(player, object);
-			break;
-		case -1:
-			handleOptionExamine(player, object);
-			break;
+			case 1:
+				handleOption1(player, object);
+				break;
+			case 2:
+				handleOption2(player, object);
+				break;
+			case 3:
+				handleOption3(player, object);
+				break;
+			case 4:
+				handleOption4(player, object);
+				break;
+			case 5:
+				handleOption5(player, object);
+				break;
+			case -1:
+				handleOptionExamine(player, object);
+				break;
 		}
 	}
 
