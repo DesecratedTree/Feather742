@@ -12,3 +12,4 @@ data/cache.zip
 /gradle
 gradlew
 gradlew.bat
+/data/npcs/packedSpawns
