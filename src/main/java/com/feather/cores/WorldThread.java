@@ -8,7 +8,7 @@ public final class WorldThread extends Thread {
 
     public static long LAST_CYCLE_CTM = Utils.currentTimeMillis();
 
-    protected WorldThread() {
+    WorldThread() {
         setPriority(Thread.MAX_PRIORITY);
         setName("World Thread");
     }

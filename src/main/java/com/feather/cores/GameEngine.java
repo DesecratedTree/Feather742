@@ -6,6 +6,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import com.feather.Settings;
 import com.feather.cores.events.EventBus;
 import com.feather.cores.events.GameLifecycle;
 import com.feather.cores.processes.*;
@@ -100,10 +101,12 @@ public final class GameEngine {
      * Main game cycle - implements correct order of operations
      */
     public static void tick() {
-        if (shutdown) return;
 
+        final boolean TICKDEBUG = true;
+        if (shutdown) return;
         currentTickNumber++;
-        Logger.log("Game Engine", "Starting tick #" + currentTickNumber);
+
+        if (TICKDEBUG) Logger.log("Game Engine", "Starting tick #" + currentTickNumber);
 
         try {
             // Start of cycle
@@ -124,7 +127,7 @@ public final class GameEngine {
             // End of cycle
             eventBus.publish(GameLifecycle.END_CYCLE);
 
-            Logger.log("Game Engine", "Completed tick #" + currentTickNumber);
+            if (TICKDEBUG) Logger.log("Game Engine", "Completed tick #" + currentTickNumber);
 
         } catch (Exception e) {
             Logger.log("Game Engine", "Error during game tick #" + currentTickNumber + ": " + e.getMessage());
