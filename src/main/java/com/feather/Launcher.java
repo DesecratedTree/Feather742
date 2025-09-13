@@ -1,6 +1,5 @@
 package com.feather;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
@@ -11,7 +10,7 @@ import com.feather.cache.parser.ItemDefinitions;
 import com.feather.cache.parser.ItemsEquipIds;
 import com.feather.cache.parser.NPCDefinitions;
 import com.feather.cache.parser.ObjectDefinitions;
-import com.feather.cores.CoresManager;
+import com.feather.cores.GameEngine;
 import com.feather.game.Region;
 import com.feather.game.RegionBuilder;
 import com.feather.game.World;
@@ -34,9 +33,6 @@ public final class Launcher {
 		Settings.HOSTED = false;
 		Settings.DEBUG = true;
 		long currentTime = Utils.currentTimeMillis();
-		if (Settings.HOSTED) {
-
-		}
 		Logger.log("Launcher", "Initing Cache...");
 		Cache.init();
 		ItemsEquipIds.init();
@@ -74,7 +70,7 @@ public final class Launcher {
 		Logger.log("Launcher", "Initing Friend Chats Manager...");
 		FriendChatsManager.init();
 		Logger.log("Launcher", "Initing Cores Manager...");
-		CoresManager.init();
+		GameEngine.init();
 		Logger.log("Launcher", "Initing World...");
 		World.init();
 		Logger.log("Launcher", "Initing Region Builder...");
@@ -106,7 +102,7 @@ public final class Launcher {
 	}
 
 	private static void addUpdatePlayersOnlineTask() {
-		CoresManager.slowExecutor.scheduleWithFixedDelay(new Runnable() {
+		GameEngine.slowExecutor.scheduleWithFixedDelay(new Runnable() {
 			@Override
 			public void run() {
 				try {
@@ -119,7 +115,7 @@ public final class Launcher {
 	}
 
 	private static void addCleanMemoryTask() {
-		CoresManager.slowExecutor.scheduleWithFixedDelay(new Runnable() {
+		GameEngine.slowExecutor.scheduleWithFixedDelay(new Runnable() {
 			@Override
 			public void run() {
 				try {
@@ -132,7 +128,7 @@ public final class Launcher {
 	}
 
 	private static void addAccountsSavingTask() {
-		CoresManager.slowExecutor.scheduleWithFixedDelay(new Runnable() {
+		GameEngine.slowExecutor.scheduleWithFixedDelay(new Runnable() {
 			@Override
 			public void run() {
 				try {
@@ -167,7 +163,7 @@ public final class Launcher {
 		}
 		for (Index index : Cache.STORE.getIndexes())
 			index.resetCachedFiles();
-		CoresManager.fastExecutor.purge();
+		GameEngine.fastExecutor.purge();
 		System.gc();
 	}
 
@@ -181,7 +177,7 @@ public final class Launcher {
 
 	public static void closeServices() {
 		ServerChannelHandler.shutdown();
-		CoresManager.shutdown();
+		GameEngine.shutdown();
 		if (Settings.HOSTED) {
 			try {
 				setWebsitePlayersOnline(0);

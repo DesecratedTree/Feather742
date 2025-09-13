@@ -6,7 +6,7 @@ import java.util.BitSet;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import com.feather.cores.CoresManager;
+import com.feather.cores.GameEngine;
 import com.feather.game.RegionBuilder;
 import com.feather.game.WorldObject;
 import com.feather.game.WorldTile;
@@ -338,7 +338,7 @@ public final class ClanWars implements Serializable {
 	public void accept(final Player player) {
 		final Player other = (Player) player.getTemporaryAttributtes().get("clan_request_p");
 		if (other != null && (Boolean) other.getTemporaryAttributtes().get("accepted_war_terms") == Boolean.TRUE) {
-			CoresManager.slowExecutor.submit(new Runnable() {
+			GameEngine.slowExecutor.submit(new Runnable() {
 				@Override
 				public void run() {
 					player.getTemporaryAttributtes().remove("accepted_war_terms");
@@ -368,7 +368,7 @@ public final class ClanWars implements Serializable {
 							newCoords[0], newCoords[1], width, height);
 					baseLocation = new WorldTile(newCoords[0] << 3, newCoords[1] << 3, 0);
 					WallHandler.loadWall(ClanWars.this);
-					CoresManager.fastExecutor.scheduleAtFixedRate(timer = new ClanWarsTimer(ClanWars.this), 600, 600);
+					GameEngine.fastExecutor.scheduleAtFixedRate(timer = new ClanWarsTimer(ClanWars.this), 600, 600);
 					enter(player);
 					enter(other);
 					currentWars.add(ClanWars.this);
@@ -418,7 +418,7 @@ public final class ClanWars implements Serializable {
 				c.timer.refresh(p, false);
 			}
 			p.getControlerManager().startControler("clan_war", c);
-			CoresManager.slowExecutor.submit(new Runnable() {
+			GameEngine.slowExecutor.submit(new Runnable() {
 				@Override
 				public void run() {
 					for (Player player : c.firstPlayers) {
@@ -584,7 +584,7 @@ public final class ClanWars implements Serializable {
 		for (Player player : secondTeam.getPlayers()) {
 			player.getPackets().sendGameMessage(secondMessage);
 		}
-		CoresManager.slowExecutor.schedule(new Runnable() {
+		GameEngine.slowExecutor.schedule(new Runnable() {
 			@Override
 			public void run() {
 				int width = (areaType.getNorthEastTile().getX() - areaType.getSouthWestTile().getX()) / 8 + 1;

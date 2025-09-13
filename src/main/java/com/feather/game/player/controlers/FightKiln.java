@@ -4,7 +4,7 @@ import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 import com.feather.cache.parser.NPCDefinitions;
-import com.feather.cores.CoresManager;
+import com.feather.cores.GameEngine;
 import com.feather.game.*;
 import com.feather.game.item.Item;
 import com.feather.game.npc.NPC;
@@ -187,7 +187,7 @@ public class FightKiln extends Controler {
 		Runnable event = new Runnable() {
 			@Override
 			public void run() {
-				CoresManager.slowExecutor.execute(new Runnable() {
+				GameEngine.slowExecutor.execute(new Runnable() {
 					@Override
 					public void run() {
 						int currentWave = getCurrentWave();
@@ -267,7 +267,7 @@ public class FightKiln extends Controler {
 									HarAken harAken = new HarAken(15211, getWorldTile(45, 26), kiln);
 									harAken.spawn();
 									harAken.sendDeath(player);
-									CoresManager.fastExecutor.schedule(new TimerTask() {
+									GameEngine.fastExecutor.schedule(new TimerTask() {
 										@Override
 										public void run() {
 											try {
@@ -552,7 +552,7 @@ public class FightKiln extends Controler {
 		aliveNPCSCount = WAVES[currentWave-1].length;
 		for(int i = 0; i <  WAVES[currentWave-1].length; i += 4) {
 			final int next = i;
-			CoresManager.fastExecutor.schedule(new TimerTask() {
+			GameEngine.fastExecutor.schedule(new TimerTask() {
 				@Override
 				public void run() {
 					try {
@@ -699,7 +699,7 @@ public class FightKiln extends Controler {
 
 
 	public void setWaveEvent() {
-		CoresManager.fastExecutor.schedule(new TimerTask() {
+		GameEngine.fastExecutor.schedule(new TimerTask() {
 
 			@Override
 			public void run() {
@@ -788,7 +788,7 @@ public class FightKiln extends Controler {
 		/*
 		 * 1200 delay because of leaving
 		 */
-		CoresManager.slowExecutor.schedule(new Runnable() {
+		GameEngine.slowExecutor.schedule(new Runnable() {
 			@Override
 			public void run() {
 				RegionBuilder.destroyMap(boundChuncks[0], boundChuncks[1], 8, 8);
@@ -887,7 +887,7 @@ public class FightKiln extends Controler {
 			player.getPackets().sendGameMessage("<col=7E2217>>The power of this crystal makes you invulnerable.");
 			player.getTemporaryAttributtes().put("FightKilnCrystal", Boolean.TRUE);
 			player.setInvulnerable(true);
-			CoresManager.slowExecutor.schedule(new Runnable() {
+			GameEngine.slowExecutor.schedule(new Runnable() {
 				@Override
 				public void run() {
 					player.getTemporaryAttributtes().remove("FightKilnCrystal");
@@ -916,7 +916,7 @@ public class FightKiln extends Controler {
 			player.getEquipment().refreshConfigs(false);
 			player.heal(player.getSkills().getLevelForXp(Skills.HITPOINTS) * 5);
 			player.getPackets().sendGameMessage("<col=7E2217>The power of this crystal improves your Constitution.");
-			CoresManager.slowExecutor.schedule(new Runnable() {
+			GameEngine.slowExecutor.schedule(new Runnable() {
 
 				@Override
 				public void run() {
@@ -943,7 +943,7 @@ public class FightKiln extends Controler {
 			player.getPackets().sendGameMessage("<col=7E2217>The power of the crystal improves your Magic prowess, at the expense of your Defence, Strength and Ranged ability.");
 		else if(skill == Skills.STRENGTH)
 			player.getPackets().sendGameMessage("<col=7E2217>The power of the crystal improves your Strength prowess, at the expense of your Defence, Ranged and Magical ability.");
-		CoresManager.fastExecutor.schedule(new TimerTask() {
+		GameEngine.fastExecutor.schedule(new TimerTask() {
 
 			private int count;
 			@Override
@@ -993,7 +993,7 @@ public class FightKiln extends Controler {
 		harAken.resetTimer();
 		harAken.setCantInteract(true);
 		harAken.setNextAnimation(new Animation(16234));
-		CoresManager.fastExecutor.schedule(new TimerTask() {
+		GameEngine.fastExecutor.schedule(new TimerTask() {
 
 			@Override
 			public void run() {

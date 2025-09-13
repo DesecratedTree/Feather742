@@ -2,7 +2,7 @@ package com.feather.game;
 
 import com.feather.Settings;
 import com.feather.cache.parser.ObjectDefinitions;
-import com.feather.cores.CoresManager;
+import com.feather.cores.GameEngine;
 import com.feather.utils.Logger;
 
 public class DynamicRegion extends Region {
@@ -65,7 +65,7 @@ public class DynamicRegion extends Region {
 			setLoadMapStage(1);
 			// lets use slow executor, if we take 1-3sec to load objects who
 			// cares? what maters are the players on the loaded regions lul
-			CoresManager.slowExecutor.execute(new Runnable() {
+			GameEngine.slowExecutor.execute(new Runnable() {
 				@Override
 				public void run() {
 					try {

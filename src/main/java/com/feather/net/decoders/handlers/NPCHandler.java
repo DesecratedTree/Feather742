@@ -38,11 +38,11 @@ public class NPCHandler {
 		if (npc == null || npc.hasFinished()
 				|| !player.getMapRegionsIds().contains(npc.getRegionId()))
 			return;
-		if (player.getRights() > 1) {
-			player.getPackets().sendGameMessage(
-					"FeatherNPC - ID is " + npc.getId() + ", location is " + npc.getX() + " - " + npc.getY() + " - " + npc.getPlane() + ".");}
+		if ((player.getRights() == 2) && Settings.DEBUG){
+            player.sendMessage("NPC ID: " + npc.getId() + " | Name: " + npc.getName().toLowerCase());
+            player.sendMessage("HP: " + npc.getCombatDefinitions().getHitpoints());
+        }
         player.getPackets().sendGameMessage(NPCExamines.getExamine(npc));
-        player.getPackets().sendGameMessage("NPC HP: " + npc.getCombatDefinitions().getHitpoints());
 		if(player.isSpawnsMode()) {
 			try {
 				if(NPCSpawns.removeSpawn(npc)) {
@@ -54,8 +54,6 @@ public class NPCHandler {
 			}
 			player.getPackets().sendGameMessage("Failed removing spawn!");
 		}
-		if (Settings.DEBUG)
-			Logger.log("NPCHandler", "examined npc: " + npcIndex+", "+npc.getId());
 	}
 	
 	public static void handleOption1(final Player player, InputStream stream) {

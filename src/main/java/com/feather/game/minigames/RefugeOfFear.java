@@ -7,7 +7,7 @@ import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 import com.feather.cache.parser.ItemDefinitions;
-import com.feather.cores.CoresManager;
+import com.feather.cores.GameEngine;
 import com.feather.game.*;
 import com.feather.game.Hit.HitLook;
 import com.feather.game.item.Item;
@@ -84,7 +84,7 @@ public final class RefugeOfFear extends Controler {
 			player.getControlerManager().removeControlerWithoutCheck();
 			return;
 		}
-		CoresManager.slowExecutor.schedule(new Runnable() {
+		GameEngine.slowExecutor.schedule(new Runnable() {
 			@Override
 			public void run() {
 				boundChunks = RegionBuilder.findEmptyChunkBound(3, 3);
@@ -232,7 +232,7 @@ public final class RefugeOfFear extends Controler {
 			}
 			player.setNextAnimation(new Animation(881));
 			player.getPackets().sendGameMessage("You try to open the rusty lock with the key...");
-			CoresManager.fastExecutor.schedule(new TimerTask() {
+			GameEngine.fastExecutor.schedule(new TimerTask() {
 				@Override
 				public void run() {
 					if (!player.getInventory().containsItem(finalKey, 1)) {
@@ -345,7 +345,7 @@ public final class RefugeOfFear extends Controler {
 		player.getInterfaceManager().sendMagicBook();
 		player.getInterfaceManager().sendEmotes();
 		removeNPCs();
-		CoresManager.slowExecutor.schedule(new Runnable() {
+		GameEngine.slowExecutor.schedule(new Runnable() {
 			@Override
 			public void run() {
 				RegionBuilder.destroyMap(boundChunks[0], boundChunks[1], 4, 3);

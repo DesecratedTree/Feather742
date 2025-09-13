@@ -1,89 +1,34 @@
 package com.feather.cores;
 
 import com.feather.Settings;
-import com.feather.game.World;
-import com.feather.game.npc.NPC;
-import com.feather.game.player.Player;
-import com.feather.game.tasks.WorldTasksManager;
 import com.feather.utils.Logger;
 import com.feather.utils.Utils;
 
 public final class WorldThread extends Thread {
 
-	protected WorldThread() {
-		setPriority(Thread.MAX_PRIORITY);
-		setName("World Thread");
-	}
+    public static long LAST_CYCLE_CTM = Utils.currentTimeMillis();
 
-	@Override
-	public final void run() {
-		while (!CoresManager.shutdown) {
-			long currentTime = Utils.currentTimeMillis();
-			try {
-				// long debug = Utils.currentTimeMillis();
-				WorldTasksManager.processTasks();
-				// System.out.print("TASKS: "+(Utils.currentTimeMillis()-debug));
-				// debug = Utils.currentTimeMillis();
-				for (Player player : World.getPlayers()) {
-					if (player == null || !player.hasStarted()
-							|| player.hasFinished())
-						continue;
-					if (currentTime - player.getPacketsDecoderPing() > Settings.MAX_PACKETS_DECODER_PING_DELAY
-							&& player.getSession().getChannel().isOpen())
-						player.getSession().getChannel().close();
-					player.processEntity();
-				}
-				// System.out.print(" ,PLAYERS PROCESS: "+(Utils.currentTimeMillis()-debug));
-				// debug = Utils.currentTimeMillis();
-				for (NPC npc : World.getNPCs()) {
-					if (npc == null || npc.hasFinished())
-						continue;
-					npc.processEntity();
-				}
-			} catch (Throwable e) {
-				Logger.handle(e);
-			}
-			try {
-				// System.out.print(" ,NPCS PROCESS: "+(Utils.currentTimeMillis()-debug));
-				// debug = Utils.currentTimeMillis();
+    protected WorldThread() {
+        setPriority(Thread.MAX_PRIORITY);
+        setName("World Thread");
+    }
 
-				for (Player player : World.getPlayers()) {
-					if (player == null || !player.hasStarted()
-							|| player.hasFinished())
-						continue;
-					player.getPackets().sendLocalPlayersUpdate();
-					player.getPackets().sendLocalNPCsUpdate();
-				}
-				// System.out.print(" ,PLAYER UPDATE: "+(Utils.currentTimeMillis()-debug)+", "+World.getPlayers().size()+", "+World.getNPCs().size());
-				// debug = Utils.currentTimeMillis();
-				for (Player player : World.getPlayers()) {
-					if (player == null || !player.hasStarted()
-							|| player.hasFinished())
-						continue;
-					player.resetMasks();
-				}
-				for (NPC npc : World.getNPCs()) {
-					if (npc == null || npc.hasFinished())
-						continue;
-					npc.resetMasks();
-				}
-			} catch (Throwable e) {
-				Logger.handle(e);
-			}
-			// System.out.println(" ,TOTAL: "+(Utils.currentTimeMillis()-currentTime));
-			LAST_CYCLE_CTM = Utils.currentTimeMillis();
-			long sleepTime = Settings.WORLD_CYCLE_TIME + currentTime
-					- LAST_CYCLE_CTM;
-			if (sleepTime <= 0)
-				continue;
-			try {
-				Thread.sleep(sleepTime);
-			} catch (InterruptedException e) {
-				Logger.handle(e);
-			}
-		}
-	}
+    @Override
+    public final void run() {
+        Logger.log("WorldThread", "Legacy WorldThread started - GameEngine will handle game loop");
 
-	public static long LAST_CYCLE_CTM;
+        // This thread now serves as a legacy compatibility layer
+        // The actual game processing is handled by GameEngine
+        while (!GameEngine.shutdown) {
+            try {
+                // Just sleep to keep the thread alive for legacy compatibility
+                Thread.sleep(Settings.WORLD_CYCLE_TIME);
+            } catch (InterruptedException e) {
+                Logger.handle(e);
+                break;
+            }
+        }
 
+        Logger.log("WorldThread", "Legacy WorldThread stopped");
+    }
 }

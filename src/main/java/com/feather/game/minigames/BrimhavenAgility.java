@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TimerTask;
 
-import com.feather.cores.CoresManager;
+import com.feather.cores.GameEngine;
 import com.feather.game.Animation;
 import com.feather.game.ForceMovement;
 import com.feather.game.WorldObject;
@@ -48,8 +48,8 @@ public final class BrimhavenAgility extends Controler {
 
 	private static void startGame() {
 		//starts at 0 so that it selects a taggedDispenser
-		CoresManager.fastExecutor.scheduleAtFixedRate(currentGame = new PlayingGame(), 0, 60000);
-		CoresManager.fastExecutor.scheduleAtFixedRate(bladesManager = new BladesManager(), 5000, 5000); //TODO right time atm they move each 5seconds
+		GameEngine.fastExecutor.scheduleAtFixedRate(currentGame = new PlayingGame(), 0, 60000);
+		GameEngine.fastExecutor.scheduleAtFixedRate(bladesManager = new BladesManager(), 5000, 5000); //TODO right time atm they move each 5seconds
 	}
 
 	private static void cancelGame() {

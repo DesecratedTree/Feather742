@@ -3,7 +3,7 @@ package com.feather.game.player.controlers;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import com.feather.cores.CoresManager;
+import com.feather.cores.GameEngine;
 import com.feather.game.*;
 import com.feather.game.npc.NPC;
 import com.feather.game.npc.nomad.Nomad;
@@ -313,7 +313,7 @@ public class NomadsRequiem extends Controler {
 	public void enter(final DungeonPart part, final int doorIndex) {
 		player.lock();
 		final long time = FadingScreen.fade(player);
-		CoresManager.slowExecutor.execute(new Runnable() {
+		GameEngine.slowExecutor.execute(new Runnable() {
 			@Override
 			public void run() {
 				try {
@@ -344,7 +344,7 @@ public class NomadsRequiem extends Controler {
 	
 	public void destroyPart(final int[] mapBaseChunks, final DungeonPart part) {
 		 //since it will change after
-		CoresManager.slowExecutor.schedule(new Runnable() {
+		GameEngine.slowExecutor.schedule(new Runnable() {
 			@Override
 			public void run() {
 				RegionBuilder.destroyMap(mapBaseChunks[0], mapBaseChunks[1], part.sizeX, part.sizeY);

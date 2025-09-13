@@ -12,7 +12,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
 
 import com.feather.Settings;
-import com.feather.cores.CoresManager;
+import com.feather.cores.GameEngine;
 import com.feather.game.*;
 import com.feather.game.Hit.HitLook;
 import com.feather.game.item.FloorItem;
@@ -1001,7 +1001,7 @@ public class Player extends Entity {
 		}
 		long currentTime = Utils.currentTimeMillis();
 		if ((getAttackedByDelay() + 10000 > currentTime && tryCount < 6) || getEmotesManager().getNextEmoteEnd() >= currentTime || lockDelay >= currentTime) {
-			CoresManager.slowExecutor.schedule(new Runnable() {
+			GameEngine.slowExecutor.schedule(new Runnable() {
 				@Override
 				public void run() {
 					try {
@@ -3225,5 +3225,9 @@ public class Player extends Entity {
 
     public RouteEvent getRouteEvent() {
         return routeEvent;
+    }
+
+    public void sendMessage(String message) {
+        getPackets().sendGameMessage(message);
     }
 }

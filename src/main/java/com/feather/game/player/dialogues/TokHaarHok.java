@@ -2,7 +2,7 @@ package com.feather.game.player.dialogues;
 
 import java.util.TimerTask;
 
-import com.feather.cores.CoresManager;
+import com.feather.cores.GameEngine;
 import com.feather.game.WorldTile;
 import com.feather.game.player.controlers.FightKiln;
 import com.feather.game.player.cutscenes.Cutscene;
@@ -101,7 +101,7 @@ public class TokHaarHok extends Dialogue {
 				WorldTile posTile = fightKiln.getWorldTile(37, 45);
 				player.getPackets().sendCameraPos(Cutscene.getX(player, posTile.getX()),
 						Cutscene.getY(player, posTile.getY()), 3000);
-				CoresManager.fastExecutor.schedule(new TimerTask() {
+				GameEngine.fastExecutor.schedule(new TimerTask() {
 					@Override
 					public void run() {
 						try {
@@ -156,7 +156,7 @@ public class TokHaarHok extends Dialogue {
 				stage = 1;
 				fightKiln.showHarAken();
 				player.getInterfaceManager().closeChatBoxInterface();
-				CoresManager.fastExecutor.schedule(new TimerTask() {
+				GameEngine.fastExecutor.schedule(new TimerTask() {
 					@Override
 					public void run() {
 						try {
@@ -170,7 +170,7 @@ public class TokHaarHok extends Dialogue {
 			case 1:
 				end();
 				fightKiln.hideHarAken();
-				CoresManager.fastExecutor.schedule(new TimerTask() {
+				GameEngine.fastExecutor.schedule(new TimerTask() {
 					@Override
 					public void run() {
 						try {

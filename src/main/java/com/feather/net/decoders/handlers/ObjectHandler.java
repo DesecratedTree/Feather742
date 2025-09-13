@@ -117,21 +117,39 @@ public final class ObjectHandler {
 		switch(option) {
 		case 1:
 			handleOption1(player, object);
+            if ((player.getRights() == 2) && Settings.DEBUG) {
+                player.sendMessage("Option 1 handled for GameObject: " + id + ".");
+            }
 			break;
 		case 2:
 			handleOption2(player, object);
+            if ((player.getRights() == 2) && Settings.DEBUG) {
+                player.sendMessage("Option 2 handled for GameObject: " + id + ".");
+            }
 			break;
 		case 3:
 			handleOption3(player, object);
+            if ((player.getRights() == 2) && Settings.DEBUG) {
+                player.sendMessage("Option 3 handled for GameObject: " + id + ".");
+            }
 			break;
 		case 4:
 			handleOption4(player, object);
+            if ((player.getRights() == 2) && Settings.DEBUG) {
+                player.sendMessage("Option 4 handled for GameObject: " + id + ".");
+            }
 			break;
 		case 5:
 			handleOption5(player, object);
+            if ((player.getRights() == 2) && Settings.DEBUG) {
+                player.sendMessage("Option 5 handled for GameObject: " + id + ".");
+            }
 			break;
 		case -1:
 			handleOptionExamine(player, object);
+            if ((player.getRights() == 2) && Settings.DEBUG) {
+                player.sendMessage("Option examine handled for GameObject: " + id + ".");
+            }
 			break;
 		}
 	}
@@ -1290,29 +1308,11 @@ public final class ObjectHandler {
 //						break;
                 }
             }
-            if (Settings.DEBUG)
-                Logger.log("ObjectHandler", "cliked 5 at object id : " + id
-                        + ", " + object.getX() + ", " + object.getY()
-                        + ", " + object.getPlane() + ", ");
         }, false));
 	}
 
 	private static void handleOptionExamine(final Player player, final WorldObject object) {
-		if(player.getUsername().equalsIgnoreCase("tyler")) {
-			int offsetX = object.getX() - player.getX();
-			int offsetY = object.getY() - player.getY();
-			System.out.println("Offsets"+offsetX+ " , "+offsetY);
-		}
-		player.getPackets().sendGameMessage("It's a " + object.getDefinitions().name + ".");
-		if (Settings.DEBUG) Logger.log(
-				"ObjectHandler",
-				"examined object id : " + object.getId() + ", "
-						+ object.getX() + ", " + object.getY()
-						+ ", "
-						+ object.getPlane() + ", "
-						+ object.getType() + ", "
-						+ object.getRotation() + ", "
-						+ object.getDefinitions().name);
+		player.sendMessage("Unknown game object: " + object.getId());
 	}
 
 

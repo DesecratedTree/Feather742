@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.TimerTask;
 
-import com.feather.cores.CoresManager;
+import com.feather.cores.GameEngine;
 import com.feather.game.World;
 import com.feather.game.WorldObject;
 import com.feather.game.WorldTile;
@@ -133,7 +133,7 @@ public final class CastleWars {
 
 	public static void createPlayingGame() {
 		playingGame = new PlayingGame();
-		CoresManager.fastExecutor
+		GameEngine.fastExecutor
 		.scheduleAtFixedRate(playingGame, 60000, 60000);
 		refreshAllPlayersTime();
 	}

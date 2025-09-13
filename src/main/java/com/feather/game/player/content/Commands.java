@@ -14,7 +14,7 @@ import java.util.TimerTask;
 import com.feather.Settings;
 import com.feather.cache.parser.AnimationDefinitions;
 import com.feather.cache.parser.ItemDefinitions;
-import com.feather.cores.CoresManager;
+import com.feather.cores.GameEngine;
 import com.feather.game.*;
 import com.feather.game.Hit.HitLook;
 import com.feather.game.item.Item;
@@ -1055,7 +1055,7 @@ public final class Commands {
 						: 10;
 				final int end = cmd.length > 4 ? Integer.parseInt(cmd[4])
 						: 20000;
-				CoresManager.fastExecutor.scheduleAtFixedRate(new TimerTask() {
+				GameEngine.fastExecutor.scheduleAtFixedRate(new TimerTask() {
 					int current = start;
 
 					@Override

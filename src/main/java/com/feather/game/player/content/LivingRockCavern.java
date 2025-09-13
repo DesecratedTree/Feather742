@@ -2,7 +2,7 @@ package com.feather.game.player.content;
 
 import java.util.concurrent.TimeUnit;
 
-import com.feather.cores.CoresManager;
+import com.feather.cores.GameEngine;
 import com.feather.game.World;
 import com.feather.game.WorldObject;
 import com.feather.utils.Utils;
@@ -37,7 +37,7 @@ public final class LivingRockCavern {
 	
 	private static void respawnRock(final Rocks rock) {
 		World.spawnObject(rock.rock, false);
-		CoresManager.slowExecutor.schedule(new Runnable() {
+		GameEngine.slowExecutor.schedule(new Runnable() {
 
 			@Override
 			public void run() {
@@ -48,7 +48,7 @@ public final class LivingRockCavern {
 	
 	private static void removeRock(final Rocks rock) {
 		World.destroySpawnedObject(rock.rock, false);
-		CoresManager.slowExecutor.schedule(new Runnable() {
+		GameEngine.slowExecutor.schedule(new Runnable() {
 			@Override
 			public void run() {
 				respawnRock(rock);

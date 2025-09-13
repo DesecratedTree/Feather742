@@ -3,7 +3,7 @@ package com.feather.game.player.controlers;
 import java.util.concurrent.TimeUnit;
 
 import com.feather.Settings;
-import com.feather.cores.CoresManager;
+import com.feather.cores.GameEngine;
 import com.feather.game.*;
 import com.feather.game.Hit.HitLook;
 import com.feather.game.item.Item;
@@ -74,7 +74,7 @@ public final class QueenBlackDragonController extends Controler {
 	public void start() {
 		player.lock();
 		final long time = FadingScreen.fade(player);
-		CoresManager.slowExecutor.execute(new Runnable() {
+		GameEngine.slowExecutor.execute(new Runnable() {
 			@Override
 			public void run() {
 				try {
@@ -376,7 +376,7 @@ public final class QueenBlackDragonController extends Controler {
 		/*
 		 * 1200 delay because of leaving
 		 */
-		CoresManager.slowExecutor.schedule(new Runnable() {
+		GameEngine.slowExecutor.schedule(new Runnable() {
 			@Override
 			public void run() {
 				RegionBuilder.destroyMap(regionBase[0], regionBase[1], 8, 8);

@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 import com.feather.cache.parser.ItemDefinitions;
-import com.feather.cores.CoresManager;
+import com.feather.cores.GameEngine;
 import com.feather.game.player.Player;
 import com.feather.utils.Utils;
 
@@ -21,7 +21,7 @@ public class Vote {
 		}
 		player.getTemporaryAttributtes().put("CheckingVote", Boolean.TRUE);
 		player.getDialogueManager().startDialogue("SimpleMessage", "Verifying your authentication id...");
-		CoresManager.slowExecutor.execute(new Runnable() {
+		GameEngine.slowExecutor.execute(new Runnable() {
 			@Override
 			public void run() {
 				try {

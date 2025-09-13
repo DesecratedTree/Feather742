@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.TimerTask;
 
 import com.feather.Settings;
-import com.feather.cores.CoresManager;
+import com.feather.cores.GameEngine;
 import com.feather.game.Hit;
 import com.feather.game.World;
 import com.feather.game.Hit.HitLook;
@@ -236,7 +236,7 @@ public final class FightPits {
 			startedGame = false;
 		}
 		gameTask = new GameTask();
-		CoresManager.fastExecutor.scheduleAtFixedRate(gameTask, end ? 60000: 10000, 60000); 
+		GameEngine.fastExecutor.scheduleAtFixedRate(gameTask, end ? 60000: 10000, 60000);
 		
 	}
 	

@@ -2,7 +2,7 @@ package com.feather.game.player.content;
 
 import java.util.TimerTask;
 
-import com.feather.cores.CoresManager;
+import com.feather.cores.GameEngine;
 import com.feather.game.player.Player;
 import com.feather.game.tasks.WorldTask;
 import com.feather.game.tasks.WorldTasksManager;
@@ -22,7 +22,7 @@ public final class FadingScreen {
 	public static void unfade(final Player player, long startTime, final Runnable event) {
 		long leftTime =  2500 - (Utils.currentTimeMillis() - startTime);
 		if(leftTime > 0) {
-			CoresManager.fastExecutor.schedule(new TimerTask() {
+			GameEngine.fastExecutor.schedule(new TimerTask() {
 				@Override
 				public void run() {
 					try {
@@ -45,7 +45,7 @@ public final class FadingScreen {
 			@Override
 			public void run() {
 				player.getInterfaceManager().sendFadingInterface(170);
-				CoresManager.fastExecutor.schedule(new TimerTask() {
+				GameEngine.fastExecutor.schedule(new TimerTask() {
 					@Override
 					public void run() {
 						try {

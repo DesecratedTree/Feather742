@@ -8,7 +8,7 @@ import com.feather.Settings;
 import com.feather.cache.Cache;
 import com.feather.cache.parser.ClientScriptMap;
 import com.feather.cache.parser.ObjectDefinitions;
-import com.feather.cores.CoresManager;
+import com.feather.cores.GameEngine;
 import com.feather.game.item.FloorItem;
 import com.feather.game.player.Player;
 import com.feather.io.InputStream;
@@ -584,7 +584,7 @@ public class Region {
 			setLoadMapStage(1);
 			// lets use slow executor, if we take 1-3sec to load objects who
 			// cares? what maters are the players on the loaded regions lul
-			CoresManager.slowExecutor.execute(new Runnable() {
+			GameEngine.slowExecutor.execute(new Runnable() {
 				@Override
 				public void run() {
 					try {
@@ -607,7 +607,7 @@ public class Region {
 	}
 
 	void loadNPCSpawns() {
-		NPCSpawns.loadNPCSpawns();
+		NPCSpawns.loadNPCSpawns(regionId);
 	}
 
 	void loadObjectSpawns() {

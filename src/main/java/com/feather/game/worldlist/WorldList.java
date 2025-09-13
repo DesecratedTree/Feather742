@@ -8,8 +8,9 @@ public class WorldList {
 
 	//String activity, String ip, int countryId, String countryName, boolean members
 	public static void init() {
-		WORLDS.put(1, new WorldEntry("Main World", "127.0.0.1", 4, "Main World", true));
-	}
+		WORLDS.put(1, new WorldEntry("Main World", "15.204.91.129", 4, "Main World", true));
+
+    }
 
 	public static WorldEntry getWorld(int worldId) {
 		return WORLDS.get(worldId);

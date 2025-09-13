@@ -2,7 +2,7 @@ package com.feather.game.player.controlers.events;
 
 import java.util.concurrent.TimeUnit;
 
-import com.feather.cores.CoresManager;
+import com.feather.cores.GameEngine;
 import com.feather.game.Animation;
 import com.feather.game.RegionBuilder;
 import com.feather.game.WorldObject;
@@ -57,7 +57,7 @@ public class DeathEvent extends Controler {
 	public void loadRoom() {
 		stage = Stages.LOADING;
 		player.lock(); //locks player
-		CoresManager.slowExecutor.execute(new Runnable() {
+		GameEngine.slowExecutor.execute(new Runnable() {
 			@Override
 			public void run() {
 				boundChuncks = RegionBuilder.findEmptyChunkBound(2, 2); 
@@ -128,7 +128,7 @@ public class DeathEvent extends Controler {
 		if(stage != Stages.RUNNING) 
 			return;
 		stage = Stages.DESTROYING;
-		CoresManager.slowExecutor.schedule(new Runnable() {
+		GameEngine.slowExecutor.schedule(new Runnable() {
 			@Override
 			public void run() {
 				RegionBuilder.destroyMap(boundChuncks[0], boundChuncks[1], 8, 8);

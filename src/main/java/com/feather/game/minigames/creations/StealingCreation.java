@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TimerTask;
 
-import com.feather.cores.CoresManager;
+import com.feather.cores.GameEngine;
 import com.feather.game.Animation;
 import com.feather.game.WorldObject;
 import com.feather.game.WorldTile;
@@ -64,7 +64,7 @@ public class StealingCreation {
 		if (!canEnter(player, inRedTeam)) {
 			return;
 		} else if (!hasRequiredPlayers())//saves performance
-			CoresManager.fastExecutor.scheduleAtFixedRate(lobbyTask = new LobbyTimer(), 0, 60000);
+			GameEngine.fastExecutor.scheduleAtFixedRate(lobbyTask = new LobbyTimer(), 0, 60000);
 		player.getControlerManager().startControler("StealingCreationsLobby", inRedTeam);
 	}
 

@@ -3,7 +3,7 @@ package com.feather.game.npc.others;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import com.feather.cores.CoresManager;
+import com.feather.cores.GameEngine;
 import com.feather.game.*;
 import com.feather.game.Hit.HitLook;
 import com.feather.game.npc.NPC;
@@ -179,7 +179,7 @@ public final class TormentedDemon extends NPC {
 			finish();
 		}
 		final NPC npc = this;
-		CoresManager.slowExecutor.schedule(new Runnable() {
+		GameEngine.slowExecutor.schedule(new Runnable() {
 			@Override
 			public void run() {
 				setFinished(false);

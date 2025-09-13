@@ -2,7 +2,7 @@ package com.feather.game.npc.others;
 
 import java.util.concurrent.TimeUnit;
 
-import com.feather.cores.CoresManager;
+import com.feather.cores.GameEngine;
 import com.feather.game.Animation;
 import com.feather.game.Entity;
 import com.feather.game.WorldTile;
@@ -56,7 +56,7 @@ public class LivingRock extends NPC {
 		final int remainsId = getId() + 5;
 		transformIntoNPC(remainsId);
 		setRandomWalk(false);
-		CoresManager.slowExecutor.schedule(new Runnable() {
+		GameEngine.slowExecutor.schedule(new Runnable() {
 			@Override
 			public void run() {
 				try {

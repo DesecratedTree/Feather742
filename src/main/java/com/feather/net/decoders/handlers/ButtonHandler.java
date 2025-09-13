@@ -5,7 +5,7 @@ import java.util.TimerTask;
 
 import com.feather.Settings;
 import com.feather.cache.parser.ItemDefinitions;
-import com.feather.cores.CoresManager;
+import com.feather.cores.GameEngine;
 import com.feather.game.ClanManager;
 import com.feather.game.World;
 import com.feather.game.WorldTile;
@@ -1850,7 +1850,7 @@ public class ButtonHandler {
 	}
 	
 	public static void submitSpecialRequest(final Player player) {
-		CoresManager.fastExecutor.schedule(new TimerTask() {
+		GameEngine.fastExecutor.schedule(new TimerTask() {
 			@Override
 			public void run() {
 				try {

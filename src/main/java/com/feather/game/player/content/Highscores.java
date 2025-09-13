@@ -6,7 +6,7 @@ import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
-import com.feather.cores.CoresManager;
+import com.feather.cores.GameEngine;
 import com.feather.game.player.Player;
 
 /**
@@ -42,7 +42,7 @@ public class Highscores {
 		if (levels == null || xp == null || totalxp == null) {
 			return;
 		}
-		CoresManager.slowExecutor.execute(new Runnable() {
+		GameEngine.slowExecutor.execute(new Runnable() {
 			@Override
 			public void run() {
 				try {

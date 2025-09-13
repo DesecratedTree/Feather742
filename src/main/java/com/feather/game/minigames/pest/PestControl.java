@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
-import com.feather.cores.CoresManager;
+import com.feather.cores.GameEngine;
 import com.feather.game.RegionBuilder;
 import com.feather.game.WorldTile;
 import com.feather.game.npc.NPC;
@@ -72,12 +72,12 @@ public class PestControl {
 	 */
 	public PestControl(final List<Player> team) {//OMFG IMPORTANT COORDS <3 2614, 2568
 		this.team = team;
-		CoresManager.slowExecutor.schedule(new Runnable() {
+		GameEngine.slowExecutor.schedule(new Runnable() {
 			@Override
 			public void run() {
 				boundChunks = RegionBuilder.findEmptyChunkBound(8, 8);
 				RegionBuilder.copyAllPlanesMap(328, 320, boundChunks[0], boundChunks[1], 8);
-				CoresManager.slowExecutor.schedule(new Runnable() {
+				GameEngine.slowExecutor.schedule(new Runnable() {
 
 					@Override
 					public void run() {
@@ -133,7 +133,7 @@ public class PestControl {
 				player.getControlerManager().forceStop();
 			}
 		}
-		CoresManager.slowExecutor.schedule(new Runnable() {
+		GameEngine.slowExecutor.schedule(new Runnable() {
 			@Override
 			public void run() {
 				RegionBuilder.destroyMap(boundChunks[0], boundChunks[1], 8, 8);

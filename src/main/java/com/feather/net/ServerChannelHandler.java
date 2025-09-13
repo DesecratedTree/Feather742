@@ -14,7 +14,7 @@ import org.jboss.netty.channel.group.DefaultChannelGroup;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
 
 import com.feather.Settings;
-import com.feather.cores.CoresManager;
+import com.feather.cores.GameEngine;
 import com.feather.io.InputStream;
 import com.feather.net.decoders.WorldPacketsDecoder;
 import com.feather.utils.Logger;
@@ -38,9 +38,9 @@ public final class ServerChannelHandler extends SimpleChannelHandler {
 	private ServerChannelHandler() {
 		channels = new DefaultChannelGroup();
 		bootstrap = new ServerBootstrap(new NioServerSocketChannelFactory(
-				CoresManager.serverBossChannelExecutor,
-				CoresManager.serverWorkerChannelExecutor,
-				CoresManager.serverWorkersCount));
+				GameEngine.serverBossChannelExecutor,
+				GameEngine.serverWorkerChannelExecutor,
+				GameEngine.serverWorkersCount));
 		bootstrap.getPipeline().addLast("handler", this);
 		bootstrap.setOption("reuseAddress", true); // reuses adress for bind
 		bootstrap.setOption("child.tcpNoDelay", true);

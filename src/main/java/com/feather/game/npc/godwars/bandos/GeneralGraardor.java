@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import com.feather.cores.CoresManager;
+import com.feather.cores.GameEngine;
 import com.feather.game.Animation;
 import com.feather.game.Entity;
 import com.feather.game.World;
@@ -88,7 +88,7 @@ public class GeneralGraardor extends NPC {
 			finish();
 		}
 		final NPC npc = this;
-		CoresManager.slowExecutor.schedule(new Runnable() {
+		GameEngine.slowExecutor.schedule(new Runnable() {
 			@Override
 			public void run() {
 				setFinished(false);

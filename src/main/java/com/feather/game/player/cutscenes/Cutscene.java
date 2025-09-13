@@ -1,7 +1,7 @@
 package com.feather.game.player.cutscenes;
 
 import com.feather.Settings;
-import com.feather.cores.CoresManager;
+import com.feather.cores.GameEngine;
 import com.feather.game.RegionBuilder;
 import com.feather.game.WorldTile;
 import com.feather.game.npc.NPC;
@@ -43,7 +43,7 @@ public abstract class Cutscene {
 		player.unlock();
 		deleteCache();
 		if (currentMapData != null) {
-			CoresManager.slowExecutor.execute(new Runnable() {
+			GameEngine.slowExecutor.execute(new Runnable() {
 				@Override
 				public void run() {
 					try {
@@ -72,7 +72,7 @@ public abstract class Cutscene {
 			final int baseChunkY, final int widthChunks, final int heightChunks) {
 		constructingRegion = true;
 		player.getPackets().sendWindowsPane(56, 0);
-		CoresManager.slowExecutor.execute(new Runnable() {
+		GameEngine.slowExecutor.execute(new Runnable() {
 			@Override
 			public void run() {
 				try {
@@ -96,7 +96,7 @@ public abstract class Cutscene {
 						@Override
 						public void run() {
 
-							CoresManager.slowExecutor.execute(new Runnable() {
+							GameEngine.slowExecutor.execute(new Runnable() {
 								@Override
 								public void run() {
 									player.getPackets()

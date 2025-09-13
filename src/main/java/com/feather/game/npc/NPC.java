@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 import com.feather.Settings;
 import com.feather.cache.parser.ItemDefinitions;
 import com.feather.cache.parser.NPCDefinitions;
-import com.feather.cores.CoresManager;
+import com.feather.cores.GameEngine;
 import com.feather.game.*;
 import com.feather.game.Hit.HitLook;
 import com.feather.game.item.Item;
@@ -538,7 +538,7 @@ public class NPC extends Entity implements Serializable {
 			setLocation(respawnTile);
 			finish();
 		}
-		CoresManager.slowExecutor.schedule(new Runnable() {
+		GameEngine.slowExecutor.schedule(new Runnable() {
 			@Override
 			public void run() {
 				try {

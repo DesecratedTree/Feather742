@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.feather.Launcher;
 import com.feather.Settings;
-import com.feather.cores.CoresManager;
+import com.feather.cores.GameEngine;
 import com.feather.game.item.FloorItem;
 import com.feather.game.item.Item;
 import com.feather.game.minigames.GodWarsBosses;
@@ -106,7 +106,7 @@ public final class World {
 	 */
 
 	private static void addOwnedObjectsTask() {
-		CoresManager.slowExecutor.scheduleWithFixedDelay(new Runnable() {
+		GameEngine.slowExecutor.scheduleWithFixedDelay(new Runnable() {
 			@Override
 			public void run() {
 				try {
@@ -119,7 +119,7 @@ public final class World {
 	}
 	
 	private static void addRestoreShopItemsTask() {
-		CoresManager.slowExecutor.scheduleWithFixedDelay(new Runnable() {
+		GameEngine.slowExecutor.scheduleWithFixedDelay(new Runnable() {
 			@Override
 			public void run() {
 				try {
@@ -132,7 +132,7 @@ public final class World {
 	}
 
 	private static final void addSummoningEffectTask() {
-		CoresManager.slowExecutor.scheduleWithFixedDelay(new Runnable() {
+		GameEngine.slowExecutor.scheduleWithFixedDelay(new Runnable() {
 			@Override
 			public void run() {
 				try {
@@ -154,7 +154,7 @@ public final class World {
 
 	private static final void addRestoreSpecialAttackTask() {
 
-		CoresManager.fastExecutor.schedule(new TimerTask() {
+		GameEngine.fastExecutor.schedule(new TimerTask() {
 			@Override
 			public void run() {
 				try {
@@ -174,7 +174,7 @@ public final class World {
 	private static boolean checkAgility;
 
 	private static final void addTriviaBotTask() {
-		CoresManager.fastExecutor.schedule(new TimerTask() {
+		GameEngine.fastExecutor.schedule(new TimerTask() {
 			@Override
 			public void run() {
 				try {
@@ -187,7 +187,7 @@ public final class World {
 	}
 
 	private static final void addRestoreRunEnergyTask() {
-		CoresManager.fastExecutor.schedule(new TimerTask() {
+		GameEngine.fastExecutor.schedule(new TimerTask() {
 			@Override
 			public void run() {
 				try {
@@ -209,7 +209,7 @@ public final class World {
 	}
 
 	private static final void addDrainPrayerTask() {
-		CoresManager.fastExecutor.schedule(new TimerTask() {
+		GameEngine.fastExecutor.schedule(new TimerTask() {
 			@Override
 			public void run() {
 				try {
@@ -227,7 +227,7 @@ public final class World {
 	}
 
 	private static final void addRestoreHitPointsTask() {
-		CoresManager.fastExecutor.schedule(new TimerTask() {
+		GameEngine.fastExecutor.schedule(new TimerTask() {
 			@Override
 			public void run() {
 				try {
@@ -250,7 +250,7 @@ public final class World {
 	}
 
 	private static final void addRestoreSkillsTask() {
-		CoresManager.fastExecutor.schedule(new TimerTask() {
+		GameEngine.fastExecutor.schedule(new TimerTask() {
 			@Override
 			public void run() {
 				try {
@@ -897,7 +897,7 @@ public final class World {
 				continue;
 			player.getPackets().sendSystemUpdate(delay);
 		}
-		CoresManager.slowExecutor.schedule(new Runnable() {
+		GameEngine.slowExecutor.schedule(new Runnable() {
 			@Override
 			public void run() {
 				try {
@@ -943,7 +943,7 @@ public final class World {
 		if (realObject != null && clip)
 			getRegion(regionId).removeMapObject(realObject, baseLocalX,
 					baseLocalY);
-		CoresManager.slowExecutor.schedule(new Runnable() {
+		GameEngine.slowExecutor.schedule(new Runnable() {
 			@Override
 			public void run() {
 				try {
@@ -997,7 +997,7 @@ public final class World {
 		if (realObject == null)
 			return false;
 		removeObject(object, clip);
-		CoresManager.slowExecutor.schedule(new Runnable() {
+		GameEngine.slowExecutor.schedule(new Runnable() {
 			@Override
 			public void run() {
 				try {
@@ -1126,7 +1126,7 @@ public final class World {
 		if (invisible && hiddenTime != -1) {
 			if (owner != null)
 				owner.getPackets().sendGroundItem(floorItem);
-			CoresManager.slowExecutor.schedule(new Runnable() {
+			GameEngine.slowExecutor.schedule(new Runnable() {
 				@Override
 				public void run() {
 					try {
@@ -1191,7 +1191,7 @@ public final class World {
 		if (publicTime < 0) {
 			return;
 		}
-		CoresManager.slowExecutor.schedule(new Runnable() {
+		GameEngine.slowExecutor.schedule(new Runnable() {
 			@Override
 			public void run() {
 				try {
@@ -1499,7 +1499,7 @@ public final class World {
 						realMapObject.getType(), realMapObject.getRotation(),
 						object.getX(), object.getY(), object.getPlane());
 		spawnObject(object, false);
-		CoresManager.slowExecutor.schedule(new Runnable() {
+		GameEngine.slowExecutor.schedule(new Runnable() {
 			@Override
 			public void run() {
 				try {

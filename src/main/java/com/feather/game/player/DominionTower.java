@@ -3,7 +3,7 @@ package com.feather.game.player;
 import java.io.Serializable;
 
 import com.feather.cache.parser.NPCDefinitions;
-import com.feather.cores.CoresManager;
+import com.feather.cores.GameEngine;
 import com.feather.game.*;
 import com.feather.game.item.Item;
 import com.feather.game.npc.NPC;
@@ -182,7 +182,7 @@ public final class DominionTower implements Serializable {
 	public void createArena(final int mode) {
 		player.closeInterfaces();
 		player.lock();
-		CoresManager.slowExecutor.execute(new Runnable() {
+		GameEngine.slowExecutor.execute(new Runnable() {
 			@Override
 			public void run() {
 				try {
@@ -196,7 +196,7 @@ public final class DominionTower implements Serializable {
 						WorldTasksManager.schedule(new WorldTask() {
 							@Override
 							public void run() {
-								CoresManager.slowExecutor
+								GameEngine.slowExecutor
 										.execute(new Runnable() {
 											@Override
 											public void run() {
@@ -516,7 +516,7 @@ public final class DominionTower implements Serializable {
 		WorldTasksManager.schedule(new WorldTask() {
 			@Override
 			public void run() {
-				CoresManager.slowExecutor.execute(new Runnable() {
+				GameEngine.slowExecutor.execute(new Runnable() {
 					@Override
 					public void run() {
 						try {

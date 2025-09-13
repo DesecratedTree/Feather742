@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TimerTask;
 
-import com.feather.cores.CoresManager;
+import com.feather.cores.GameEngine;
 import com.feather.game.WorldTile;
 import com.feather.game.player.Player;
 import com.feather.utils.Logger;
@@ -74,7 +74,7 @@ public class Lander {
 		}
 		synchronized(lock) {
 			if (lobby.size() == 0) // :O ?
-				CoresManager.fastExecutor.scheduleAtFixedRate(timer = new LobbyTimer(), 0, 60000);
+				GameEngine.fastExecutor.scheduleAtFixedRate(timer = new LobbyTimer(), 0, 60000);
 			add(player);
 			player.setNextWorldTile(landerRequirement.getWorldTile());
 			player.getPackets().sendGameMessage("You board the lander.", true);

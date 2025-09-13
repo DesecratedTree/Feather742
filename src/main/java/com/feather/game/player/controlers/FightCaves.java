@@ -5,7 +5,7 @@ import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 import com.feather.Settings;
-import com.feather.cores.CoresManager;
+import com.feather.cores.GameEngine;
 import com.feather.game.*;
 import com.feather.game.item.Item;
 import com.feather.game.npc.fightcaves.FightCavesNPC;
@@ -169,7 +169,7 @@ public class FightCaves extends Controler {
 		this.login = login;
 		stage = Stages.LOADING;
 		player.lock(); //locks player
-		CoresManager.slowExecutor.execute(new Runnable() {
+		GameEngine.slowExecutor.execute(new Runnable() {
 			@Override
 			public void run() {
 				//finds empty map bounds
@@ -200,7 +200,7 @@ public class FightCaves extends Controler {
 					/*
 					 * lets stress less the worldthread, also fastexecutor used for mini stuff
 					 */
-					CoresManager.fastExecutor.schedule(new TimerTask() {
+					GameEngine.fastExecutor.schedule(new TimerTask() {
 
 						@Override
 						public void run() {
@@ -290,7 +290,7 @@ public class FightCaves extends Controler {
 	public void setWaveEvent() {
 		if(getCurrentWave() == 63) 
 			player.getDialogueManager().startDialogue("SimpleNPCMessage", THHAAR_MEJ_JAL, "Look out, here comes TzTok-Jad!");
-		CoresManager.fastExecutor.schedule(new TimerTask() {
+		GameEngine.fastExecutor.schedule(new TimerTask() {
 
 			@Override
 			public void run() {
@@ -389,7 +389,7 @@ public class FightCaves extends Controler {
 		/*
 		 * 1200 delay because of leaving
 		 */
-		CoresManager.slowExecutor.schedule(new Runnable() {
+		GameEngine.slowExecutor.schedule(new Runnable() {
 			@Override
 			public void run() {
 				RegionBuilder.destroyMap(boundChuncks[0], boundChuncks[1], 8, 8);
