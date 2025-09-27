@@ -1,8 +1,8 @@
 package com.feather.game.player.cutscenes.actions;
 
 import com.feather.game.player.Player;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 
 /**
  * Handles an interface showing up cutscene action.
@@ -35,7 +35,7 @@ public final class InterfaceAction extends CutsceneAction {
 	@Override
 	public void process(final Player player, Object[] cache) {
 		player.getInterfaceManager().sendInterface(interfaceId);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				player.getInterfaceManager().closeScreenInterface();

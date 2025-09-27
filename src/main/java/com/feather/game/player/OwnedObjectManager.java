@@ -7,8 +7,8 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import com.feather.game.World;
 import com.feather.game.WorldObject;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 public class OwnedObjectManager {
@@ -82,7 +82,7 @@ public class OwnedObjectManager {
 					&& manager.getCurrentObject().getPlane() == object
 					.getPlane()
 					&& manager.getCurrentObject().getId() == object.getId()) {
-				WorldTasksManager.schedule(new WorldTask() {
+				WorldTasksManager.scheduleTask(new WorldTask() {
 					@Override
 					public void run() {
 						manager.delete();

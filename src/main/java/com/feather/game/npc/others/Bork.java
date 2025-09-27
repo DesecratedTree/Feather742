@@ -2,14 +2,14 @@ package com.feather.game.npc.others;
 
 import java.util.concurrent.TimeUnit;
 
-import com.feather.cores.GameEngine;
+import com.feather.engine.GameEngine;
 import com.feather.game.Animation;
 import com.feather.game.Entity;
 import com.feather.game.WorldTile;
 import com.feather.game.npc.NPC;
 import com.feather.game.player.Player;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 
 @SuppressWarnings("serial")
 public class Bork extends NPC {
@@ -31,7 +31,7 @@ public class Bork extends NPC {
 				final Player player = (Player) e;
 				player.getInterfaceManager().sendInterface(693);
 				player.getDialogueManager().startDialogue("DagonHai", 7137, player, 1);
-				WorldTasksManager.schedule(new WorldTask() {
+				WorldTasksManager.scheduleTask(new WorldTask() {
 					@Override
 					public void run() {
 						player.stopAll();
@@ -41,7 +41,7 @@ public class Bork extends NPC {
 		}
 		getCombat().removeTarget();
 		setNextAnimation(new Animation(getCombatDefinitions().getDeathEmote()));
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 
 			@Override
 			public void run() {

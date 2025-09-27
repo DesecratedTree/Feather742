@@ -3,15 +3,15 @@ package com.feather.game.player.controlers;
 import java.util.concurrent.TimeUnit;
 
 import com.feather.Settings;
-import com.feather.cores.GameEngine;
+import com.feather.engine.GameEngine;
 import com.feather.game.*;
 import com.feather.game.Hit.HitLook;
 import com.feather.game.item.Item;
 import com.feather.game.npc.qbd.QueenBlackDragon;
 import com.feather.game.player.content.FadingScreen;
 import com.feather.game.player.content.Magic;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Logger;
 
 /**
@@ -335,7 +335,7 @@ public final class QueenBlackDragonController extends Controler {
 
 	@Override
 	public boolean sendDeath() {
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				end(0);

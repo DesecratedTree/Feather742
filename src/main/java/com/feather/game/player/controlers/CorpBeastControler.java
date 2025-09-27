@@ -5,8 +5,8 @@ import com.feather.game.Animation;
 import com.feather.game.WorldObject;
 import com.feather.game.WorldTile;
 import com.feather.game.player.Player;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 
 public class CorpBeastControler extends Controler {
 
@@ -33,7 +33,7 @@ public class CorpBeastControler extends Controler {
 
 	@Override
 	public boolean sendDeath() {
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			int loop;
 
 			@Override

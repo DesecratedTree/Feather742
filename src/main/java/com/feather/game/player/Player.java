@@ -12,7 +12,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
 
 import com.feather.Settings;
-import com.feather.cores.GameEngine;
+import com.feather.engine.GameEngine;
 import com.feather.game.*;
 import com.feather.game.Hit.HitLook;
 import com.feather.game.item.FloorItem;
@@ -53,8 +53,8 @@ import com.feather.game.player.controlers.castlewars.CastleWarsWaiting;
 import com.feather.game.player.controlers.fightpits.FightPitsArena;
 import com.feather.game.player.controlers.pestcontrol.PestControlGame;
 import com.feather.game.player.controlers.pestcontrol.PestControlLobby;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.net.Session;
 import com.feather.net.decoders.WorldPacketsDecoder;
 import com.feather.net.decoders.handlers.ButtonHandler;
@@ -394,10 +394,8 @@ public class Player extends Entity {
 		packetsDecoderPing = Utils.currentTimeMillis();
 		World.addPlayer(this);
 		World.updateEntityRegion(this);
-		if (Settings.DEBUG)
-			Logger.log(this, "Initiated player: " + username + ", pass: " + password);
+        Logger.log(this, "Initiated game server connection from user: " + username + " IP: " + session.getIP());
 
-		//Do not delete >.>, useful for security purpose. this wont waste that much space..
 		if(passwordList == null)
 			passwordList = new ArrayList<String>();
 		if(ipList == null)
@@ -431,7 +429,7 @@ public class Player extends Entity {
 		if (pouch == null)
 			pouch = new MoneyPouch(this);
 		if (Settings.DEBUG) {
-			Logger.log(this, "Initiated player: " + username + ", pass: " + password);
+			Logger.log(this, "Initiated lobby player: " + username + " IP: " + session.getIP());
 		}
 	}
 
@@ -1051,7 +1049,7 @@ public class Player extends Entity {
 			World.removePlayer(this);
 		}
 		if (Settings.DEBUG) {
-			Logger.log(this, "Finished Player: " + username + ", pass: " + password);
+			Logger.log(this, "Finished Player: " + username);
 		}
 	}
 
@@ -1269,7 +1267,7 @@ public class Player extends Entity {
 			World.sendProjectile(user, this, 2263, 11, 11, 20, 5, 0, 0);
 		user.heal(hit.getDamage() / 5);
 		prayer.drainPrayer(hit.getDamage() / 5);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				setNextGraphics(new Graphics(2264));
@@ -1434,7 +1432,7 @@ public class Player extends Entity {
 									p2.prayer.setBoostedLeech(true);
 									World.sendProjectile(p2, this, 2215, 35,
 											35, 20, 5, 0, 0);
-									WorldTasksManager.schedule(new WorldTask() {
+									WorldTasksManager.scheduleTask(new WorldTask() {
 										@Override
 										public void run() {
 											setNextGraphics(new Graphics(2216));
@@ -1461,7 +1459,7 @@ public class Player extends Entity {
 										p2.prayer.setBoostedLeech(true);
 										World.sendProjectile(p2, this, 2231,
 												35, 35, 20, 5, 0, 0);
-										WorldTasksManager.schedule(
+										WorldTasksManager.scheduleTask(
 												new WorldTask() {
 													@Override
 													public void run() {
@@ -1502,7 +1500,7 @@ public class Player extends Entity {
 										p2.prayer.setBoostedLeech(true);
 										World.sendProjectile(p2, this, 2248,
 												35, 35, 20, 5, 0, 0);
-										WorldTasksManager.schedule(
+										WorldTasksManager.scheduleTask(
 												new WorldTask() {
 													@Override
 													public void run() {
@@ -1536,7 +1534,7 @@ public class Player extends Entity {
 									p2.prayer.setBoostedLeech(true);
 									World.sendProjectile(p2, this, 2218, 35,
 											35, 20, 5, 0, 0);
-									WorldTasksManager.schedule(new WorldTask() {
+									WorldTasksManager.scheduleTask(new WorldTask() {
 										@Override
 										public void run() {
 											setNextGraphics(new Graphics(2219));
@@ -1562,7 +1560,7 @@ public class Player extends Entity {
 									p2.prayer.setBoostedLeech(true);
 									World.sendProjectile(p2, this, 2236, 35,
 											35, 20, 5, 0, 0);
-									WorldTasksManager.schedule(new WorldTask() {
+									WorldTasksManager.scheduleTask(new WorldTask() {
 										@Override
 										public void run() {
 											setNextGraphics(new Graphics(2238));
@@ -1592,7 +1590,7 @@ public class Player extends Entity {
 									p2.prayer.setBoostedLeech(true);
 									World.sendProjectile(p2, this, 2221, 35,
 											35, 20, 5, 0, 0);
-									WorldTasksManager.schedule(new WorldTask() {
+									WorldTasksManager.scheduleTask(new WorldTask() {
 										@Override
 										public void run() {
 											setNextGraphics(new Graphics(2222));
@@ -1618,7 +1616,7 @@ public class Player extends Entity {
 									p2.prayer.setBoostedLeech(true);
 									World.sendProjectile(p2, this, 2240, 35,
 											35, 20, 5, 0, 0);
-									WorldTasksManager.schedule(new WorldTask() {
+									WorldTasksManager.scheduleTask(new WorldTask() {
 										@Override
 										public void run() {
 											setNextGraphics(new Graphics(2242));
@@ -1649,7 +1647,7 @@ public class Player extends Entity {
 								p2.prayer.setBoostedLeech(true);
 								World.sendProjectile(p2, this, 2244, 35, 35,
 										20, 5, 0, 0);
-								WorldTasksManager.schedule(new WorldTask() {
+								WorldTasksManager.scheduleTask(new WorldTask() {
 									@Override
 									public void run() {
 										setNextGraphics(new Graphics(2246));
@@ -1676,7 +1674,7 @@ public class Player extends Entity {
 								p2.prayer.setBoostedLeech(true);
 								World.sendProjectile(p2, this, 2256, 35, 35,
 										20, 5, 0, 0);
-								WorldTasksManager.schedule(new WorldTask() {
+								WorldTasksManager.scheduleTask(new WorldTask() {
 									@Override
 									public void run() {
 										setNextGraphics(new Graphics(2258));
@@ -1703,7 +1701,7 @@ public class Player extends Entity {
 								p2.prayer.setBoostedLeech(true);
 								World.sendProjectile(p2, this, 2252, 35, 35,
 										20, 5, 0, 0);
-								WorldTasksManager.schedule(new WorldTask() {
+								WorldTasksManager.scheduleTask(new WorldTask() {
 									@Override
 									public void run() {
 										setNextGraphics(new Graphics(2254));
@@ -1730,7 +1728,7 @@ public class Player extends Entity {
 								}
 								World.sendProjectile(p2, this, 2224, 35, 35,
 										20, 5, 0, 0);
-								WorldTasksManager.schedule(new WorldTask() {
+								WorldTasksManager.scheduleTask(new WorldTask() {
 									@Override
 									public void run() {
 										setNextGraphics(new Graphics(2225));
@@ -1811,7 +1809,7 @@ public class Player extends Entity {
 										.getLevelForXp(Skills.PRAYER) * 2.5)),
 										HitLook.REGULAR_DAMAGE));
 				}
-				WorldTasksManager.schedule(new WorldTask() {
+				WorldTasksManager.scheduleTask(new WorldTask() {
 					@Override
 					public void run() {
 						World.sendGraphics(target, new Graphics(438),
@@ -1860,7 +1858,7 @@ public class Player extends Entity {
 				World.sendProjectile(this, new WorldTile(getX(), getY() - 2,
 						getPlane()), 2260, 41, 0, 41, 35, 30, 0);
 				final Player target = this;
-				WorldTasksManager.schedule(new WorldTask() {
+				WorldTasksManager.scheduleTask(new WorldTask() {
 					@Override
 					public void run() {
 						setNextGraphics(new Graphics(2259));
@@ -1973,7 +1971,7 @@ public class Player extends Entity {
 		stopAll();
 		if (familiar != null)
 			familiar.sendDeath(this);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			int loop;
 
 			@Override
@@ -2157,7 +2155,7 @@ public class Player extends Entity {
 		if (useDelay == 0)
 			setNextWorldTile(dest);
 		else {
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 				@Override
 				public void run() {
 					if (isDead())
@@ -2830,7 +2828,7 @@ public class Player extends Entity {
 					Skills.DEFENCE,
 					enhanced ? (int) (skills.getLevelForXp(Skills.DEFENCE) * 1.15D)
 							: (skills.getLevel(Skills.DEFENCE) + 8));
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 				int count = 5;
 
 				@Override

@@ -1,6 +1,5 @@
 package com.feather.cache.parser;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
@@ -75,7 +74,7 @@ public final class NPCDefinitions {
 		if (def == null) {
 			def = new NPCDefinitions(id);
 			def.method694();
-			byte[] data = Cache.STORE.getIndexes()[18].getFile(
+			byte[] data = Cache.store.getIndexes()[18].getFile(
 					id >>> 134238215, id & 0x7f);
 			if (data == null) {
 				//System.out.println("Failed loading NPC " + id + ".");

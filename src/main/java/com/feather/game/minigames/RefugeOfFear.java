@@ -7,7 +7,7 @@ import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 import com.feather.cache.parser.ItemDefinitions;
-import com.feather.cores.GameEngine;
+import com.feather.engine.GameEngine;
 import com.feather.game.*;
 import com.feather.game.Hit.HitLook;
 import com.feather.game.item.Item;
@@ -17,8 +17,8 @@ import com.feather.game.player.actions.Summoning.Pouches;
 import com.feather.game.player.content.Pots;
 import com.feather.game.player.content.Foods.Food;
 import com.feather.game.player.controlers.Controler;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 
 /**
  * A controler used for the Refuge of Fear minigame.
@@ -258,7 +258,7 @@ public final class RefugeOfFear extends Controler {
 	@Override
 	public boolean sendDeath() {
 		player.lock(7);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			int loop;
 			@Override
 			public void run() {

@@ -1,11 +1,11 @@
 package com.feather.net.decoders.handlers;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.TimerTask;
 
 import com.feather.Settings;
 import com.feather.cache.parser.ItemDefinitions;
-import com.feather.cores.GameEngine;
+import com.feather.engine.GameEngine;
 import com.feather.game.ClanManager;
 import com.feather.game.World;
 import com.feather.game.WorldTile;
@@ -42,8 +42,8 @@ import com.feather.game.player.content.XPLamp;
 import com.feather.game.player.dialogues.LevelUp;
 import com.feather.game.player.dialogues.Transportation;
 import com.feather.game.player.dialogues.quests.CooksAssistant;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.io.InputStream;
 import com.feather.net.decoders.WorldPacketsDecoder;
 import com.feather.utils.ItemExamines;
@@ -661,7 +661,7 @@ public class ButtonHandler {
 			else if (componentId >= 72 && componentId <= 91)
 				player.setFriendChatSetup(componentId - 72);
 		} else if (interfaceId == 271) {
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 				@Override
 				public void run() {
 					if (componentId == 8 || componentId == 42)
@@ -1611,14 +1611,14 @@ public class ButtonHandler {
 					"Not enough free space in your inventory.");
 			return true;
 		}
-		HashMap<Integer, Integer> requiriments = item.getDefinitions()
-				.getWearingSkillRequiriments();
+		Map<Integer, Integer> requirements = item.getDefinitions()
+				.getWearingSkillRequirements();
 		boolean hasRequiriments = true;
-		if (requiriments != null) {
-			for (int skillId : requiriments.keySet()) {
+		if (requirements != null) {
+			for (int skillId : requirements.keySet()) {
 				if (skillId > 24 || skillId < 0)
 					continue;
-				int level = requiriments.get(skillId);
+				int level = requirements.get(skillId);
 				if (level < 0 || level > 120)
 					continue;
 				if (player.getSkills().getLevelForXp(skillId) < level) {
@@ -1762,14 +1762,14 @@ public class ButtonHandler {
 					"Not enough free space in your inventory.");
 			return false;
 		}
-		HashMap<Integer, Integer> requiriments = item.getDefinitions()
-				.getWearingSkillRequiriments();
+		Map<Integer, Integer> requirements = item.getDefinitions()
+				.getWearingSkillRequirements();
 		boolean hasRequiriments = true;
-		if (requiriments != null) {
-			for (int skillId : requiriments.keySet()) {
+		if (requirements != null) {
+			for (int skillId : requirements.keySet()) {
 				if (skillId > 24 || skillId < 0)
 					continue;
-				int level = requiriments.get(skillId);
+				int level = requirements.get(skillId);
 				if (level < 0 || level > 120)
 					continue;
 				if (player.getSkills().getLevelForXp(skillId) < level) {
@@ -1854,7 +1854,7 @@ public class ButtonHandler {
 			@Override
 			public void run() {
 				try {
-					WorldTasksManager.schedule(new WorldTask() {
+					WorldTasksManager.scheduleTask(new WorldTask() {
 						@Override
 						public void run() {
 							player.getCombatDefinitions().switchUsingSpecialAttack();

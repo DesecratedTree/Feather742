@@ -7,8 +7,8 @@ import com.feather.game.World;
 import com.feather.game.WorldTile;
 import com.feather.game.npc.NPC;
 import com.feather.game.player.Player;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 public class DonatorZone {
@@ -22,7 +22,7 @@ public class DonatorZone {
 					final NPC n = World.getNPCs().get(npcIndex);
 					if (n == null || n.getId() != 5445)
 						continue;
-					WorldTasksManager.schedule(new WorldTask() {
+					WorldTasksManager.scheduleTask(new WorldTask() {
 						@Override
 						public void run() {
 							final int random = Utils.getRandom(3);

@@ -7,8 +7,8 @@ import com.feather.game.World;
 import com.feather.game.npc.NPC;
 import com.feather.game.npc.combat.CombatScript;
 import com.feather.game.npc.combat.NPCCombatDefinitions;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 
 public class FakeNomadCombat extends CombatScript {
 
@@ -26,7 +26,7 @@ public class FakeNomadCombat extends CombatScript {
 		delayHit(npc, 2, target, getRegularHit(npc, hit ? 50 : 0));
 		World.sendProjectile(npc, target, 1657, 30, 30, 75, 25, 0, 0);
 		if(hit) {
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 				@Override
 				public void run() {
 					target.setNextGraphics(new Graphics(2278, 0, 100));

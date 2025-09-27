@@ -1,4 +1,4 @@
-package com.feather.cores;
+package com.feather.engine;
 
 import java.util.Timer;
 import java.util.concurrent.ExecutorService;
@@ -6,15 +6,14 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import com.feather.Settings;
-import com.feather.cores.events.EventBus;
-import com.feather.cores.events.GameLifecycle;
-import com.feather.cores.processes.*;
+import com.feather.engine.events.EventBus;
+import com.feather.engine.events.GameLifecycle;
+import com.feather.engine.processes.*;
 import com.feather.utils.Logger;
 
 public final class GameEngine {
 
-    protected static volatile boolean shutdown;
+    static volatile boolean shutdown;
     public static WorldThread worldThread;
     public static ExecutorService serverWorkerChannelExecutor;
     public static ExecutorService serverBossChannelExecutor;
@@ -49,7 +48,7 @@ public final class GameEngine {
         initializeProcesses();
         initializeLegacyComponents();
         startGameLoop();
-        Logger.log("Game Engine", "Game Engine initialized and started.");
+        Logger.log("GameEngine", "Game Engine initialized and started.");
     }
 
     private static void initializeExecutors() {
@@ -89,12 +88,12 @@ public final class GameEngine {
         worldPostTick = new WorldPostTickProcess();
         playerPostTick = new PlayerPostTickProcess();
 
-        Logger.log("Game Engine", "Game processes initialized.");
+        Logger.log("GameEngine", "Game processes initialized.");
     }
 
     private static void initializeLegacyComponents() {
         worldThread.start();
-        Logger.log("Game Engine", "Legacy components initialized.");
+        Logger.log("GameEngine", "Legacy components initialized.");
     }
 
     /**
@@ -102,11 +101,11 @@ public final class GameEngine {
      */
     public static void tick() {
 
-        final boolean TICKDEBUG = true;
+        final boolean TICKDEBUG = false;
         if (shutdown) return;
         currentTickNumber++;
 
-        if (TICKDEBUG) Logger.log("Game Engine", "Starting tick #" + currentTickNumber);
+        if (TICKDEBUG) Logger.log("GameEngine", "Starting tick #" + currentTickNumber);
 
         try {
             // Start of cycle
@@ -127,10 +126,10 @@ public final class GameEngine {
             // End of cycle
             eventBus.publish(GameLifecycle.END_CYCLE);
 
-            if (TICKDEBUG) Logger.log("Game Engine", "Completed tick #" + currentTickNumber);
+            if (TICKDEBUG) Logger.log("GameEngine", "Completed tick #" + currentTickNumber);
 
         } catch (Exception e) {
-            Logger.log("Game Engine", "Error during game tick #" + currentTickNumber + ": " + e.getMessage());
+            Logger.log("GameEngine", "Error during game tick #" + currentTickNumber + ": " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -173,7 +172,7 @@ public final class GameEngine {
             try {
                 cycleTime = com.feather.Settings.WORLD_CYCLE_TIME;
             } catch (Exception e) {
-                Logger.log("Game Engine", "Could not access Settings.WORLD_CYCLE_TIME, using default 600ms");
+                Logger.log("GameEngine", "Could not access Settings.WORLD_CYCLE_TIME, using default 600ms");
             }
 
             gameLoopExecutor.scheduleAtFixedRate(
@@ -182,7 +181,7 @@ public final class GameEngine {
                     cycleTime,
                     TimeUnit.MILLISECONDS
             );
-            Logger.log("Game Engine", "Game loop started at " + cycleTime + "ms intervals.");
+            Logger.log("GameEngine", "Game loop started at " + cycleTime + "ms intervals.");
         }
     }
 
@@ -191,7 +190,7 @@ public final class GameEngine {
      */
     public static void stopGameLoop() {
         gameLoopRunning = false;
-        Logger.log("Game Engine", "Game loop stopped.");
+        Logger.log("GameEngine", "Game loop stopped.");
     }
 
     public static void shutdown() {
@@ -214,7 +213,7 @@ public final class GameEngine {
             }
         }
 
-        Logger.log("Game Engine", "Game Engine has been shutdown.");
+        Logger.log("GameEngine", "Game Engine has been shutdown.");
         shutdown = true;
     }
 

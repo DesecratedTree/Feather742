@@ -7,8 +7,8 @@ import com.feather.game.World;
 import com.feather.game.npc.NPC;
 import com.feather.game.npc.combat.CombatScript;
 import com.feather.game.npc.combat.NPCCombatDefinitions;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 public class JadCombat extends CombatScript {
@@ -46,7 +46,7 @@ public class JadCombat extends CombatScript {
 		if(attackStyle == 1) { //range
 			npc.setNextAnimation(new Animation(16202));
 			npc.setNextGraphics(new Graphics(2994));
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 				@Override
 				public void run() {
 					target.setNextGraphics(new Graphics(3000));
@@ -63,11 +63,11 @@ public class JadCombat extends CombatScript {
 		}else{
 			npc.setNextAnimation(new Animation( 16195));
 			npc.setNextGraphics(new Graphics(2995));
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 				@Override
 				public void run() {
 					World.sendProjectile(npc, target, 2996, 80, 30, 40, 20, 5, 0);
-					WorldTasksManager.schedule(new WorldTask() {
+					WorldTasksManager.scheduleTask(new WorldTask() {
 						@Override
 						public void run() {
 							target.setNextGraphics(new Graphics(2741, 0, 100));

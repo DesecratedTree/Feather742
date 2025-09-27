@@ -2,15 +2,15 @@ package com.feather.game.player.controlers.events;
 
 import java.util.concurrent.TimeUnit;
 
-import com.feather.cores.GameEngine;
+import com.feather.engine.GameEngine;
 import com.feather.game.Animation;
 import com.feather.game.RegionBuilder;
 import com.feather.game.WorldObject;
 import com.feather.game.WorldTile;
 import com.feather.game.player.content.Magic;
 import com.feather.game.player.controlers.Controler;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 
 public class DeathEvent extends Controler {
 
@@ -66,7 +66,7 @@ public class DeathEvent extends Controler {
 				player.setNextWorldTile(new WorldTile(boundChuncks[0] * 8 + 10, boundChuncks[1] * 8 + 6, 0));
 				player.setNextAnimation(new Animation(-1));
 				//1delay because player cant walk while teleing :p, + possible issues avoid
-				WorldTasksManager.schedule(new WorldTask()  {
+				WorldTasksManager.scheduleTask(new WorldTask()  {
 					@Override
 					public void run() {
 						player.getMusicsManager().playMusic(683);

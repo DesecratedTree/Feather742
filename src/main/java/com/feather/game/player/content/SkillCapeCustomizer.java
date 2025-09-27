@@ -1,6 +1,7 @@
 package com.feather.game.player.content;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 import com.feather.cache.parser.ItemDefinitions;
 import com.feather.game.player.Player;
@@ -13,10 +14,10 @@ public final class SkillCapeCustomizer {
 
 	public static void resetSkillCapes(Player player) {
 		player.setMaxedCapeCustomized(Arrays.copyOf(
-				ItemDefinitions.getItemDefinitions(20767).originalModelColors,
+                Objects.requireNonNull(ItemDefinitions.getItemDefinitions(20767).getOriginalModelColors()),
 				4));
 		player.setCompletionistCapeCustomized(Arrays.copyOf(
-				ItemDefinitions.getItemDefinitions(20769).originalModelColors,
+                Objects.requireNonNull(ItemDefinitions.getItemDefinitions(20769).getOriginalModelColors()),
 				4));
 	}
 
@@ -68,11 +69,11 @@ public final class SkillCapeCustomizer {
 		if (buttonId == 58) { // reset
 			if (capeId == 20767)
 				player.setMaxedCapeCustomized(Arrays.copyOf(
-						ItemDefinitions.getItemDefinitions(capeId).originalModelColors,
+                        Objects.requireNonNull(ItemDefinitions.getItemDefinitions(capeId).getOriginalModelColors()),
 						4));
 			else
 				player.setCompletionistCapeCustomized(Arrays.copyOf(
-						ItemDefinitions.getItemDefinitions(capeId).originalModelColors,
+                        Objects.requireNonNull(ItemDefinitions.getItemDefinitions(capeId).getOriginalModelColors()),
 						4));
 			for (int i = 0; i < 4; i++)
 				player.getPackets().sendConfigByFile(9254 + i, skillCape[i]);

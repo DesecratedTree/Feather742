@@ -8,8 +8,8 @@ import com.feather.game.npc.NPC;
 import com.feather.game.npc.combat.CombatScript;
 import com.feather.game.npc.combat.NPCCombatDefinitions;
 import com.feather.game.player.Player;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 public class RevenantCombat extends CombatScript {
@@ -96,7 +96,7 @@ public class RevenantCombat extends CombatScript {
 			delayHit(npc, 2, target, getMagicHit(npc, damage));
 			World.sendProjectile(npc, target, 1276, 34, 16, 30, 35, 16, 0);
 			if(damage > 0) {
-				WorldTasksManager.schedule(new WorldTask() {
+				WorldTasksManager.scheduleTask(new WorldTask() {
 
 					@Override
 					public void run() {

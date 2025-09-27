@@ -21,8 +21,8 @@ import com.feather.game.player.Player;
 import com.feather.game.player.Skills;
 import com.feather.game.player.content.Combat;
 import com.feather.game.player.content.Magic;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.MapAreas;
 import com.feather.utils.Utils;
 
@@ -572,11 +572,11 @@ public class PlayerCombat extends Action {
 				target.getTemporaryAttributtes().put("miasmic_immunity", Boolean.TRUE);
 				target.getTemporaryAttributtes().put("miasmic_effect", Boolean.TRUE);
 				final Entity t = target;
-				WorldTasksManager.schedule(new WorldTask() {
+				WorldTasksManager.scheduleTask(new WorldTask() {
 					@Override
 					public void run() {
 						t.getTemporaryAttributtes().remove("miasmic_effect");
-						WorldTasksManager.schedule(new WorldTask() {
+						WorldTasksManager.scheduleTask(new WorldTask() {
 							@Override
 							public void run() {
 								t.getTemporaryAttributtes().remove("miasmic_immunity");
@@ -603,11 +603,11 @@ public class PlayerCombat extends Action {
 				target.getTemporaryAttributtes().put("miasmic_immunity", Boolean.TRUE);
 				target.getTemporaryAttributtes().put("miasmic_effect", Boolean.TRUE);
 				final Entity t0 = target;
-				WorldTasksManager.schedule(new WorldTask() {
+				WorldTasksManager.scheduleTask(new WorldTask() {
 					@Override
 					public void run() {
 						t0.getTemporaryAttributtes().remove("miasmic_effect");
-						WorldTasksManager.schedule(new WorldTask() {
+						WorldTasksManager.scheduleTask(new WorldTask() {
 							@Override
 							public void run() {
 								t0.getTemporaryAttributtes().remove("miasmic_immunity");
@@ -636,11 +636,11 @@ public class PlayerCombat extends Action {
 							target.getTemporaryAttributtes().put("miasmic_immunity", Boolean.TRUE);
 							target.getTemporaryAttributtes().put("miasmic_effect", Boolean.TRUE);
 							final Entity t = target;
-							WorldTasksManager.schedule(new WorldTask() {
+							WorldTasksManager.scheduleTask(new WorldTask() {
 								@Override
 								public void run() {
 									t.getTemporaryAttributtes().remove("miasmic_effect");
-									WorldTasksManager.schedule(new WorldTask() {
+									WorldTasksManager.scheduleTask(new WorldTask() {
 										@Override
 										public void run() {
 											t.getTemporaryAttributtes().remove("miasmic_immunity");
@@ -680,11 +680,11 @@ public class PlayerCombat extends Action {
 							target.getTemporaryAttributtes().put("miasmic_immunity", Boolean.TRUE);
 							target.getTemporaryAttributtes().put("miasmic_effect", Boolean.TRUE);
 							final Entity t = target;
-							WorldTasksManager.schedule(new WorldTask() {
+							WorldTasksManager.scheduleTask(new WorldTask() {
 								@Override
 								public void run() {
 									t.getTemporaryAttributtes().remove("miasmic_effect");
-									WorldTasksManager.schedule(new WorldTask() {
+									WorldTasksManager.scheduleTask(new WorldTask() {
 										@Override
 										public void run() {
 											t.getTemporaryAttributtes().remove("miasmic_immunity");
@@ -1302,7 +1302,7 @@ public class PlayerCombat extends Action {
 						player.setNextAnimation(new Animation(2779));
 						World.sendProjectile(player, target, weaponId == 10034 ? 909 : 908, 41, 16, 31, 35, 16, 0);
 						delayHit(1, weaponId, attackStyle, getRangeHit(player, damage));
-						WorldTasksManager.schedule(new WorldTask() {
+						WorldTasksManager.scheduleTask(new WorldTask() {
 							@Override
 							public void run() {
 								player.setNextGraphics(new Graphics(2739, 0, 96 << 16));
@@ -1345,7 +1345,7 @@ public class PlayerCombat extends Action {
 				dropAmmo(player, 2);
 				break;
 			case 15241: // Hand cannon
-				WorldTasksManager.schedule(new WorldTask() {
+				WorldTasksManager.scheduleTask(new WorldTask() {
 					int loop = 0;
 
 					@Override
@@ -1417,7 +1417,7 @@ public class PlayerCombat extends Action {
 							getRangeHit(player, damage));
 					delayHit(3, weaponId, attackStyle,
 							getRangeHit(player, damage2));
-					WorldTasksManager.schedule(new WorldTask() {
+					WorldTasksManager.scheduleTask(new WorldTask() {
 						@Override
 						public void run() {
 							target.setNextGraphics(new Graphics(1100, 0, 100));
@@ -1476,7 +1476,7 @@ public class PlayerCombat extends Action {
 				delayHit(2, weaponId, attackStyle, getRangeHit(player, hit));
 				if (hit > 0) {
 					final Entity finalTarget = target;
-					WorldTasksManager.schedule(new WorldTask() {
+					WorldTasksManager.scheduleTask(new WorldTask() {
 						int damage = hit;
 
 						@Override
@@ -1679,7 +1679,7 @@ public class PlayerCombat extends Action {
 					long currentTime = Utils.currentTimeMillis();
 					if (getRandomMaxHit(player, weaponId, attackStyle, true) > 0 && target.getFrozenBlockedDelay() < currentTime) {
 						target.addFreezeDelay(delay, true);
-						WorldTasksManager.schedule(new WorldTask() {
+						WorldTasksManager.scheduleTask(new WorldTask() {
 							@Override
 							public void run() {
 								target.setNextGraphics(new Graphics(469, 0, 96));
@@ -1974,7 +1974,7 @@ public class PlayerCombat extends Action {
 				if (!target.addWalkSteps(target.getX() - player.getX() + target.getX(), target.getY() - player.getY() + target.getY(), 1))
 					player.setNextFaceEntity(target);
 				target.setNextFaceEntity(player);
-				WorldTasksManager.schedule(new WorldTask() {
+				WorldTasksManager.scheduleTask(new WorldTask() {
 					@Override
 					public void run() {
 						target.setNextFaceEntity(null);
@@ -1986,7 +1986,7 @@ public class PlayerCombat extends Action {
 					other.lock();
 					other.addFoodDelay(3000);
 					other.setDisableEquip(true);
-					WorldTasksManager.schedule(new WorldTask() {
+					WorldTasksManager.scheduleTask(new WorldTask() {
 						@Override
 						public void run() {
 							other.setDisableEquip(false);
@@ -2261,7 +2261,7 @@ public class PlayerCombat extends Action {
 						target.addFreezeDelay(10000, true);
 						target.setNextGraphics(new Graphics(181, 0, 96));
 						final Entity t = target;
-						WorldTasksManager.schedule(new WorldTask() {
+						WorldTasksManager.scheduleTask(new WorldTask() {
 							@Override
 							public void run() {
 								final int damage = getRandomMaxHit(player, -2, attack, false, false, 1.0, false);
@@ -2999,7 +2999,7 @@ public class PlayerCombat extends Action {
 					}
 		}
 
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 
 			@Override
 			public void run() {

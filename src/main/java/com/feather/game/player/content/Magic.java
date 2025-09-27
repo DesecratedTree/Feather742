@@ -11,8 +11,8 @@ import com.feather.game.player.Player;
 import com.feather.game.player.Skills;
 import com.feather.game.player.controlers.Kalaboss;
 import com.feather.game.player.controlers.Wilderness;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 /*
@@ -619,7 +619,7 @@ public class Magic {
 	public static void resourcesTeleport(final Player player, final int x,
 			final int y, final int h) {
 		player.lock();
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			int loop;
 
 			@Override
@@ -664,7 +664,7 @@ public class Magic {
 			return;
 		player.setNextAnimation(new Animation(2140));
 		player.lock();
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				player.unlock();
@@ -719,7 +719,7 @@ public class Magic {
 		if (teleType == MAGIC_TELEPORT)
 			player.getPackets().sendSound(5527, 0, 2);
 		player.lock(3 + delay);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			
 			boolean removeDamage;
 			
@@ -782,7 +782,7 @@ public class Magic {
 		player.lock();
 		player.setNextAnimation(new Animation(9597));
 		player.setNextGraphics(new Graphics(1680));
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			int stage;
 
 			@Override

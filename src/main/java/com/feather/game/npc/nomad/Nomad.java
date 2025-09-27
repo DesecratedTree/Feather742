@@ -9,8 +9,8 @@ import com.feather.game.player.Player;
 import com.feather.game.player.QuestManager.Quests;
 import com.feather.game.player.content.FadingScreen;
 import com.feather.game.player.dialogues.Dialogue;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 @SuppressWarnings("serial")
@@ -74,7 +74,7 @@ public class Nomad extends NPC {
 			target.getPackets().sendConfigByFile(6962, 0);
 			Dialogue.sendNPCDialogueNoContinue(target, getId(), 9802, "You...<br>You have doomed this world.");
 			target.getPackets().sendVoice(8260);
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 				@Override
 				public void run() {
 					Dialogue.closeNoContinueDialogue(target);
@@ -137,7 +137,7 @@ public class Nomad extends NPC {
 	public void sendTeleport(final WorldTile tile) {
 		setNextAnimation(new Animation(12729));
 		setNextGraphics(new Graphics(1576));
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				setNextWorldTile(tile);
@@ -172,7 +172,7 @@ public class Nomad extends NPC {
 		setNextGraphics(new Graphics(1576));
 		final int thisIndex = Utils.random(4);
 		final Nomad thisNpc = this;
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				copies = new ArrayList<NPC>();

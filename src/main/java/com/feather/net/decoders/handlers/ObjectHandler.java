@@ -45,8 +45,8 @@ import com.feather.game.player.controlers.NomadsRequiem;
 import com.feather.game.player.controlers.Wilderness;
 import com.feather.game.player.dialogues.MiningGuildDwarf;
 import com.feather.game.player.dialogues.quests.CooksAssistant;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.io.InputStream;
 import com.feather.utils.Logger;
 import com.feather.utils.PkRank;
@@ -359,7 +359,7 @@ public final class ObjectHandler {
                     return;
                 }
                 int x1 = player.getX() == 2886 ? 2892 : 2886;
-                WorldTasksManager.schedule(new WorldTask() {
+                WorldTasksManager.scheduleTask(new WorldTask() {
                     int count = 0;
 
                     @Override
@@ -384,7 +384,7 @@ public final class ObjectHandler {
                 player.lock(8);
                 player.addWalkSteps(x == 3150 ?  3155 : 3149, 9906, -1, false);
                 player.getPackets().sendGameMessage("You pulled yourself through the pipes.", true);
-                WorldTasksManager.schedule(new WorldTask() {
+                WorldTasksManager.scheduleTask(new WorldTask() {
                     boolean secondloop;
 
                     @Override
@@ -474,7 +474,7 @@ public final class ObjectHandler {
                     return;
                 }
                 player.lock();
-                WorldTasksManager.schedule(new WorldTask() {
+                WorldTasksManager.scheduleTask(new WorldTask() {
                     int count = 0;
 
                     @Override
@@ -539,7 +539,7 @@ public final class ObjectHandler {
                 player.lock();
                 if(player.getX() != object.getX() || player.getY() != object.getY())
                     player.addWalkSteps(object.getX(), object.getY(), -1, false);
-                WorldTasksManager.schedule(new WorldTask() {
+                WorldTasksManager.scheduleTask(new WorldTask() {
 
                     private int count;
                     @Override
@@ -662,7 +662,7 @@ public final class ObjectHandler {
                 if(player.getX() != object.getX() || player.getY() != object.getY()) {
                     player.lock();
                     player.addWalkSteps(object.getX(), object.getY());
-                    WorldTasksManager.schedule(new WorldTask() {
+                    WorldTasksManager.scheduleTask(new WorldTask() {
                         @Override
                         public void run() {
                             InventoryOptionsHandler.dig(player);
@@ -1084,7 +1084,7 @@ public final class ObjectHandler {
                             player.getPackets().sendGameMessage(
                                     "You pray to the gods...", true);
                             player.setNextAnimation(new Animation(645));
-                            WorldTasksManager.schedule(new WorldTask() {
+                            WorldTasksManager.scheduleTask(new WorldTask() {
                                 @Override
                                 public void run() {
                                     player.getPrayer().restorePrayer(

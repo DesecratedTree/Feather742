@@ -6,8 +6,8 @@ import com.feather.game.Graphics;
 import com.feather.game.Hit;
 import com.feather.game.Hit.HitLook;
 import com.feather.game.player.Player;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 /**
@@ -34,7 +34,7 @@ public final class SoulSiphonAttack implements QueenAttack {
 			return 1;
 		}
 		victim.getPackets().sendGameMessage("<col=9900CC>The Queen Black Dragon starts to siphon the energy of her mages.</col>");
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				for (Iterator<TorturedSoul> it = npc.getSouls().iterator(); it.hasNext();) {

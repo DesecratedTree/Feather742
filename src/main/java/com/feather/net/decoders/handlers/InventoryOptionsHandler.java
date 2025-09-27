@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.feather.Settings;
 import com.feather.content.utils.ToyHorsey;
-import com.feather.cores.WorldThread;
+import com.feather.engine.WorldThread;
 import com.feather.game.Animation;
 import com.feather.game.World;
 import com.feather.game.WorldTile;
@@ -38,8 +38,8 @@ import com.feather.game.player.content.ArmourSets.Sets;
 import com.feather.game.player.content.Burying.Bone;
 import com.feather.game.player.controlers.Barrows;
 import com.feather.game.player.controlers.FightKiln;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.io.InputStream;
 import com.feather.utils.Logger;
 import com.feather.utils.Utils;
@@ -76,7 +76,7 @@ public class InventoryOptionsHandler {
 				return;
 			long passedTime = Utils.currentTimeMillis()
 					- WorldThread.LAST_CYCLE_CTM;
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 
 				@Override
 				public void run() {
@@ -99,7 +99,7 @@ public class InventoryOptionsHandler {
 		player.resetWalkSteps();
 		player.setNextAnimation(new Animation(830));
 		player.lock();
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 
 			@Override
 			public void run() {

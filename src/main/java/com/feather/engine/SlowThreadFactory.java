@@ -1,21 +1,20 @@
-package com.feather.cores;
+package com.feather.engine;
 
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class DecoderThreadFactory implements ThreadFactory {
+public class SlowThreadFactory implements ThreadFactory {
 
 	private static final AtomicInteger poolNumber = new AtomicInteger(1);
 	private final ThreadGroup group;
 	private final AtomicInteger threadNumber = new AtomicInteger(1);
 	private final String namePrefix;
 
-	public DecoderThreadFactory() {
+	public SlowThreadFactory() {
 		SecurityManager s = System.getSecurityManager();
 		group = (s != null) ? s.getThreadGroup() : Thread.currentThread()
 				.getThreadGroup();
-		namePrefix = "Decoder Pool-" + poolNumber.getAndIncrement()
-				+ "-thread-";
+		namePrefix = "Slow Pool-" + poolNumber.getAndIncrement() + "-thread-";
 	}
 
 	@Override
@@ -24,8 +23,8 @@ public class DecoderThreadFactory implements ThreadFactory {
 				+ threadNumber.getAndIncrement(), 0);
 		if (t.isDaemon())
 			t.setDaemon(false);
-		if (t.getPriority() != Thread.MAX_PRIORITY - 1)
-			t.setPriority(Thread.MAX_PRIORITY - 1);
+		if (t.getPriority() != Thread.MIN_PRIORITY)
+			t.setPriority(Thread.MIN_PRIORITY);
 		return t;
 	}
 

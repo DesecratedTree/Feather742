@@ -3,8 +3,8 @@ package com.feather.game.player.actions.mining;
 import com.feather.game.player.Player;
 import com.feather.game.player.Skills;
 import com.feather.game.player.actions.Action;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 
 public abstract class MiningBase extends Action {
 
@@ -19,7 +19,7 @@ public abstract class MiningBase extends Action {
 	public static void propect(final Player player, String startMessage, final String endMessage) {
 		player.getPackets().sendGameMessage(startMessage, true);
 		player.lock(5);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				player.getPackets().sendGameMessage(endMessage);

@@ -8,8 +8,8 @@ import com.feather.game.npc.NPC;
 import com.feather.game.npc.combat.NPCCombatDefinitions;
 import com.feather.game.player.Player;
 import com.feather.game.player.controlers.FightKiln;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 
 @SuppressWarnings("serial")
 public class FightKilnNPC extends NPC {
@@ -50,7 +50,7 @@ public class FightKilnNPC extends NPC {
 		setNextAnimation(null);
 		controler.checkCrystal();
 		setNextGraphics(new Graphics(getDeathGfx()));
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			int loop;
 
 			@Override

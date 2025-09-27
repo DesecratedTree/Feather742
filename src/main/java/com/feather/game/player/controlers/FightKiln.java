@@ -4,7 +4,7 @@ import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 import com.feather.cache.parser.NPCDefinitions;
-import com.feather.cores.GameEngine;
+import com.feather.engine.GameEngine;
 import com.feather.game.*;
 import com.feather.game.item.Item;
 import com.feather.game.npc.NPC;
@@ -16,8 +16,8 @@ import com.feather.game.player.Player;
 import com.feather.game.player.Skills;
 import com.feather.game.player.content.FadingScreen;
 import com.feather.game.player.cutscenes.Cutscene;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Logger;
 import com.feather.utils.Utils;
 
@@ -218,7 +218,7 @@ public class FightKiln extends Controler {
 							tokHaarHok = new NPC(TOKHAAR_HOK, getWorldTile(30, 36), -1, true, true);
 							tokHaarHok.setDirection(Utils.getFaceDirection(0, 1));
 							//1delay because player cant walk while teleing :p, + possible issues avoid
-							WorldTasksManager.schedule(new WorldTask()  {
+							WorldTasksManager.scheduleTask(new WorldTask()  {
 								int count = 0;
 								boolean run;
 								@Override
@@ -254,7 +254,7 @@ public class FightKiln extends Controler {
 							tokHaarHok.setDirection(Utils.getFaceDirection(0, -1));
 							player.getPackets().sendBlackOut(2);
 							player.getPackets().sendConfig(1241, 1);
-							WorldTasksManager.schedule(new WorldTask()  {
+							WorldTasksManager.scheduleTask(new WorldTask()  {
 
 								@Override
 								public void run() {
@@ -286,7 +286,7 @@ public class FightKiln extends Controler {
 							tokHaarHok.setDirection(Utils.getFaceDirection(0, -1));
 							player.getPackets().sendBlackOut(2);
 							player.getPackets().sendConfig(1241, 1);
-							WorldTasksManager.schedule(new WorldTask()  {
+							WorldTasksManager.scheduleTask(new WorldTask()  {
 
 								@Override
 								public void run() {
@@ -304,7 +304,7 @@ public class FightKiln extends Controler {
 							teleportPlayerToMiddle();
 							player.getPackets().sendBlackOut(2);
 							player.getPackets().sendConfig(1241, 1);
-							WorldTasksManager.schedule(new WorldTask()  {
+							WorldTasksManager.scheduleTask(new WorldTask()  {
 
 								int count = 0;
 								@Override
@@ -348,7 +348,7 @@ public class FightKiln extends Controler {
 							player.setNextFaceWorldTile(getWorldTile(20, 20));
 							player.getPackets().sendBlackOut(2);
 							player.getPackets().sendConfig(1241, 1);
-							WorldTasksManager.schedule(new WorldTask()  {
+							WorldTasksManager.scheduleTask(new WorldTask()  {
 
 								@Override
 								public void run() {
@@ -368,7 +368,7 @@ public class FightKiln extends Controler {
 							teleportPlayerToMiddle();
 							player.getPackets().sendBlackOut(2);
 							player.getPackets().sendConfig(1241, 1);
-							WorldTasksManager.schedule(new WorldTask()  {
+							WorldTasksManager.scheduleTask(new WorldTask()  {
 
 								@Override
 								public void run() {
@@ -388,7 +388,7 @@ public class FightKiln extends Controler {
 							teleportPlayerToMiddle();
 							player.getPackets().sendBlackOut(2);
 							player.getPackets().sendConfig(1241, 1);
-							WorldTasksManager.schedule(new WorldTask()  {
+							WorldTasksManager.scheduleTask(new WorldTask()  {
 
 								@Override
 								public void run() {
@@ -415,7 +415,7 @@ public class FightKiln extends Controler {
 							player.getPackets().sendBlackOut(2);
 							player.getPackets().sendConfig(1241, 1);
 							player.setNextFaceWorldTile(tokHaarHok);
-							WorldTasksManager.schedule(new WorldTask()  {
+							WorldTasksManager.scheduleTask(new WorldTask()  {
 
 								@Override
 								public void run() {
@@ -434,7 +434,7 @@ public class FightKiln extends Controler {
 						}else if (login) { //LOGIN during
 							kiln.login = login;
 							teleportPlayerToMiddle();
-							WorldTasksManager.schedule(new WorldTask()  {
+							WorldTasksManager.scheduleTask(new WorldTask()  {
 
 								@Override
 								public void run() {
@@ -719,7 +719,7 @@ public class FightKiln extends Controler {
 	public boolean sendDeath() {
 		player.lock(7);
 		player.stopAll();
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			int loop;
 
 			@Override

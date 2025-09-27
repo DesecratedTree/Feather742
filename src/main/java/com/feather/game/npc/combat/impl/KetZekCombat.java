@@ -7,8 +7,8 @@ import com.feather.game.World;
 import com.feather.game.npc.NPC;
 import com.feather.game.npc.combat.CombatScript;
 import com.feather.game.npc.combat.NPCCombatDefinitions;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 public class KetZekCombat extends CombatScript {
@@ -50,7 +50,7 @@ public class KetZekCombat extends CombatScript {
 		//npc.setNextGraphics(new Graphics(1622, 0, 96 << 16));
 		World.sendProjectile(npc, target, 2984, 34, 16, 30, 35, 16, 0);
 		delayHit(npc, 2, target, getMagicHit(npc, hit));
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 
 			@Override
 			public void run() {

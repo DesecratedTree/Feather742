@@ -34,7 +34,7 @@ public class GraphicDefinitions {
 		GraphicDefinitions defs = animDefs.get(emoteId);
 		if (defs != null)
 			return defs;
-		byte[] data = Cache.STORE.getIndexes()[21].getFile(
+		byte[] data = Cache.store.getIndexes()[21].getFile(
 				emoteId >>> 735411752, emoteId & 0xff);
 		defs = new GraphicDefinitions();
 		defs.graphicsId = emoteId;

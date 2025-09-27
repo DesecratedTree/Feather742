@@ -6,8 +6,8 @@ import com.feather.game.npc.NPC;
 import com.feather.game.npc.combat.CombatScript;
 import com.feather.game.npc.combat.NPCCombatDefinitions;
 import com.feather.game.player.Player;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 public class MercenaryMageCombat extends CombatScript {
@@ -30,7 +30,7 @@ public class MercenaryMageCombat extends CombatScript {
 			final WorldTile center = new WorldTile(target);
 			World.sendGraphics(npc, new Graphics(2929), center);
 			npc.setNextForceTalk(new ForceTalk("Obliterate!"));
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 
 				@Override
 				public void run() {
@@ -51,7 +51,7 @@ public class MercenaryMageCombat extends CombatScript {
 			final WorldTile center = new WorldTile(target);
 			World.sendGraphics(npc, new Graphics(2191), center);
 			npc.setNextForceTalk(new ForceTalk("How are the burns?"));
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 				int count = 0;
 				@Override
 				public void run() {
@@ -73,7 +73,7 @@ public class MercenaryMageCombat extends CombatScript {
 			final int dir = Utils.random(Utils.DIRECTION_DELTA_X.length);
 			final WorldTile center = new WorldTile(npc.getX() + Utils.DIRECTION_DELTA_X[dir] * 5, npc.getY() + Utils.DIRECTION_DELTA_Y[dir] * 5, 0);
 			npc.setNextForceTalk(new ForceTalk("I think it's time to clean my room!"));
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 				int count = 0;
 				@Override
 				public void run() {

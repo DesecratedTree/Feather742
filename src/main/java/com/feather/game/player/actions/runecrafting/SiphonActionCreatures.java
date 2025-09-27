@@ -11,8 +11,8 @@ import com.feather.game.player.actions.Action;
 import com.feather.game.player.content.Runecrafting;
 import com.feather.game.player.controlers.Controler;
 import com.feather.game.player.controlers.RunespanControler;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 /**
@@ -222,7 +222,7 @@ public class SiphonActionCreatures extends Action {
 			creature.resetWalkSteps();
 			player.setNextFaceWorldTile(creature);
 			World.sendProjectile(creature, creature, player, 3060, 31, 35, 35, 0, 2, 0);
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 				@Override
 				public void run() {
 					player.setNextGraphics(new Graphics(3062));
@@ -237,7 +237,7 @@ public class SiphonActionCreatures extends Action {
 	 */
 	public void processEsslingDeath(final Player player) {
 		creature.setNextAnimation(new Animation(creatures.getDeathEmote()));
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				player.getPackets().sendGameMessage("The creature has been broken down.");

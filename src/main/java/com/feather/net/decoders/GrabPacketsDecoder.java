@@ -28,14 +28,14 @@ public final class GrabPacketsDecoder extends Decoder {
 		if (archiveId < 0)
 			return;
 		if (indexId != 255) {
-			if (Cache.STORE.getIndexes().length <= indexId
-					|| Cache.STORE.getIndexes()[indexId] == null
-					|| !Cache.STORE.getIndexes()[indexId]
+			if (Cache.store.getIndexes().length <= indexId
+					|| Cache.store.getIndexes()[indexId] == null
+					|| !Cache.store.getIndexes()[indexId]
 							.archiveExists(archiveId))
 				return;
 		} else if (archiveId != 255)
-			if (Cache.STORE.getIndexes().length <= archiveId
-					|| Cache.STORE.getIndexes()[archiveId] == null)
+			if (Cache.store.getIndexes().length <= archiveId
+					|| Cache.store.getIndexes()[archiveId] == null)
 				return;
 		session.getGrabPackets().sendCacheArchive(indexId, archiveId, priority);
 	}

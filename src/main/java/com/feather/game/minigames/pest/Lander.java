@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TimerTask;
 
-import com.feather.cores.GameEngine;
+import com.feather.engine.GameEngine;
 import com.feather.game.WorldTile;
 import com.feather.game.player.Player;
 import com.feather.utils.Logger;

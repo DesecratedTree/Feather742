@@ -1,8 +1,8 @@
 package com.feather.game.npc.qbd;
 
 import com.feather.game.player.Player;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 /**
@@ -15,7 +15,7 @@ public final class ChangeArmour implements QueenAttack {
 	@Override
 	public int attack(final QueenBlackDragon npc, Player victim) {
 		npc.switchState(Utils.random(2) < 1 ? QueenState.CRYSTAL_ARMOUR : QueenState.HARDEN);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				npc.switchState(QueenState.DEFAULT);

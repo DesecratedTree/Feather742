@@ -6,8 +6,8 @@ import com.feather.game.WorldObject;
 import com.feather.game.WorldTile;
 import com.feather.game.minigames.Crucible;
 import com.feather.game.player.Player;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 public class CrucibleControler extends Controler {
@@ -125,7 +125,7 @@ public class CrucibleControler extends Controler {
 	@Override
 	public boolean sendDeath() {
 		final CrucibleControler thisControler = this;
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			int loop;
 
 			@Override

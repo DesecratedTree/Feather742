@@ -11,8 +11,8 @@ import com.feather.game.player.Player;
 import com.feather.game.player.Skills;
 import com.feather.game.player.controlers.CrucibleControler;
 import com.feather.game.player.controlers.Wilderness;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 public final class Pots {
@@ -322,7 +322,7 @@ public final class Pots {
 				player.addFireImmune(360000);
 				final long current = player.getFireImmune();
 				player.getPackets().sendGameMessage( "You are now immune to dragonfire.");
-				WorldTasksManager.schedule(new WorldTask() {
+				WorldTasksManager.scheduleTask(new WorldTask() {
 					boolean stop = false;
 					@Override
 					public void run() {
@@ -592,7 +592,7 @@ public final class Pots {
 			@Override
 			public void extra(final Player player) {
 				player.setOverloadDelay(501);
-				WorldTasksManager.schedule(new WorldTask() {
+				WorldTasksManager.scheduleTask(new WorldTask() {
 					int count = 4;
 
 					@Override

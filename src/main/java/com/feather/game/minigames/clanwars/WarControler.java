@@ -10,8 +10,8 @@ import com.feather.game.player.actions.PlayerCombat;
 import com.feather.game.player.content.Foods.Food;
 import com.feather.game.player.content.Pots.Pot;
 import com.feather.game.player.controlers.Controler;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 
 /**
  * A controler subclass handling players in the clan wars activity.
@@ -46,7 +46,7 @@ public final class WarControler extends Controler {
 	public boolean sendDeath() {
 		player.lock(7);
 		player.stopAll();
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			int loop;
 			@Override
 			public void run() {

@@ -5,13 +5,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import com.feather.cores.GameEngine;
+import com.feather.engine.GameEngine;
 import com.feather.game.*;
 import com.feather.game.npc.godwars.zaros.Nex;
 import com.feather.game.npc.godwars.zaros.NexMinion;
 import com.feather.game.player.Player;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 public final class ZarosGodwars {
@@ -155,7 +155,7 @@ public final class ZarosGodwars {
 			if (nex == null) {
 				World.spawnNPC(13447, new WorldTile(2924, 5202, 0), -1, true,
 						true);
-				WorldTasksManager.schedule(new WorldTask() {
+				WorldTasksManager.scheduleTask(new WorldTask() {
 					private int count = 0;
 
 					@Override

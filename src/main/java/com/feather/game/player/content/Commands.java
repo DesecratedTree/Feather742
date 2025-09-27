@@ -5,16 +5,12 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.TimerTask;
+import java.util.*;
 
 import com.feather.Settings;
 import com.feather.cache.parser.AnimationDefinitions;
 import com.feather.cache.parser.ItemDefinitions;
-import com.feather.cores.GameEngine;
+import com.feather.engine.GameEngine;
 import com.feather.game.*;
 import com.feather.game.Hit.HitLook;
 import com.feather.game.item.Item;
@@ -33,8 +29,8 @@ import com.feather.game.player.controlers.FightKiln;
 import com.feather.game.player.cutscenes.HomeCutScene;
 import com.feather.game.player.dialogues.Dialogue;
 import com.feather.game.player.dialogues.quests.CooksAssistant;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.DisplayNames;
 import com.feather.utils.Donations;
 import com.feather.utils.Encrypt;
@@ -332,7 +328,7 @@ public final class Commands {
 			case "modelid":
 				int id = Integer.parseInt(cmd[1]);
 				player.getPackets().sendMessage(99, 
-						"Model id for item " + id + " is: " + ItemDefinitions.getItemDefinitions(id).modelId, player);
+						"Model id for item " + id + " is: " + ItemDefinitions.getItemDefinitions(id).getModelId(), player);
 				return true;
 
 			case "teletome":
@@ -568,13 +564,13 @@ public final class Commands {
 								.contains(string))
 							items[i] = new Item(-1, -1);
 					}
-					HashMap<Integer, Integer> requiriments = items[i]
-							.getDefinitions().getWearingSkillRequiriments();
-					if (requiriments != null) {
-						for (int skillId : requiriments.keySet()) {
+					Map<Integer, Integer> requirements = items[i]
+							.getDefinitions().getWearingSkillRequirements();
+					if (requirements != null) {
+						for (int skillId : requirements.keySet()) {
 							if (skillId > 24 || skillId < 0)
 								continue;
-							int level = requiriments.get(skillId);
+							int level = requirements.get(skillId);
 							if (level < 0 || level > 120)
 								continue;
 							if (player.getSkills().getLevelForXp(skillId) < level) {
@@ -1614,7 +1610,7 @@ public final class Commands {
 
 			case "trylook":
 				final int look = Integer.parseInt(cmd[1]);
-				WorldTasksManager.schedule(new WorldTask() {
+				WorldTasksManager.scheduleTask(new WorldTask() {
 					int i = 269;// 200
 
 					@Override
@@ -1631,7 +1627,7 @@ public final class Commands {
 				return true; 
 
 			case "tryinter":
-				WorldTasksManager.schedule(new WorldTask() {
+				WorldTasksManager.scheduleTask(new WorldTask() {
 					int i = 1;
 
 					@Override
@@ -1647,7 +1643,7 @@ public final class Commands {
 				return true; 
 
 			case "tryanim":
-				WorldTasksManager.schedule(new WorldTask() {
+				WorldTasksManager.scheduleTask(new WorldTask() {
 					int i = 16700;
 
 					@Override
@@ -1675,7 +1671,7 @@ public final class Commands {
 				return true;
 
 			case "trygfx":
-				WorldTasksManager.schedule(new WorldTask() {
+				WorldTasksManager.scheduleTask(new WorldTask() {
 					int i = 1500;
 
 					@Override
@@ -2874,14 +2870,14 @@ public final class Commands {
 							items[i] = new Item(-1, -1);
 						}
 					}
-					HashMap<Integer, Integer> requiriments = items[i]
-							.getDefinitions().getWearingSkillRequiriments();
+					Map<Integer, Integer> requirements = items[i]
+							.getDefinitions().getWearingSkillRequirements();
 					boolean hasRequiriments = true;
-					if (requiriments != null) {
-						for (int skillId : requiriments.keySet()) {
+					if (requirements != null) {
+						for (int skillId : requirements.keySet()) {
 							if (skillId > 24 || skillId < 0)
 								continue;
-							int level = requiriments.get(skillId);
+							int level = requirements.get(skillId);
 							if (level < 0 || level > 120)
 								continue;
 							if (player.getSkills().getLevelForXp(skillId) < level) {

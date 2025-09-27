@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.feather.Launcher;
 import com.feather.Settings;
-import com.feather.cores.GameEngine;
+import com.feather.engine.GameEngine;
 import com.feather.game.item.FloorItem;
 import com.feather.game.item.Item;
 import com.feather.game.minigames.GodWarsBosses;
@@ -55,8 +55,8 @@ import com.feather.game.player.content.LivingRockCavern;
 import com.feather.game.player.content.ShootingStar;
 import com.feather.game.player.content.TriviaBot;
 import com.feather.game.player.controlers.Wilderness;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.AntiFlood;
 import com.feather.utils.IPBanL;
 import com.feather.utils.Logger;
@@ -1611,7 +1611,7 @@ public final class World {
 	 * Spawns The Shooting Star Every 1200 Seconds.
 	 */
 	public static void spawnStar() {
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			int loop;
 			@Override
 			public void run() {
@@ -1629,7 +1629,7 @@ public final class World {
 	 * Removes The Star Sprite After 50 Seconds.
 	 */
 	public static void removeStarSprite(final Player player) {
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			int loop;
 			@Override
 			public void run() {

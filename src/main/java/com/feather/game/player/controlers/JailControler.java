@@ -4,8 +4,8 @@ import com.feather.game.Animation;
 import com.feather.game.WorldObject;
 import com.feather.game.WorldTile;
 import com.feather.game.player.Player;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 public class JailControler extends Controler {
@@ -32,7 +32,7 @@ public class JailControler extends Controler {
 
 	@Override
 	public boolean sendDeath() {
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			int loop;
 
 			@Override

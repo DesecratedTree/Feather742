@@ -71,12 +71,12 @@ public class XteasChecker {
 		int absX = (id >> 8) * 64;
 		int absY = (id & 0xff) * 64;
 
-		int containerId = Cache.STORE.getIndexes()[5].getArchiveId("l"
+		int containerId = Cache.store.getIndexes()[5].getArchiveId("l"
 				+ ((absX >> 3) / 8) + "_" + ((absY >> 3) / 8));
 		if (containerId == -1) {
 			return;
 		}
-		byte[] data = Cache.STORE.getIndexes()[5].getFile(containerId, 0,
+		byte[] data = Cache.store.getIndexes()[5].getFile(containerId, 0,
 				xtea_keys);
 		if (data == null) {
 			System.out.println("null. ." + absX + ", " + absY);

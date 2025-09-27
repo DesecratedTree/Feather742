@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TimerTask;
 
-import com.feather.cores.GameEngine;
+import com.feather.engine.GameEngine;
 import com.feather.game.Animation;
 import com.feather.game.ForceMovement;
 import com.feather.game.WorldObject;
@@ -12,8 +12,8 @@ import com.feather.game.WorldTile;
 import com.feather.game.player.Player;
 import com.feather.game.player.Skills;
 import com.feather.game.player.controlers.Controler;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 public final class BrimhavenAgility extends Controler {
@@ -138,7 +138,7 @@ public final class BrimhavenAgility extends Controler {
 			player.lock();
 			player.setNextFaceWorldTile(new WorldTile(player.getX(), player.getY() -1, 3));
 			player.setNextAnimation(new Animation(1121));
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 				int index = 0;
 				@Override
 				public void run() {
@@ -152,7 +152,7 @@ public final class BrimhavenAgility extends Controler {
 					player.setNextAnimation(new Animation(1122));
 					final WorldTile tile = new WorldTile(player.getX(), player.getY() - rotationY, player.getPlane());
 					player.setNextForceMovement(new ForceMovement(tile, 1, 1));
-					WorldTasksManager.schedule(new WorldTask() {
+					WorldTasksManager.scheduleTask(new WorldTask() {
 						@Override
 						public void run() {
 							player.setNextWorldTile(new WorldTile(tile));
@@ -170,7 +170,7 @@ public final class BrimhavenAgility extends Controler {
 			return false;
 		} else if (object.getId() == 3551) {
 			player.getAppearance().setRenderEmote(155);
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 				int index = 0;
 				@Override
 				public void run() {

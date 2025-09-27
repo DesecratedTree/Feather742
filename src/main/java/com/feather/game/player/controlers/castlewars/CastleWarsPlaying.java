@@ -12,8 +12,8 @@ import com.feather.game.player.Equipment;
 import com.feather.game.player.Inventory;
 import com.feather.game.player.Player;
 import com.feather.game.player.controlers.Controler;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 public class CastleWarsPlaying extends Controler {
@@ -179,7 +179,7 @@ public class CastleWarsPlaying extends Controler {
 
 	@Override
 	public boolean sendDeath() {
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			int loop;
 
 			@Override

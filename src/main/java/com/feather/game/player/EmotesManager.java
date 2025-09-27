@@ -10,8 +10,8 @@ import com.feather.game.Graphics;
 import com.feather.game.World;
 import com.feather.game.WorldTile;
 import com.feather.game.npc.NPC;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.net.decoders.WorldPacketsDecoder;
 import com.feather.utils.Utils;
 
@@ -362,7 +362,7 @@ public final class EmotesManager implements Serializable {
 					final int rand = (int) (Math.random() * (2 + 1));
 					player.setNextAnimation(new Animation(13190));
 					player.setNextGraphics(new Graphics(2442));
-					WorldTasksManager.schedule(new WorldTask() {
+					WorldTasksManager.scheduleTask(new WorldTask() {
 						int step;
 
 						@Override
@@ -386,7 +386,7 @@ public final class EmotesManager implements Serializable {
 				case 19709:
 				case 19710: // Master dungeoneering cape
 					/*
-					 * WorldTasksManager.schedule(new WorldTask() { int step;
+					 * WorldTasksManager.scheduleTask(new WorldTask() { int step;
 					 * private NPC dung1, dung2, dung3, dung4;
 					 * 
 					 * @Override public void run() { if (step == 1) {
@@ -472,7 +472,7 @@ public final class EmotesManager implements Serializable {
 					}
 					nextEmoteEnd = Utils.currentTimeMillis() + (25 * 600);
 					final WorldTile npcTile = spawnTile;
-					WorldTasksManager.schedule(new WorldTask() {
+					WorldTasksManager.scheduleTask(new WorldTask() {
 						private int step;
 						private NPC npc;
 
@@ -530,7 +530,7 @@ public final class EmotesManager implements Serializable {
 						return;
 					}
 					nextEmoteEnd = Utils.currentTimeMillis() + (20 * 600);
-					WorldTasksManager.schedule(new WorldTask() {
+					WorldTasksManager.scheduleTask(new WorldTask() {
 						private int step;
 
 						@Override
@@ -585,7 +585,7 @@ public final class EmotesManager implements Serializable {
 				player.setNextGraphics(new Graphics(1973));
 			} else	if (id == 46) {// Turkey
 
-				WorldTasksManager.schedule(new WorldTask() {
+				WorldTasksManager.scheduleTask(new WorldTask() {
 
 					@Override
 					public void run() {
@@ -610,7 +610,7 @@ public final class EmotesManager implements Serializable {
 			}
 			if (id == 52) {// Seal Of Approval
 
-				WorldTasksManager.schedule(new WorldTask() {
+				WorldTasksManager.scheduleTask(new WorldTask() {
 					int random = (int) (Math.random() * (2 + 1));
 
 					@Override

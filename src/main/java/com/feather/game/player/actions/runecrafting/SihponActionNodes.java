@@ -8,8 +8,8 @@ import com.feather.game.player.Player;
 import com.feather.game.player.Skills;
 import com.feather.game.player.actions.Action;
 import com.feather.game.player.content.Runecrafting;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 /**
  * 
@@ -237,7 +237,7 @@ public class SihponActionNodes extends Action {
 				.sendGameMessage(
 						"The node you were siphoning from has been depleted of energy.",
 						true);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				player.getPackets().sendGameMessage(
@@ -273,7 +273,7 @@ public class SihponActionNodes extends Action {
 			player.setNextAnimation(new Animation(nodes.getEmoteId()));
 			player.setNextFaceWorldTile(node);
 			World.sendProjectile(node, node, player, 3060, 31, 35, 35, 0, 2, 0);
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 				@Override
 				public void run() {
 					player.setNextGraphics(new Graphics(3062));

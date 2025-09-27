@@ -2,7 +2,7 @@ package com.feather.game.player.content;
 
 import java.util.concurrent.TimeUnit;
 
-import com.feather.cores.GameEngine;
+import com.feather.engine.GameEngine;
 import com.feather.game.World;
 import com.feather.game.WorldObject;
 import com.feather.utils.Utils;

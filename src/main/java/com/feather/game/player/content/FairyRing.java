@@ -5,8 +5,8 @@ import javax.xml.stream.Location;
 import com.feather.game.Graphics;
 import com.feather.game.WorldTile;
 import com.feather.game.player.Player;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 public final class FairyRing {
@@ -76,7 +76,7 @@ public final class FairyRing {
     		}
     		            p.stopAll();
                         refresh(p);
-            			WorldTasksManager.schedule(new WorldTask() {
+            			WorldTasksManager.scheduleTask(new WorldTask() {
             				int loop;
             				@Override
             				public void run() {
@@ -101,7 +101,7 @@ public final class FairyRing {
                 player.thirdColumn = 1;         
         }
         public static boolean interactWithfairyRing(final Player p, Location loc) {
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
     			public void run() {
 					openFairyRing(p);    			}
     		});

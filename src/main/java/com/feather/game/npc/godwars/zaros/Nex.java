@@ -7,8 +7,8 @@ import com.feather.game.Hit.HitLook;
 import com.feather.game.minigames.ZarosGodwars;
 import com.feather.game.npc.NPC;
 import com.feather.game.npc.combat.NPCCombatDefinitions;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 @SuppressWarnings("serial")
@@ -88,7 +88,7 @@ public final class Nex extends NPC {
 	public void sendDeath(Entity source) {
 		transformIntoNPC(13450);
 		final NPCCombatDefinitions defs = getCombatDefinitions();
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			int loop;
 
 			@Override
@@ -107,7 +107,7 @@ public final class Nex extends NPC {
 		setNextForceTalk(new ForceTalk("Taste my wrath!"));
 		playSound(3323, 2);
 		final NPC target = this;
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				setNextGraphics(new Graphics(2259));

@@ -3,8 +3,8 @@ package com.feather.game.player.actions;
 import com.feather.game.item.Item;
 import com.feather.game.player.Player;
 import com.feather.game.player.Skills;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 
 public class HerbCleaning {
 
@@ -87,7 +87,7 @@ public class HerbCleaning {
 					"You do not have the required level to clean this.", true);
 			return true;
 		}
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				Item i = player.getInventory().getItem(slotId);

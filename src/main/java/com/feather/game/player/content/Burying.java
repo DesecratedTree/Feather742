@@ -8,8 +8,8 @@ import com.feather.game.Animation;
 import com.feather.game.item.Item;
 import com.feather.game.player.Player;
 import com.feather.game.player.Skills;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 public class Burying {
@@ -92,7 +92,7 @@ public class Burying {
 			player.setNextAnimation(BURY_ANIMATION);
 			player.getPackets().sendGameMessage(
 					"You dig a hole in the ground...");
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 				@Override
 				public void run() {
 					player.getPackets().sendGameMessage(

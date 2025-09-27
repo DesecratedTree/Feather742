@@ -10,8 +10,8 @@ import com.feather.game.item.Item;
 import com.feather.game.npc.others.BarrowsBrother;
 import com.feather.game.player.Player;
 import com.feather.game.player.Skills;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 public final class Barrows extends Controler {
@@ -53,7 +53,7 @@ public final class Barrows extends Controler {
 					&& player.getX() <= hill.outBound.getX()+3
 					&& player.getY() <= hill.outBound.getY()+3) {
 				player.useStairs(-1, hill.inside, 1, 2, "You've broken into a crypt.");
-				WorldTasksManager.schedule(new WorldTask() {
+				WorldTasksManager.scheduleTask(new WorldTask() {
 					@Override
 					public void run() {
 						player.getControlerManager().startControler("Barrows");

@@ -6,8 +6,8 @@ import com.feather.game.Hit;
 import com.feather.game.Hit.HitLook;
 import com.feather.game.player.Player;
 import com.feather.game.player.content.Combat;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 /**
@@ -32,7 +32,7 @@ public final class SuperFireAttack implements QueenAttack {
 		npc.setNextAnimation(ANIMATION);
 		npc.setNextGraphics(GRAPHIC);
 		victim.getPackets().sendGameMessage("<col=FFCC00>The Queen Black Dragon gathers her strength to breath extremely hot flames.</col>");
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			int count = 0;
 			@Override
 			public void run() {

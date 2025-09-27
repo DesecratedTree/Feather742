@@ -9,8 +9,8 @@ import com.feather.game.minigames.PuroPuro;
 import com.feather.game.npc.NPC;
 import com.feather.game.player.Player;
 import com.feather.game.player.Skills;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 public class Hunter {
@@ -181,7 +181,7 @@ public class Hunter {
 		player.lock(1);
 		player.getPackets().sendGameMessage("You swing your net...");
 		player.setNextAnimation(CAPTURE_ANIMATION);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				if (isSuccessful(player, instance.getLevel(), new DynamicFormula() {
@@ -202,7 +202,7 @@ public class Hunter {
 				} else {
 					if (isImpling) {
 						npc.setNextForceTalk(new ForceTalk("Tehee, you missed me!"));
-						WorldTasksManager.schedule(new WorldTask() {
+						WorldTasksManager.scheduleTask(new WorldTask() {
 							@Override
 							public void run() {
 								WorldTile teleTile = npc;

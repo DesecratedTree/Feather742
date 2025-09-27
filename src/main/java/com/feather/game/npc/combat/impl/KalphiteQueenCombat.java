@@ -10,8 +10,8 @@ import com.feather.game.npc.NPC;
 import com.feather.game.npc.combat.CombatScript;
 import com.feather.game.npc.combat.NPCCombatDefinitions;
 import com.feather.game.player.Player;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 public class KalphiteQueenCombat extends CombatScript {
@@ -29,7 +29,7 @@ public class KalphiteQueenCombat extends CombatScript {
 			arrayList.add((Player) target);
 		World.sendProjectile(fromEntity, target, 280, fromEntity == startTile ? 70 : 20, 20, 60, 30, 0, 0);
 		delayHit(startTile, 0, target, getMagicHit(startTile, getRandomMaxHit(startTile, startTile.getMaxHit(), NPCCombatDefinitions.MAGE, target)));
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 
 			@Override
 			public void run() {
@@ -111,7 +111,7 @@ public class KalphiteQueenCombat extends CombatScript {
 			}
 		}else{
 			npc.setNextGraphics(new Graphics(npc.getId() == 1158 ? 278 : 279));
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 
 				@Override
 				public void run() {

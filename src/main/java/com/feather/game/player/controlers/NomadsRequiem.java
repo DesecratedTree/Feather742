@@ -3,7 +3,7 @@ package com.feather.game.player.controlers;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import com.feather.cores.GameEngine;
+import com.feather.engine.GameEngine;
 import com.feather.game.*;
 import com.feather.game.npc.NPC;
 import com.feather.game.npc.nomad.Nomad;
@@ -13,8 +13,8 @@ import com.feather.game.player.content.FadingScreen;
 import com.feather.game.player.content.Magic;
 import com.feather.game.player.cutscenes.Cutscene;
 import com.feather.game.player.dialogues.Dialogue;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Logger;
 import com.feather.utils.Utils;
 
@@ -111,7 +111,7 @@ public class NomadsRequiem extends Controler {
 		else if(currentPart == DungeonPart.ENTRANCE && doorIndex == 0 && player.getQuestManager().getQuestStage(Quests.NOMADS_REQUIEM) == 0) 
 			sendFirstScene();
 		else{
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 				@Override
 				public void run() {
 					player.unlock();
@@ -135,7 +135,7 @@ public class NomadsRequiem extends Controler {
 		}
 		player.lock(7);
 		player.stopAll();
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			int loop;
 
 			@Override
@@ -166,7 +166,7 @@ public class NomadsRequiem extends Controler {
 		final NPC nomad = World.spawnNPC(8531, new WorldTile(getBaseX() + 41, getBaseY() + 11, 0), -1, true, true);
 		nomad.setRun(true);
 		nomad.setDirection(Utils.getFaceDirection(1, 0));
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			private int stage;
 			
 			@Override
@@ -201,7 +201,7 @@ public class NomadsRequiem extends Controler {
 		final WorldObject object = new WorldObject(48072, 10, 0, getBaseX() + 14, getBaseY() + 20, 0);
 		World.spawnObject(object, false);
 		final NomadsRequiem requiem = this;
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 
 			private int stage;
 			
@@ -283,7 +283,7 @@ public class NomadsRequiem extends Controler {
 	
 	public void continueThroneScene() {
 		final WorldObject object = new WorldObject(48072, 10, 0, getBaseX() + 14, getBaseY() + 20, 0);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 
 			private int stage;
 			

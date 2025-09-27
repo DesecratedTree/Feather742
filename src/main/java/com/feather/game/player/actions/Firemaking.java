@@ -11,8 +11,8 @@ import com.feather.game.minigames.duel.DuelControler;
 import com.feather.game.npc.familiar.Familiar;
 import com.feather.game.player.Player;
 import com.feather.game.player.Skills;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.net.decoders.handlers.InventoryOptionsHandler;
 import com.feather.utils.Utils;
 
@@ -166,7 +166,7 @@ public class Firemaking extends Action {
 					player.addWalkSteps(player.getX(), player.getY() - 1, 1);
 		player.getPackets().sendGameMessage(
 				"The fire catches and the logs begin to burn.", true);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				final FloorItem item = World.getRegion(tile.getRegionId())

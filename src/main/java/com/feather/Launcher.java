@@ -1,7 +1,5 @@
 package com.feather;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 import com.alex.store.Index;
@@ -10,7 +8,7 @@ import com.feather.cache.parser.ItemDefinitions;
 import com.feather.cache.parser.ItemsEquipIds;
 import com.feather.cache.parser.NPCDefinitions;
 import com.feather.cache.parser.ObjectDefinitions;
-import com.feather.cores.GameEngine;
+import com.feather.engine.GameEngine;
 import com.feather.game.Region;
 import com.feather.game.RegionBuilder;
 import com.feather.game.World;
@@ -33,8 +31,13 @@ public final class Launcher {
 		Settings.HOSTED = false;
 		Settings.DEBUG = true;
 		long currentTime = Utils.currentTimeMillis();
-		Logger.log("Launcher", "Initing Cache...");
+
+        Logger.log("Launcher", "Initializing GameEngine...");
+        GameEngine.init();
+
+		Logger.log("Launcher", "Initiating cache...");
 		Cache.init();
+
 		ItemsEquipIds.init();
 		Huffman.init();
 		Logger.log("Launcher", "Initing Data Files...");
@@ -69,8 +72,6 @@ public final class Launcher {
 		CutscenesHandler.init();
 		Logger.log("Launcher", "Initing Friend Chats Manager...");
 		FriendChatsManager.init();
-		Logger.log("Launcher", "Initing Cores Manager...");
-		GameEngine.init();
 		Logger.log("Launcher", "Initing World...");
 		World.init();
 		Logger.log("Launcher", "Initing Region Builder...");
@@ -88,44 +89,51 @@ public final class Launcher {
 		Logger.log("Launcher", "Server took "
 				+ (Utils.currentTimeMillis() - currentTime)
 				+ " milli seconds to launch.");
-		Logger.log("Launcher", "Hosted: " + Settings.HOSTED + " | Debug: " + Settings.DEBUG);
+
 		addAccountsSavingTask();
-		if (Settings.HOSTED)
-			addUpdatePlayersOnlineTask();
 		addCleanMemoryTask();
 		// Donations.init();
 	}
 
-	private static void setWebsitePlayersOnline(int amount) throws IOException {
-		URL url = new URL("http://www.matrixftw.com/updateplayeramount.php?players="+ amount + "&auth=JFHDJF3847234");
-		url.openStream().close();
-	}
+    private static void addCleanMemoryTask() {
+        GameEngine.slowExecutor.scheduleWithFixedDelay(() -> {
+            try {
+                Runtime runtime = Runtime.getRuntime();
 
-	private static void addUpdatePlayersOnlineTask() {
-		GameEngine.slowExecutor.scheduleWithFixedDelay(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					setWebsitePlayersOnline(World.getPlayers().size());
-				} catch (Throwable e) {
-					Logger.handle(e);
-				}
-			}
-		}, 2, 2, TimeUnit.MINUTES);
-	}
+                // Take memory snapshot BEFORE cleanup
+                long beforeFree = runtime.freeMemory();
+                long beforeTotal = runtime.totalMemory();
+                long beforeUsed = beforeTotal - beforeFree;
 
-	private static void addCleanMemoryTask() {
-		GameEngine.slowExecutor.scheduleWithFixedDelay(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					cleanMemory(Runtime.getRuntime().freeMemory() < Settings.MIN_FREE_MEM_ALLOWED);
-				} catch (Throwable e) {
-					Logger.handle(e);
-				}
-			}
-		}, 0, 5, TimeUnit.MINUTES);
-	}
+                // Perform cleanup
+                cleanMemory();
+
+                // Suggest GC (optional)
+                System.gc();
+
+                // Take memory snapshot AFTER cleanup
+                long afterFree = runtime.freeMemory();
+                long afterTotal = runtime.totalMemory();
+                long afterUsed = afterTotal - afterFree;
+
+                long freedMemory = beforeUsed - afterUsed;
+
+                System.out.println();
+                Logger.log("Launcher", "Memory Freed: " + formatGB(freedMemory));
+                System.out.println();
+
+            } catch (Throwable e) {
+                Logger.handle(e);
+            }
+        }, 0, 5, TimeUnit.MINUTES);
+    }
+
+    // Utility method to format bytes to GB string with 2 decimal places
+    private static String formatGB(long bytes) {
+        double gb = bytes / (1024.0 * 1024 * 1024);
+        return String.format("%.2f GB", gb);
+    }
+
 
 	private static void addAccountsSavingTask() {
 		GameEngine.slowExecutor.scheduleWithFixedDelay(new Runnable() {
@@ -153,38 +161,27 @@ public final class Launcher {
 		DTRank.save();
 	}
 
-	public static void cleanMemory(boolean force) {
-		if (force) {
-			ItemDefinitions.clearItemsDefinitions();
+	public static void cleanMemory() {
+			ItemDefinitions.clearItemDefinitions();
 			NPCDefinitions.clearNPCDefinitions();
 			ObjectDefinitions.clearObjectDefinitions();
-			for (Region region : World.getRegions().values())
-				region.removeMapFromMemory();
-		}
-		for (Index index : Cache.STORE.getIndexes())
-			index.resetCachedFiles();
-		GameEngine.fastExecutor.purge();
-		System.gc();
+			for (Region region : World.getRegions().values()) region.removeMapFromMemory();
+		    for (Index index : Cache.store.getIndexes()) index.resetCachedFiles();
+		    GameEngine.fastExecutor.purge();
+		    System.gc();
 	}
 
 	public static void shutdown() {
 		try {
 			closeServices();
 		} finally {
-			System.exit(0);
-		}
-	}
+            System.exit(0);
+        }
+    }
 
 	public static void closeServices() {
 		ServerChannelHandler.shutdown();
 		GameEngine.shutdown();
-		if (Settings.HOSTED) {
-			try {
-				setWebsitePlayersOnline(0);
-			} catch (Throwable e) {
-				Logger.handle(e);
-			}
-		}
 	}
 
 	public static void restart() {

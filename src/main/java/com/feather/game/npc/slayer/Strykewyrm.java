@@ -4,8 +4,8 @@ import com.feather.game.Animation;
 import com.feather.game.WorldTile;
 import com.feather.game.npc.NPC;
 import com.feather.game.player.Player;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 @SuppressWarnings("serial")
@@ -27,7 +27,7 @@ public class Strykewyrm extends NPC {
 		if (getId() != stompId && !isCantInteract() && !isUnderCombat()) {
 			setNextAnimation(new Animation(12796));
 			setCantInteract(true);
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 				@Override
 				public void run() {
 					transformIntoNPC(9462);
@@ -79,7 +79,7 @@ public class Strykewyrm extends NPC {
 			return;
 		}
 		player.setNextAnimation(new Animation(4278));
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				npc.setNextAnimation(new Animation(12795));

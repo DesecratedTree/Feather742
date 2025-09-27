@@ -1,15 +1,15 @@
 package com.feather.game.player.cutscenes;
 
 import com.feather.Settings;
-import com.feather.cores.GameEngine;
+import com.feather.engine.GameEngine;
 import com.feather.game.RegionBuilder;
 import com.feather.game.WorldTile;
 import com.feather.game.npc.NPC;
 import com.feather.game.player.InterfaceManager;
 import com.feather.game.player.Player;
 import com.feather.game.player.cutscenes.actions.CutsceneAction;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Logger;
 
 public abstract class Cutscene {
@@ -91,7 +91,7 @@ public abstract class Cutscene {
 					if (Settings.DEBUG)
 						Logger.log(this, "Bases: " + getBaseX() + ", "
 								+ getBaseY());
-					WorldTasksManager.schedule(new WorldTask() {
+					WorldTasksManager.scheduleTask(new WorldTask() {
 
 						@Override
 						public void run() {

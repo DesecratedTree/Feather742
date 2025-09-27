@@ -5,7 +5,7 @@ import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 import com.feather.Settings;
-import com.feather.cores.GameEngine;
+import com.feather.engine.GameEngine;
 import com.feather.game.*;
 import com.feather.game.item.Item;
 import com.feather.game.npc.fightcaves.FightCavesNPC;
@@ -14,8 +14,8 @@ import com.feather.game.npc.fightcaves.TzTok_Jad;
 import com.feather.game.player.Player;
 import com.feather.game.player.actions.Summoning;
 import com.feather.game.player.content.pet.Pets;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Logger;
 import com.feather.utils.Utils;
 
@@ -181,7 +181,7 @@ public class FightCaves extends Controler {
 				selectedMusic = MUSICS[Utils.random(MUSICS.length)];
 				player.setNextWorldTile(!login ? getWorldTile(46, 61) : getWorldTile(32, 32) );
 				//1delay because player cant walk while teleing :p, + possible issues avoid
-				WorldTasksManager.schedule(new WorldTask()  {
+				WorldTasksManager.scheduleTask(new WorldTask()  {
 					@Override
 					public void run() {
 						if(!login) {
@@ -321,7 +321,7 @@ public class FightCaves extends Controler {
 	public boolean sendDeath() {
 		player.lock(7);
 		player.stopAll();
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			int loop;
 
 			@Override

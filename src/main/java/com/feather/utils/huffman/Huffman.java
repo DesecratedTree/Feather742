@@ -12,7 +12,7 @@ public final class Huffman {
 	private static int[] huffmanAlgorithm3;
 
 	public static final void init() {
-		byte[] huffmanFile = Cache.STORE.getIndexes()[10].getFile(Cache.STORE
+		byte[] huffmanFile = Cache.store.getIndexes()[10].getFile(Cache.store
 				.getIndexes()[10].getArchiveId("huffman"));
 		int fileLength = huffmanFile.length;
 		huffmanAlgorithm2 = huffmanFile;

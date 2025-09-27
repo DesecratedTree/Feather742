@@ -3,13 +3,13 @@ package com.feather.game.player;
 import java.io.Serializable;
 
 import com.feather.cache.parser.NPCDefinitions;
-import com.feather.cores.GameEngine;
+import com.feather.engine.GameEngine;
 import com.feather.game.*;
 import com.feather.game.item.Item;
 import com.feather.game.npc.NPC;
 import com.feather.game.player.cutscenes.Cutscene;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.DTRank;
 import com.feather.utils.Utils;
 
@@ -193,7 +193,7 @@ public final class DominionTower implements Serializable {
 							, mapBaseCoords[0], mapBaseCoords[1], 8);
 					teleportToArena(mode);
 					if (needDestroy) {
-						WorldTasksManager.schedule(new WorldTask() {
+						WorldTasksManager.scheduleTask(new WorldTask() {
 							@Override
 							public void run() {
 								GameEngine.slowExecutor
@@ -266,7 +266,7 @@ public final class DominionTower implements Serializable {
 				2));
 		player.setNextFaceWorldTile(new WorldTile(getBaseX() + 26, getBaseY() + 32, 0));
 		final int index = getNextBossIndex();
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 
 			private int count;
 
@@ -377,7 +377,7 @@ public final class DominionTower implements Serializable {
 		player.setNextFaceWorldTile(new WorldTile(player.getX() + 1, player
 				.getY(), 0));
 
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			int count;
 
 			@Override
@@ -451,7 +451,7 @@ public final class DominionTower implements Serializable {
 				2));
 		player.setNextFaceWorldTile(new WorldTile(getBaseX() + 36, getBaseY() + 31, 0));
 
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 
 			private int count;
 
@@ -513,7 +513,7 @@ public final class DominionTower implements Serializable {
 			if (mode == ENDURANCE)
 				progress = 0;
 		}
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				GameEngine.slowExecutor.execute(new Runnable() {

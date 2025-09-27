@@ -232,8 +232,8 @@ public final class LoginPacketsDecoder extends Decoder {
 		stream.readInt();
 		stream.readString();
 		stream.readUnsignedByte();
-		for (int index = 0; index < Cache.STORE.getIndexes().length; index++) {
-			int crc = Cache.STORE.getIndexes()[index] == null ? -1011863738 : Cache.STORE.getIndexes()[index].getCRC();
+		for (int index = 0; index < Cache.store.getIndexes().length; index++) {
+			int crc = Cache.store.getIndexes()[index] == null ? -1011863738 : Cache.store.getIndexes()[index].getCRC();
 			int receivedCRC = stream.readInt();
 			if (crc != receivedCRC && index < 32) {
 				session.getLoginPackets().sendClientPacket(6);

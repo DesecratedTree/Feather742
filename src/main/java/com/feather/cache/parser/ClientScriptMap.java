@@ -61,7 +61,7 @@ public final class ClientScriptMap {
 		ClientScriptMap script = interfaceScripts.get(scriptId);
 		if (script != null)
 			return script;
-		byte[] data = Cache.STORE.getIndexes()[17].getFile(
+		byte[] data = Cache.store.getIndexes()[17].getFile(
 				scriptId >>> 0xba9ed5a8, scriptId & 0xff);
 		script = new ClientScriptMap();
 		if (data != null)

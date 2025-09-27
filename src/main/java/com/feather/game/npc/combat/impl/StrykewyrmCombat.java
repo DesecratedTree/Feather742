@@ -6,8 +6,8 @@ import com.feather.game.npc.NPC;
 import com.feather.game.npc.combat.CombatScript;
 import com.feather.game.npc.combat.NPCCombatDefinitions;
 import com.feather.game.player.Player;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 public class StrykewyrmCombat extends CombatScript {
@@ -51,7 +51,7 @@ public class StrykewyrmCombat extends CombatScript {
 			World.sendProjectile(npc, target, defs.getAttackProjectile(), 41,
 					16, 41, 30, 16, 0);
 			if (npc.getId() == 9463) {
-				WorldTasksManager.schedule(new WorldTask() {
+				WorldTasksManager.scheduleTask(new WorldTask() {
 					@Override
 					public void run() {
 						if (Utils.getRandom(10) == 0
@@ -75,7 +75,7 @@ public class StrykewyrmCombat extends CombatScript {
 			npc.setCantInteract(true);
 			npc.getCombat().removeTarget();
 			final int id = npc.getId();
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 
 				int count;
 

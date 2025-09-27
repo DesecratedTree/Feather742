@@ -36,11 +36,11 @@ public class NPCSpawnsDumper {
 		writer.flush();
 		int regionX = (regionId >> 8) * 64;
 		int regionY = (regionId & 0xff) * 64;
-		int npcSpawnsContainerId = Cache.STORE.getIndexes()[5].getArchiveId("n"
+		int npcSpawnsContainerId = Cache.store.getIndexes()[5].getArchiveId("n"
 				+ ((regionX >> 3) / 8) + "_" + ((regionY >> 3) / 8));
 		if (npcSpawnsContainerId == -1)
 			return;
-		byte[] npcSpawnsContainerData = Cache.STORE.getIndexes()[5].getFile(
+		byte[] npcSpawnsContainerData = Cache.store.getIndexes()[5].getFile(
 				npcSpawnsContainerId, 0, MapArchiveKeys.getMapKeys(regionId));
 		if (npcSpawnsContainerData == null)
 			return;

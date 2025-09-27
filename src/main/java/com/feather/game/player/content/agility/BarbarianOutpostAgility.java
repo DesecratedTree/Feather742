@@ -3,8 +3,8 @@ package com.feather.game.player.content.agility;
 import com.feather.game.*;
 import com.feather.game.player.Player;
 import com.feather.game.player.Skills;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 
 public class BarbarianOutpostAgility {
 
@@ -17,7 +17,7 @@ public class BarbarianOutpostAgility {
 		 player.setNextAnimation(new Animation(10580));
 		 final WorldTile toTile = new WorldTile(object.getX(), player.getY() >= 3561 ?  3558 : 3561, object.getPlane());
 		 player.setNextForceMovement(new ForceMovement(player, 0, toTile, 2, player.getY() >= 3561 ? ForceMovement.SOUTH : ForceMovement.NORTH));
-		 WorldTasksManager.schedule(new WorldTask() {
+		 WorldTasksManager.scheduleTask(new WorldTask() {
 
 			@Override
 			public void run() {
@@ -33,7 +33,7 @@ public class BarbarianOutpostAgility {
 			return;
 		player.lock(10);
 		final WorldTile toTile = new WorldTile(2538, 3545, 2);
-		 WorldTasksManager.schedule(new WorldTask() {
+		 WorldTasksManager.scheduleTask(new WorldTask() {
 			 
 			boolean secondLoop;
 			@Override
@@ -59,7 +59,7 @@ public class BarbarianOutpostAgility {
 		if(!Agility.hasLevel(player, 90))
 			return;
 		player.useStairs(10023, new WorldTile(2536, 3546, 3), 2, 3);
-		 WorldTasksManager.schedule(new WorldTask() {
+		 WorldTasksManager.scheduleTask(new WorldTask() {
 
 			@Override
 			public void run() {
@@ -76,7 +76,7 @@ public class BarbarianOutpostAgility {
 		player.lock(5);
 		player.addWalkSteps(2533, 3547, -1, false);
 		final WorldTile toTile = new WorldTile(2532, 3553, 3);
-		 WorldTasksManager.schedule(new WorldTask() {
+		 WorldTasksManager.scheduleTask(new WorldTask() {
 			 
 			 boolean secondLoop;
 			 
@@ -106,7 +106,7 @@ public class BarbarianOutpostAgility {
 		player.setNextForceMovement(new ForceMovement(player, 1, toTile, 3, ForceMovement.EAST));
 		player.setNextAnimation(new Animation(16079));
 		player.getAppearance().setRenderEmote(330);
-		 WorldTasksManager.schedule(new WorldTask() {
+		 WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				player.setNextWorldTile(toTile);
@@ -125,7 +125,7 @@ public class BarbarianOutpostAgility {
 		player.lock(1);
 		player.setNextAnimation(new Animation(2586));
 		player.getAppearance().setRenderEmote(-1);
-		 WorldTasksManager.schedule(new WorldTask() {
+		 WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				player.setNextWorldTile(new WorldTile(2538, 3553, 2));
@@ -144,7 +144,7 @@ public class BarbarianOutpostAgility {
 		player.setNextAnimation(new Animation(11792));
 		final WorldTile toTile = new WorldTile(2544, player.getY(), 0);
 		player.setNextForceMovement(new ForceMovement(player, 0, toTile, 5, ForceMovement.EAST));
-		 WorldTasksManager.schedule(new WorldTask() {
+		 WorldTasksManager.scheduleTask(new WorldTask() {
 			 int stage;
 			@Override
 			public void run() {
@@ -187,7 +187,7 @@ public class BarbarianOutpostAgility {
 		 player.setNextForceMovement(new ForceMovement(player, 1, toTile, 3, ForceMovement.SOUTH));
 		player.getSkills().addXp(Skills.AGILITY, 22);
 		player.getPackets().sendGameMessage("You skilfully swing across.", true);
-		 WorldTasksManager.schedule(new WorldTask() {
+		 WorldTasksManager.scheduleTask(new WorldTask() {
 
 			@Override
 			public void run() {
@@ -204,7 +204,7 @@ public class BarbarianOutpostAgility {
 		if(player.getY() != object.getY()) {
 			player.addWalkSteps(2551, 3546, -1, false);
 			player.lock(2);
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 
 				@Override
 				public void run() {
@@ -221,7 +221,7 @@ public class BarbarianOutpostAgility {
 		 player.setNextAnimation(new Animation(9908));
 		 final WorldTile toTile = new WorldTile(2541, object.getY(), object.getPlane());
 		 player.setNextForceMovement(new ForceMovement(player, 0, toTile, 16, ForceMovement.WEST));
-		 WorldTasksManager.schedule(new WorldTask() {
+		 WorldTasksManager.scheduleTask(new WorldTask() {
 
 			@Override
 			public void run() {
@@ -245,7 +245,7 @@ public class BarbarianOutpostAgility {
 		 final WorldTile toTile = new WorldTile(2532, object.getY(), object.getPlane());
 		 player.setRun(true);
 		 player.addWalkSteps(toTile.getX(), toTile.getY(), -1, false);
-		 WorldTasksManager.schedule(new WorldTask() {
+		 WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				 player.setNextAnimation(new Animation(759));
@@ -281,7 +281,7 @@ public class BarbarianOutpostAgility {
 		 player.setNextAnimation(new Animation(4853));
 		 final WorldTile toTile = new WorldTile(object.getX()+1, object.getY(), object.getPlane());
 		 player.setNextForceMovement(new ForceMovement(player, 0, toTile, 2, ForceMovement.EAST));
-		 WorldTasksManager.schedule(new WorldTask() {
+		 WorldTasksManager.scheduleTask(new WorldTask() {
 
 			@Override
 			public void run() {

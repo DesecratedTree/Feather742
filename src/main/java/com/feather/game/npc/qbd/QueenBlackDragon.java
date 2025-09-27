@@ -9,8 +9,8 @@ import com.feather.game.item.Item;
 import com.feather.game.item.ItemsContainer;
 import com.feather.game.npc.NPC;
 import com.feather.game.player.Player;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 /**
@@ -310,13 +310,13 @@ public final class QueenBlackDragon extends NPC {
 		attacker.getPackets().sendGameMessage("Worms burrow through her rotting flesh.");
 		final WorldTile destination = base.transform(28 + Utils.random(12), 28 + Utils.random(6), 0);
 		attacker.getPackets().sendProjectile(null, this, destination, 3141, 128, 0, 60, 0, 5, 3, super.getDefinitions().size);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				if (getPhase() > 4) {
 					return;
 				}
-				WorldTasksManager.schedule(new WorldTask() {
+				WorldTasksManager.scheduleTask(new WorldTask() {
 					@Override
 					public void run() {
 						if (getPhase() > 4) {

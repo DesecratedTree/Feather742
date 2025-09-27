@@ -2,10 +2,10 @@ package com.feather.game.player.content;
 
 import java.util.TimerTask;
 
-import com.feather.cores.GameEngine;
+import com.feather.engine.GameEngine;
 import com.feather.game.player.Player;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Logger;
 import com.feather.utils.Utils;
 
@@ -40,7 +40,7 @@ public final class FadingScreen {
 	
 	public static void unfade(final Player player, Runnable event) {
 		event.run();
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 
 			@Override
 			public void run() {

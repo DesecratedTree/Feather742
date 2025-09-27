@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TimerTask;
 
-import com.feather.cores.GameEngine;
+import com.feather.engine.GameEngine;
 import com.feather.game.Animation;
 import com.feather.game.WorldObject;
 import com.feather.game.WorldTile;
 import com.feather.game.item.Item;
 import com.feather.game.player.Player;
 import com.feather.game.player.Skills;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 
 /**
  * @author Richard (Flamable)
@@ -154,7 +154,7 @@ public class StealingCreation {
 
 	private static void sendGameEnding() {
 		sendGameConfig(556, 1);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				sendGameConfig(561, 1);

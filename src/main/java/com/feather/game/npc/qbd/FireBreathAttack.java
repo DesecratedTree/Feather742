@@ -6,8 +6,8 @@ import com.feather.game.Hit;
 import com.feather.game.Hit.HitLook;
 import com.feather.game.player.Player;
 import com.feather.game.player.content.Combat;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 /**
@@ -31,7 +31,7 @@ public final class FireBreathAttack implements QueenAttack {
 	public int attack(final QueenBlackDragon npc, final Player victim) {
 		npc.setNextAnimation(ANIMATION);
 		npc.setNextGraphics(GRAPHIC);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				super.stop();

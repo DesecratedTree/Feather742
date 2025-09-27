@@ -1,6 +1,5 @@
-package com.feather.cores.processes;
+package com.feather.engine.processes;
 
-import com.feather.Settings;
 import com.feather.utils.Utils;
 
 public class MapClock implements GameProcess {

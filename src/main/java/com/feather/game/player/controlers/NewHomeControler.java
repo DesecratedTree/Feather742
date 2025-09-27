@@ -4,8 +4,8 @@ import com.feather.game.*;
 import com.feather.game.item.FloorItem;
 import com.feather.game.item.Item;
 import com.feather.game.npc.NPC;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 
 public class NewHomeControler extends Controler {
 
@@ -46,7 +46,7 @@ public class NewHomeControler extends Controler {
 			World.addGroundItem(item, NPC1, player, true,
 					120 * 1000, true);
 		}
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 
 			@Override
 			public void run() {
@@ -72,7 +72,7 @@ public class NewHomeControler extends Controler {
 	private void sendGoodActions() {
 		player.getDialogueManager().startDialogue("SimpleNPCMessage", 1, "Thank you, please keep the items for yourself.");
 		NPC2.setNextAnimation(new Animation(0x35F));// waving bye
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 
 			@Override
 			public void run() {// teleporting away
@@ -80,7 +80,7 @@ public class NewHomeControler extends Controler {
 				NPC2.setNextGraphics(new Graphics(184));
 			}
 		});
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 
 			@Override
 			public void run() {
@@ -101,7 +101,7 @@ public class NewHomeControler extends Controler {
 		NPC2.setNextGraphics(new Graphics(875));
 		NPC1.setRandomWalk(false);
 		NPC2.setRandomWalk(false);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 
 			@Override
 			public void run() {
@@ -110,26 +110,26 @@ public class NewHomeControler extends Controler {
 				NPC1.setRun(true);
 				NPC2.faceEntity(NPC1);
 				NPC2.addWalkSteps(NPC1.getX(), NPC2.getY());
-				WorldTasksManager.schedule(new WorldTask() {
+				WorldTasksManager.scheduleTask(new WorldTask() {
 
 					@Override
 					public void run() {
 						NPC1.setNextForceTalk(new ForceTalk("Muahahahaha, its all mine!"));
-						WorldTasksManager.schedule(new WorldTask() {
+						WorldTasksManager.scheduleTask(new WorldTask() {
 
 							@Override
 							public void run() {
 								NPC2.setNextForceTalk(new ForceTalk("Somone please help!"));
 								NPC2.faceEntity(player);
 								NPC2.addWalkSteps(player.getX(), player.getY());
-								WorldTasksManager.schedule(new WorldTask() {
+								WorldTasksManager.scheduleTask(new WorldTask() {
 
 									@Override
 									public void run() {
 										player.getDialogueManager().startDialogue("SimpleNPCMessage", 1, "Please sir, help me capture the man who stole my belongings");
 									}
 								});
-								WorldTasksManager.schedule(new WorldTask() {
+								WorldTasksManager.scheduleTask(new WorldTask() {
 
 									@Override
 									public void run() {

@@ -310,7 +310,7 @@ public class Summoning {
 				.getPouchId());
 		if (def == null)
 			return;
-		HashMap<Integer, Integer> skillReq = def.getWearingSkillRequiriments();
+		Map<Integer, Integer> skillReq = def.getWearingSkillRequirements();
 		boolean hasRequiriments = true;
 		if (skillReq != null) {
 			for (int skillId : skillReq.keySet()) {
@@ -367,7 +367,7 @@ public class Summoning {
 		ItemDefinitions def = ItemDefinitions.getItemDefinitions(itemId);
 		if (def == null)
 			return false;
-		HashMap<Integer, Integer> skillReq = def.getWearingSkillRequiriments();
+		Map<Integer, Integer> skillReq = def.getWearingSkillRequirements();
 		boolean hasRequiriments = true;
 		if (skillReq != null) {
 			for (int skillId : skillReq.keySet()) {
@@ -390,8 +390,8 @@ public class Summoning {
 									+ " to create this.");
 				}
 			}
-			HashMap<Integer, Integer> itemReq = def
-					.getWearingSkillRequiriments();
+			Map<Integer, Integer> itemReq = def
+					.getWearingSkillRequirements();
 			if (itemReq != null) {
 				for (int reqId : itemReq.keySet()) {
 					int amount = skillReq.get(reqId);

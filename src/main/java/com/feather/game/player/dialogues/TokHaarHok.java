@@ -2,7 +2,7 @@ package com.feather.game.player.dialogues;
 
 import java.util.TimerTask;
 
-import com.feather.cores.GameEngine;
+import com.feather.engine.GameEngine;
 import com.feather.game.WorldTile;
 import com.feather.game.player.controlers.FightKiln;
 import com.feather.game.player.cutscenes.Cutscene;

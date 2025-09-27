@@ -7,8 +7,8 @@ import com.feather.game.item.Item;
 import com.feather.game.npc.others.FireSpirit;
 import com.feather.game.player.Player;
 import com.feather.game.player.Skills;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 public class Bonfire extends Action {
@@ -153,7 +153,7 @@ public class Bonfire extends Action {
 	@Override
 	public void stop(final Player player) {
 		player.getEmotesManager().setNextEmoteEnd(2400);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 
 			@Override
 			public void run() {

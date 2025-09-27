@@ -12,8 +12,8 @@ import com.feather.game.npc.combat.NPCCombatDefinitions;
 import com.feather.game.npc.godwars.zaros.Nex;
 import com.feather.game.player.Player;
 import com.feather.game.player.cutscenes.NexCutScene;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 public class NexCombat extends CombatScript {
@@ -65,7 +65,7 @@ public class NexCombat extends CombatScript {
 				final int idx = Utils.random(NO_ESCAPE_TELEPORTS.length);
 				final WorldTile dir = NO_ESCAPE_TELEPORTS[idx];
 				final WorldTile center = new WorldTile(2924, 5202, 0);
-				WorldTasksManager.schedule(new WorldTask() {
+				WorldTasksManager.scheduleTask(new WorldTask() {
 					private int count;
 
 					@Override
@@ -146,7 +146,7 @@ public class NexCombat extends CombatScript {
 					npc.setNextAnimation(new Animation(6986));
 					npc.setTarget(player);
 					player.setNextAnimation(new Animation(-1));
-					WorldTasksManager.schedule(new WorldTask() {
+					WorldTasksManager.scheduleTask(new WorldTask() {
 						@Override
 						public void run() {
 							player.setNextWorldTile(nex);
@@ -184,7 +184,7 @@ public class NexCombat extends CombatScript {
 					nex.playSound(3322, 2);
 					npc.setNextAnimation(new Animation(6355));
 					npc.setNextGraphics(new Graphics(1217));
-					WorldTasksManager.schedule(new WorldTask() {
+					WorldTasksManager.scheduleTask(new WorldTask() {
 						@Override
 						public void run() {
 							if (nex.getAttacksStage() != 1 || nex.hasFinished()) {
@@ -233,7 +233,7 @@ public class NexCombat extends CombatScript {
 									10, 0, t.getX(), t.getY(), 0), 2400);
 						}
 					}
-					WorldTasksManager.schedule(new WorldTask() {
+					WorldTasksManager.scheduleTask(new WorldTask() {
 						private boolean firstCall;
 
 						@Override
@@ -276,7 +276,7 @@ public class NexCombat extends CombatScript {
 										npc,
 										getRandomMaxHit(npc, damage,
 												NPCCombatDefinitions.RANGE, t)));
-						WorldTasksManager.schedule(new WorldTask() {
+						WorldTasksManager.scheduleTask(new WorldTask() {
 							@Override
 							public void run() {
 								t.setNextGraphics(new Graphics(471));
@@ -296,7 +296,7 @@ public class NexCombat extends CombatScript {
 							"Nex has marked you as a sacrifice, RUN!");
 					final int x = player.getX();
 					final int y = player.getY();
-					WorldTasksManager.schedule(new WorldTask() {
+					WorldTasksManager.scheduleTask(new WorldTask() {
 						@Override
 						public void run() {
 							player.getAppearance().setGlowRed(false);
@@ -312,7 +312,7 @@ public class NexCombat extends CombatScript {
 											290, NPCCombatDefinitions.MAGE, t);
 									delayHit(npc, 1, t,
 											getMagicHit(npc, damage));
-									WorldTasksManager.schedule(new WorldTask() {
+									WorldTasksManager.scheduleTask(new WorldTask() {
 										@Override
 										public void run() {
 											t.setNextGraphics(new Graphics(376));
@@ -362,7 +362,7 @@ public class NexCombat extends CombatScript {
 							}
 						}
 					}
-					WorldTasksManager.schedule(new WorldTask() {
+					WorldTasksManager.scheduleTask(new WorldTask() {
 						@Override
 						public void run() {
 							nex.setDoingSiphon(false);
@@ -391,7 +391,7 @@ public class NexCombat extends CombatScript {
 					if (damage > 0 && Utils.getRandom(5) == 0) {// 1/6
 																// probability
 																// freezing
-						WorldTasksManager.schedule(new WorldTask() {
+						WorldTasksManager.scheduleTask(new WorldTask() {
 							@Override
 							public void run() {
 								t.addFreezeDelay(18000);

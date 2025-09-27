@@ -515,9 +515,9 @@ public class Appearance implements Serializable {
 //			return false;
 		else if ((capeId == 20767
 				&& Arrays.equals(player.getMaxedCapeCustomized(),
-						defs.originalModelColors) || ((capeId == 20769 || capeId == 20771) && Arrays
+                defs.getOriginalModelColors()) || ((capeId == 20769 || capeId == 20771) && Arrays
 				.equals(player.getCompletionistCapeCustomized(),
-						defs.originalModelColors))))
+                        defs.getOriginalModelColors()))))
 			return false;
 		return true;
 	}
@@ -550,9 +550,9 @@ public class Appearance implements Serializable {
 		ItemDefinitions defs = ItemDefinitions.getItemDefinitions(hatId - 1);
 		if ((hatId == 20768
 				&& Arrays.equals(player.getMaxedCapeCustomized(),
-						defs.originalModelColors) || ((hatId == 20770 || hatId == 20772) && Arrays
+                defs.getOriginalModelColors()) || ((hatId == 20770 || hatId == 20772) && Arrays
 				.equals(player.getCompletionistCapeCustomized(),
-						defs.originalModelColors))))
+                        defs.getOriginalModelColors()))))
 			return false;
 		return true;
 	}

@@ -9,8 +9,8 @@ import com.feather.game.player.content.ItemConstants;
 import com.feather.game.player.content.Foods.Food;
 import com.feather.game.player.content.Pots.Pot;
 import com.feather.game.player.controlers.Controler;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.net.decoders.WorldPacketsDecoder;
 import com.feather.net.decoders.handlers.ButtonHandler;
 import com.feather.utils.Utils;
@@ -85,7 +85,7 @@ public class DuelArena extends Controler {
 		Player oldTarget = target;
 		if(duelStage != DuelStage.DONE) {
 			target = null;
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 
 				@Override
 				public void run() {
@@ -273,7 +273,7 @@ public class DuelArena extends Controler {
 		startEndingTeleport(loser);
 		loser.getPackets().sendGameMessage("Oh dear, it seems you have lost to "+victor.getDisplayName()+".");
 		victor.getPackets().sendGameMessage("Congradulations! You easily defeated "+loser.getDisplayName()+".");
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 
 			@Override
 			public void run() {
@@ -325,7 +325,7 @@ public class DuelArena extends Controler {
 		player.getTemporaryAttributtes().put("canFight", false);
 		player.setCanPvp(true);
 		player.getHintIconsManager().addHintIcon(target, 1, -1, false);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			int count = 3;
 
 			@Override
@@ -404,7 +404,7 @@ public class DuelArena extends Controler {
 	@Override
 	public boolean sendDeath() {
 		player.lock(7);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			int loop;
 
 			@Override

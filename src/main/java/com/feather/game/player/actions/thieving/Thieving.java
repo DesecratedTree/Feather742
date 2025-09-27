@@ -10,8 +10,8 @@ import com.feather.game.npc.NPC;
 import com.feather.game.player.Equipment;
 import com.feather.game.player.Player;
 import com.feather.game.player.Skills;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.net.decoders.handlers.ObjectHandler;
 import com.feather.utils.Utils;
 
@@ -127,7 +127,7 @@ public class Thieving {
 
 				player.setNextAnimation(new Animation(881));
 				player.lock(2);
-				WorldTasksManager.schedule(new WorldTask() {
+				WorldTasksManager.scheduleTask(new WorldTask() {
 					boolean gaveItems;
 
 					@Override

@@ -5,8 +5,8 @@ import java.util.Iterator;
 import com.feather.game.ForceTalk;
 import com.feather.game.npc.NPC;
 import com.feather.game.player.Player;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 /**
@@ -42,7 +42,7 @@ public final class TimeStopAttack implements QueenAttack {
 		soul.setNextGraphics(TorturedSoul.TELEPORT_GRAPHIC);
 		soul.setNextAnimation(TorturedSoul.TELEPORT_ANIMATION);
 		soul.setLocked(true);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			int stage = -1;
 			@Override
 			public void run() {

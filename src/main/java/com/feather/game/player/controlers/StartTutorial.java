@@ -6,8 +6,8 @@ import com.feather.game.WorldObject;
 import com.feather.game.WorldTile;
 import com.feather.game.npc.NPC;
 import com.feather.game.player.Skills;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 
 public class StartTutorial extends Controler {
 
@@ -209,7 +209,7 @@ public class StartTutorial extends Controler {
 						"You've received a guide book. Use it if you have questions or talk with other players.");
 		player.getPackets().sendGameMessage("or talk with other players.");
 
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				player.getInterfaceManager().sendInterfaces();

@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 import com.feather.Settings;
 import com.feather.cache.parser.ItemDefinitions;
 import com.feather.cache.parser.NPCDefinitions;
-import com.feather.cores.GameEngine;
+import com.feather.engine.GameEngine;
 import com.feather.game.*;
 import com.feather.game.Hit.HitLook;
 import com.feather.game.item.Item;
@@ -21,8 +21,8 @@ import com.feather.game.player.actions.Slayer;
 import com.feather.game.player.actions.Slayer.SlayerTask;
 import com.feather.game.player.content.Burying;
 import com.feather.game.player.controlers.Wilderness;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Logger;
 import com.feather.utils.MapAreas;
 import com.feather.utils.NPCBonuses;
@@ -246,7 +246,7 @@ public class NPC extends Entity implements Serializable {
 		if (hit.getDamage() > 0)
 			World.sendProjectile(user, this, 2263, 11, 11, 20, 5, 0, 0);
 		user.heal(hit.getDamage() / 5);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				setNextGraphics(new Graphics(2264));
@@ -300,7 +300,7 @@ public class NPC extends Entity implements Serializable {
 								p2.getPrayer().setBoostedLeech(true);
 								World.sendProjectile(p2, this, 2215, 35, 35,
 										20, 5, 0, 0);
-								WorldTasksManager.schedule(new WorldTask() {
+								WorldTasksManager.scheduleTask(new WorldTask() {
 									@Override
 									public void run() {
 										setNextGraphics(new Graphics(2216));
@@ -327,7 +327,7 @@ public class NPC extends Entity implements Serializable {
 									p2.getPrayer().setBoostedLeech(true);
 									World.sendProjectile(p2, this, 2231, 35,
 											35, 20, 5, 0, 0);
-									WorldTasksManager.schedule(new WorldTask() {
+									WorldTasksManager.scheduleTask(new WorldTask() {
 										@Override
 										public void run() {
 											setNextGraphics(new Graphics(2232));
@@ -354,7 +354,7 @@ public class NPC extends Entity implements Serializable {
 									p2.getPrayer().setBoostedLeech(true);
 									World.sendProjectile(p2, this, 2248, 35,
 											35, 20, 5, 0, 0);
-									WorldTasksManager.schedule(new WorldTask() {
+									WorldTasksManager.scheduleTask(new WorldTask() {
 										@Override
 										public void run() {
 											setNextGraphics(new Graphics(2250));
@@ -386,7 +386,7 @@ public class NPC extends Entity implements Serializable {
 								p2.getPrayer().setBoostedLeech(true);
 								World.sendProjectile(p2, this, 2218, 35, 35,
 										20, 5, 0, 0);
-								WorldTasksManager.schedule(new WorldTask() {
+								WorldTasksManager.scheduleTask(new WorldTask() {
 									@Override
 									public void run() {
 										setNextGraphics(new Graphics(2219));
@@ -412,7 +412,7 @@ public class NPC extends Entity implements Serializable {
 								p2.getPrayer().setBoostedLeech(true);
 								World.sendProjectile(p2, this, 2236, 35, 35,
 										20, 5, 0, 0);
-								WorldTasksManager.schedule(new WorldTask() {
+								WorldTasksManager.scheduleTask(new WorldTask() {
 									@Override
 									public void run() {
 										setNextGraphics(new Graphics(2238));
@@ -442,7 +442,7 @@ public class NPC extends Entity implements Serializable {
 								p2.getPrayer().setBoostedLeech(true);
 								World.sendProjectile(p2, this, 2221, 35, 35,
 										20, 5, 0, 0);
-								WorldTasksManager.schedule(new WorldTask() {
+								WorldTasksManager.scheduleTask(new WorldTask() {
 									@Override
 									public void run() {
 										setNextGraphics(new Graphics(2222));
@@ -468,7 +468,7 @@ public class NPC extends Entity implements Serializable {
 								p2.getPrayer().setBoostedLeech(true);
 								World.sendProjectile(p2, this, 2240, 35, 35,
 										20, 5, 0, 0);
-								WorldTasksManager.schedule(new WorldTask() {
+								WorldTasksManager.scheduleTask(new WorldTask() {
 									@Override
 									public void run() {
 										setNextGraphics(new Graphics(2242));
@@ -499,7 +499,7 @@ public class NPC extends Entity implements Serializable {
 							p2.getPrayer().setBoostedLeech(true);
 							World.sendProjectile(p2, this, 2244, 35, 35, 20, 5,
 									0, 0);
-							WorldTasksManager.schedule(new WorldTask() {
+							WorldTasksManager.scheduleTask(new WorldTask() {
 								@Override
 								public void run() {
 									setNextGraphics(new Graphics(2246));
@@ -576,7 +576,7 @@ public class NPC extends Entity implements Serializable {
 		resetWalkSteps();
 		combat.removeTarget();
 		setNextAnimation(null);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			int loop;
 
 			@Override

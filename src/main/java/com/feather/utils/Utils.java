@@ -276,66 +276,66 @@ public final class Utils {
 	}
 
 	public static final int getGraphicDefinitionsSize() {
-		int lastArchiveId = Cache.STORE.getIndexes()[21].getLastArchiveId();
+		int lastArchiveId = Cache.store.getIndexes()[21].getLastArchiveId();
 		return lastArchiveId
 				* 256
-				+ Cache.STORE.getIndexes()[21]
+				+ Cache.store.getIndexes()[21]
 						.getValidFilesCount(lastArchiveId);
 	}
 
 	public static final int getAnimationDefinitionsSize() {
-		int lastArchiveId = Cache.STORE.getIndexes()[20].getLastArchiveId();
+		int lastArchiveId = Cache.store.getIndexes()[20].getLastArchiveId();
 		return lastArchiveId
 				* 128
-				+ Cache.STORE.getIndexes()[20]
+				+ Cache.store.getIndexes()[20]
 						.getValidFilesCount(lastArchiveId);
 	}
 	
 	public static final int getConfigDefinitionsSize() {
-		int lastArchiveId = Cache.STORE.getIndexes()[22].getLastArchiveId();
+		int lastArchiveId = Cache.store.getIndexes()[22].getLastArchiveId();
 		return lastArchiveId
 				* 256
-				+ Cache.STORE.getIndexes()[22]
+				+ Cache.store.getIndexes()[22]
 						.getValidFilesCount(lastArchiveId);
 	}
 
 	public static final int getObjectDefinitionsSize() {
-		int lastArchiveId = Cache.STORE.getIndexes()[16].getLastArchiveId();
+		int lastArchiveId = Cache.store.getIndexes()[16].getLastArchiveId();
 		return lastArchiveId
 				* 256
-				+ Cache.STORE.getIndexes()[16]
+				+ Cache.store.getIndexes()[16]
 						.getValidFilesCount(lastArchiveId);
 	}
 
 	public static final int getNPCDefinitionsSize() {
-		int lastArchiveId = Cache.STORE.getIndexes()[18].getLastArchiveId();
+		int lastArchiveId = Cache.store.getIndexes()[18].getLastArchiveId();
 		return lastArchiveId
 				* 128
-				+ Cache.STORE.getIndexes()[18]
+				+ Cache.store.getIndexes()[18]
 						.getValidFilesCount(lastArchiveId);
 	}
 	//22314
 
 
 	public static final int getItemDefinitionsSize() {
-		int lastArchiveId = Cache.STORE.getIndexes()[19].getLastArchiveId();
-		return (lastArchiveId * 256 + Cache.STORE.getIndexes()[19]
+		int lastArchiveId = Cache.store.getIndexes()[19].getLastArchiveId();
+		return (lastArchiveId * 256 + Cache.store.getIndexes()[19]
 				.getValidFilesCount(lastArchiveId)) - 22314;
 	}
 	
 	public static boolean itemExists(int id) {
 		if(id >= getItemDefinitionsSize()) //setted because of custom items
 			return false;
-		return Cache.STORE.getIndexes()[19].fileExists(id >>> 8, 0xff & id);
+		return Cache.store.getIndexes()[19].fileExists(id >>> 8, 0xff & id);
 	}
 
 	public static final int getInterfaceDefinitionsSize() {
-		return Cache.STORE.getIndexes()[3].getLastArchiveId() + 1;
+		return Cache.store.getIndexes()[3].getLastArchiveId() + 1;
 	}
 
 	public static final int getInterfaceDefinitionsComponentsSize(
 			int interfaceId) {
-		return Cache.STORE.getIndexes()[3].getLastFileId(interfaceId) + 1;
+		return Cache.store.getIndexes()[3].getLastFileId(interfaceId) + 1;
 	}
 
 	public static String formatPlayerNameForProtocol(String name) {

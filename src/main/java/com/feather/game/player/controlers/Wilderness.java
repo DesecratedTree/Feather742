@@ -6,8 +6,8 @@ import com.feather.game.npc.NPC;
 import com.feather.game.player.Player;
 import com.feather.game.player.Skills;
 import com.feather.game.player.actions.thieving.Thieving;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 public class Wilderness extends Controler {
@@ -164,7 +164,7 @@ public class Wilderness extends Controler {
 			
 			player.setNextForceMovement(new ForceMovement(
 					new WorldTile(player), 1, toTile, 2, object.getRotation() == 0 || object.getRotation() == 2 ? ForceMovement.SOUTH : ForceMovement.EAST));
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 				@Override
 				public void run() {
 					player.setNextWorldTile(toTile);
@@ -201,7 +201,7 @@ public class Wilderness extends Controler {
 	@Override
 	public boolean sendDeath() {
 		
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			int loop;
 
 			@Override

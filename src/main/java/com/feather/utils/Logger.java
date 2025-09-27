@@ -1,6 +1,6 @@
 package com.feather.utils;
 
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.net.ServerChannelHandler;
 
 public final class Logger {
@@ -15,7 +15,7 @@ public final class Logger {
 		log(Logger.class, "---DEBUG--- start");
 		log(Logger.class, "WorldProcessTime: " + processTime);
 		log(Logger.class,
-				"WorldRunningTasks: " + WorldTasksManager.getTasksCount());
+				"WorldRunningTasks: " + WorldTasksManager.getTaskCount());
 		log(Logger.class,
 				"ConnectedChannels: "
 						+ ServerChannelHandler.getConnectedChannelsSize());

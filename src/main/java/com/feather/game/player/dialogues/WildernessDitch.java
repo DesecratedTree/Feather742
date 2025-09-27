@@ -4,8 +4,8 @@ import com.feather.game.Animation;
 import com.feather.game.ForceMovement;
 import com.feather.game.WorldObject;
 import com.feather.game.WorldTile;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 
 public class WildernessDitch extends Dialogue {
 
@@ -27,7 +27,7 @@ public class WildernessDitch extends Dialogue {
 					ditch.getRotation() == 0 || ditch.getRotation() == 2 ? ditch.getY() + 2 : player.getY(), ditch.getPlane());
 			player.setNextForceMovement(new ForceMovement(
 					new WorldTile(player), 1, toTile, 2, 	ditch.getRotation() == 0 || ditch.getRotation() == 2 ? ForceMovement.NORTH : ForceMovement.WEST));
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 				@Override
 				public void run() {
 					player.setNextWorldTile(toTile);

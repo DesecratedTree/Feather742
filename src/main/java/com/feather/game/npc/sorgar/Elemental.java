@@ -8,8 +8,8 @@ import com.feather.game.npc.NPC;
 import com.feather.game.player.Player;
 import com.feather.game.player.content.FadingScreen;
 import com.feather.game.player.controlers.SorceressGarden;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 
 @SuppressWarnings("serial")
 public class Elemental extends NPC {
@@ -115,7 +115,7 @@ public class Elemental extends NPC {
 					player.setNextGraphics(new Graphics(110, 0, 100));
 					player.reset();
 					player.stopAll();
-					WorldTasksManager.schedule(new WorldTask() {
+					WorldTasksManager.scheduleTask(new WorldTask() {
 						int i = 0;
 						@Override
 						public void run() {

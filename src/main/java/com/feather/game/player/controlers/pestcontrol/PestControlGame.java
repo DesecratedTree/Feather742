@@ -6,8 +6,8 @@ import com.feather.game.WorldObject;
 import com.feather.game.WorldTile;
 import com.feather.game.minigames.pest.PestControl;
 import com.feather.game.player.controlers.Controler;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 
 public class PestControlGame extends Controler {
 
@@ -17,7 +17,7 @@ public class PestControlGame extends Controler {
 	public void start() {
 		control = (PestControl) getArguments()[0];
 		player.getTemporaryAttributtes().put("pestPoints", 0);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				sendInterfaces();

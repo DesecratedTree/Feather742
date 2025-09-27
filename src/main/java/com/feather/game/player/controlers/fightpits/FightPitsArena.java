@@ -7,8 +7,8 @@ import com.feather.game.WorldTile;
 import com.feather.game.minigames.FightPits;
 import com.feather.game.player.Player;
 import com.feather.game.player.controlers.Controler;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 
 public class FightPitsArena extends Controler {
 
@@ -89,7 +89,7 @@ public class FightPitsArena extends Controler {
 	public boolean sendDeath() {
 		player.lock(7);
 		player.stopAll();
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			int loop;
 
 			@Override

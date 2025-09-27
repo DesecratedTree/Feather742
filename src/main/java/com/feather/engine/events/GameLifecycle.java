@@ -1,4 +1,4 @@
-package com.feather.cores.events;
+package com.feather.engine.events;
 
 public enum GameLifecycle {
     START_CYCLE,

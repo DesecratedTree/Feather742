@@ -101,7 +101,7 @@ public class CreationSkillsAction extends Action {
 	public int getSkillTimer(Player player, int skillId) {
 		int playerLevel = player.getSkills().getLevel(Skills.FISHING);
 		int fishLevel = definitions.level;
-		int modifier = itemUsed.getDefinitions().getWearingSkillRequiriments().get(skillId);
+		int modifier = itemUsed.getDefinitions().getWearingSkillRequirements().get(skillId);
 		int randomAmt = Utils.random(4);
 		double cycleCount = 1, otherBonus = 0;
 		cycleCount = Math.ceil(((fishLevel + otherBonus) * 50 - playerLevel * 10) / modifier * 0.25 - randomAmt * 4);

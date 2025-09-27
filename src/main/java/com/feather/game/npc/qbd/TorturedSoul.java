@@ -5,8 +5,8 @@ import com.feather.game.Hit.HitLook;
 import com.feather.game.npc.NPC;
 import com.feather.game.npc.combat.NPCCombatDefinitions;
 import com.feather.game.player.Player;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 /**
@@ -102,7 +102,7 @@ public final class TorturedSoul extends NPC {
 		resetWalkSteps();
 		getCombat().removeTarget();
 		setNextAnimation(null);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			int loop;
 
 			@Override
@@ -127,7 +127,7 @@ public final class TorturedSoul extends NPC {
 		super.setNextGraphics(TELEPORT_GRAPHIC);
 		super.setNextAnimation(TELEPORT_ANIMATION);
 		super.getCombat().reset();
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				stop();
@@ -154,7 +154,7 @@ public final class TorturedSoul extends NPC {
 				setNextGraphics(SPECIAL_ATT_GFX_);
 				setNextAnimation(SPECIAL_ATT_ANIM_);
 				getCombat().setTarget(victim);
-				WorldTasksManager.schedule(new WorldTask() {
+				WorldTasksManager.scheduleTask(new WorldTask() {
 					int x = currentX, y = currentY;
 					@Override
 					public void run() {

@@ -34,7 +34,7 @@ public final class ConfigDefinitions {
 		ConfigDefinitions script = configDefs.get(id);
 		if (script != null)//open new txt document
 			return script;
-		byte[] data = Cache.STORE.getIndexes()[22].getFile(id >>> 1416501898,
+		byte[] data = Cache.store.getIndexes()[22].getFile(id >>> 1416501898,
 				id & 0x3ff);
 		script = new ConfigDefinitions();
 		if (data != null)

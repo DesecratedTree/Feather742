@@ -10,8 +10,8 @@ import com.feather.game.npc.NPC;
 import com.feather.game.npc.combat.CombatScript;
 import com.feather.game.npc.combat.NPCCombatDefinitions;
 import com.feather.game.player.Player;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 
 public class RefugeOfFearSOLMageMininionCombat extends CombatScript {
 
@@ -49,7 +49,7 @@ public class RefugeOfFearSOLMageMininionCombat extends CombatScript {
 			final Player p = (Player) entity;
 			npc.setNextGraphics(new Graphics(177, 0, 96));
 			npc.setNextAnimation(new Animation(710));
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 				@Override
 				public void run() {
 					super.stop();

@@ -6,8 +6,8 @@ import com.feather.game.*;
 import com.feather.game.Hit.HitLook;
 import com.feather.game.npc.NPC;
 import com.feather.game.player.Player;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 @SuppressWarnings("serial")
@@ -41,7 +41,7 @@ public class FlameVortex extends NPC {
 	public void explode(final Player target, final int damage) {
 		explodeTime = -1;
 		final NPC npc = this;
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			
 			private boolean secondLoop;
 		

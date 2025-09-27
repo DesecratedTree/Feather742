@@ -11,8 +11,8 @@ import com.feather.cache.Cache;
 public class ModelDumper {
 
 	public static void main(String[] args) throws IOException {
-		Cache.STORE = new Store("C:/Users/Alexandre/Desktop/Java/projectos/FileStore2/cache562/", false);
-		Index index = Cache.STORE.getIndexes()[7];
+		Cache.store = new Store("C:/Users/Alexandre/Desktop/Java/projectos/FileStore2/cache562/", false);
+		Index index = Cache.store.getIndexes()[7];
 		System.out.println(index.getLastArchiveId());
 		for(int i = 0; i < index.getLastArchiveId(); i++) {
 			byte[] data = index.getFile(i);

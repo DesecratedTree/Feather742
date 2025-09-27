@@ -500,14 +500,14 @@ public final class CombatDefinitions implements Serializable {
 		if (ItemDefinitions.getItemDefinitions(id).getSummoningDef() != -1) {
 			bonuses[SUMMONING_DEF] += ItemDefinitions.getItemDefinitions(id).getSummoningDef();
 		}
-		if (ItemDefinitions.getItemDefinitions(id).getAbsorveMeleeBonus() != -1) {
-			bonuses[ABSORVE_MELEE_BONUS] += ItemDefinitions.getItemDefinitions(id).getAbsorveMeleeBonus();
+		if (ItemDefinitions.getItemDefinitions(id).getAbsorbMeleeBonus() != -1) {
+			bonuses[ABSORVE_MELEE_BONUS] += ItemDefinitions.getItemDefinitions(id).getAbsorbMeleeBonus();
 		}
-		if (ItemDefinitions.getItemDefinitions(id).getAbsorveMageBonus() != -1) {
-			bonuses[ABSORVE_MAGE_BONUS] += ItemDefinitions.getItemDefinitions(id).getAbsorveMageBonus();
+		if (ItemDefinitions.getItemDefinitions(id).getAbsorbMageBonus() != -1) {
+			bonuses[ABSORVE_MAGE_BONUS] += ItemDefinitions.getItemDefinitions(id).getAbsorbMageBonus();
 		}
-		if (ItemDefinitions.getItemDefinitions(id).getAbsorveRangeBonus() != -1) {
-			bonuses[ABSORVE_RANGE_BONUS] += ItemDefinitions.getItemDefinitions(id).getAbsorveRangeBonus();
+		if (ItemDefinitions.getItemDefinitions(id).getAbsorbRangeBonus() != -1) {
+			bonuses[ABSORVE_RANGE_BONUS] += ItemDefinitions.getItemDefinitions(id).getAbsorbRangeBonus();
 		}
 		if (ItemDefinitions.getItemDefinitions(id).getStrengthBonus() != -1) {
 			bonuses[STRENGTH_BONUS] += ItemDefinitions.getItemDefinitions(id).getStrengthBonus();

@@ -9,8 +9,8 @@ import com.feather.game.npc.NPC;
 import com.feather.game.npc.combat.CombatScript;
 import com.feather.game.npc.combat.NPCCombatDefinitions;
 import com.feather.game.player.Player;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 public class LucienCombat extends CombatScript {
@@ -48,7 +48,7 @@ public class LucienCombat extends CombatScript {
 							npc.getPlane()), 1900, 34, 0, 30, 35, 16, 0);
 				}
 			}
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 				@Override
 				public void run() {
 					ArrayList<Entity> possibleTargets = npc
@@ -94,7 +94,7 @@ public class LucienCombat extends CombatScript {
 									NPCCombatDefinitions.RANGE, target)));
 			World.sendProjectile(npc, target, 1904, 34, 16, 30, 35, 16, 0);
 
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 
 				@Override
 				public void run() {
@@ -134,7 +134,7 @@ public class LucienCombat extends CombatScript {
 			npc.setNextGraphics(new Graphics(2600));
 			npc.setCantInteract(true);
 			npc.getCombat().removeTarget();
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 
 				@Override
 				public void run() {
@@ -153,7 +153,7 @@ public class LucienCombat extends CombatScript {
 			npc.setCantInteract(true);
 			npc.setNextAnimation(new Animation(11319));
 			npc.getCombat().removeTarget();
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 				@Override
 				public void run() {
 					npc.setCantInteract(false);

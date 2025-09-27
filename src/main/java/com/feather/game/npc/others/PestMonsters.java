@@ -5,8 +5,8 @@ import com.feather.game.Entity;
 import com.feather.game.WorldTile;
 import com.feather.game.npc.NPC;
 import com.feather.game.npc.combat.NPCCombatDefinitions;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 
 @SuppressWarnings("serial")
 public class PestMonsters extends NPC {
@@ -24,7 +24,7 @@ public class PestMonsters extends NPC {
 		getCombat().removeTarget();
 		setNextAnimation(null);
 		// deathEffects(npc);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			int loop;
 
 			@Override

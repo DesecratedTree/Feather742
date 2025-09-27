@@ -3,8 +3,8 @@ package com.feather.game.npc.fightcaves;
 import com.feather.game.*;
 import com.feather.game.Hit.HitLook;
 import com.feather.game.npc.combat.NPCCombatDefinitions;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 
 @SuppressWarnings("serial")
 public class TzKekCaves extends FightCavesNPC {
@@ -20,7 +20,7 @@ public class TzKekCaves extends FightCavesNPC {
 		getCombat().removeTarget();
 		setNextAnimation(null);
 		final WorldTile tile = this;
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			int loop;
 
 			@Override

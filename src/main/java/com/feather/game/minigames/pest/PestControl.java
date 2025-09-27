@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
-import com.feather.cores.GameEngine;
+import com.feather.engine.GameEngine;
 import com.feather.game.RegionBuilder;
 import com.feather.game.WorldTile;
 import com.feather.game.npc.NPC;

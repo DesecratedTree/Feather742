@@ -6,8 +6,8 @@ import com.feather.game.Graphics;
 import com.feather.game.WorldTile;
 import com.feather.game.npc.combat.NPCCombatDefinitions;
 import com.feather.game.player.controlers.FightCaves;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 
 @SuppressWarnings("serial")
 public class TzTok_Jad extends FightCavesNPC {
@@ -34,7 +34,7 @@ public class TzTok_Jad extends FightCavesNPC {
 		resetWalkSteps();
 		getCombat().removeTarget();
 		setNextAnimation(null);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			int loop;
 
 			@Override

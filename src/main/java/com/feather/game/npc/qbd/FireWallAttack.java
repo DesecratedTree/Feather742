@@ -8,8 +8,8 @@ import com.feather.game.Animation;
 import com.feather.game.Hit;
 import com.feather.game.Hit.HitLook;
 import com.feather.game.player.Player;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 /**
@@ -45,17 +45,17 @@ public final class FireWallAttack implements QueenAttack {
 		Collections.shuffle(wallIds);
 		victim.getPackets().sendGameMessage("<col=FF9900>The Queen Black Dragon takes a huge breath.</col>");
 		final int wallCount = waves;
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				for (int i = 0; i < wallCount; i++) {
 					final int wallId = wallIds.get(i);
-					WorldTasksManager.schedule(new WorldTask() {
+					WorldTasksManager.scheduleTask(new WorldTask() {
 						@Override
 						public void run() {
 							for (int j = 0; j < 2; j++) {
 								final boolean second = j == 1;
-								WorldTasksManager.schedule(new WorldTask() {
+								WorldTasksManager.scheduleTask(new WorldTask() {
 									int y = 37 + (second ? 1 : 0);
 									@Override
 									public void run() {

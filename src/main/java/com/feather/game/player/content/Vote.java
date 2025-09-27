@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 import com.feather.cache.parser.ItemDefinitions;
-import com.feather.cores.GameEngine;
+import com.feather.engine.GameEngine;
 import com.feather.game.player.Player;
 import com.feather.utils.Utils;
 

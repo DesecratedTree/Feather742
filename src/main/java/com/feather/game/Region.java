@@ -8,7 +8,7 @@ import com.feather.Settings;
 import com.feather.cache.Cache;
 import com.feather.cache.parser.ClientScriptMap;
 import com.feather.cache.parser.ObjectDefinitions;
-import com.feather.cores.GameEngine;
+import com.feather.engine.GameEngine;
 import com.feather.game.item.FloorItem;
 import com.feather.game.player.Player;
 import com.feather.io.InputStream;
@@ -621,14 +621,14 @@ public class Region {
 	public void loadRegionMap() {
 		int regionX = (regionId >> 8) * 64;
 		int regionY = (regionId & 0xff) * 64;
-		int landArchiveId = Cache.STORE.getIndexes()[5].getArchiveId("l"
+		int landArchiveId = Cache.store.getIndexes()[5].getArchiveId("l"
 				+ ((regionX >> 3) / 8) + "_" + ((regionY >> 3) / 8));
-		byte[] landContainerData = landArchiveId == -1 ? null : Cache.STORE
+		byte[] landContainerData = landArchiveId == -1 ? null : Cache.store
 				.getIndexes()[5].getFile(landArchiveId, 0,
 				MapArchiveKeys.getMapKeys(regionId));
-		int mapArchiveId = Cache.STORE.getIndexes()[5].getArchiveId("m"
+		int mapArchiveId = Cache.store.getIndexes()[5].getArchiveId("m"
 				+ ((regionX >> 3) / 8) + "_" + ((regionY >> 3) / 8));
-		byte[] mapContainerData = mapArchiveId == -1 ? null : Cache.STORE
+		byte[] mapContainerData = mapArchiveId == -1 ? null : Cache.store
 				.getIndexes()[5].getFile(mapArchiveId, 0);
 		byte[][][] mapSettings = mapContainerData == null ? null
 				: new byte[4][64][64];

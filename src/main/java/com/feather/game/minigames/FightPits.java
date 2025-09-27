@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.TimerTask;
 
 import com.feather.Settings;
-import com.feather.cores.GameEngine;
+import com.feather.engine.GameEngine;
 import com.feather.game.Hit;
 import com.feather.game.World;
 import com.feather.game.Hit.HitLook;
@@ -16,8 +16,8 @@ import com.feather.game.npc.NPC;
 import com.feather.game.npc.fightpits.FightPitsNPC;
 import com.feather.game.npc.fightpits.TzKekPits;
 import com.feather.game.player.Player;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Logger;
 import com.feather.utils.Utils;
 
@@ -72,7 +72,7 @@ public final class FightPits {
 								spawns.add(new FightPitsNPC(2739, new WorldTile(GAME_TELEPORTS[Utils.random(GAME_TELEPORTS.length)], 3)));
 						}else if (minutes == 10) { //spawn tz-kek
 							//alot hits appears on players
-							WorldTasksManager.schedule(new WorldTask() {
+							WorldTasksManager.scheduleTask(new WorldTask() {
 
 								@Override
 								public void run() {

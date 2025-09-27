@@ -2,7 +2,7 @@ package com.feather.game;
 
 import com.feather.Settings;
 import com.feather.cache.parser.ObjectDefinitions;
-import com.feather.cores.GameEngine;
+import com.feather.engine.GameEngine;
 import com.feather.utils.Logger;
 
 public class DynamicRegion extends Region {

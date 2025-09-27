@@ -1,6 +1,6 @@
-package com.feather.cores.processes;
+package com.feather.engine.processes;
 
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Logger;
 
 public class WorldMainTickProcess extends BaseGameProcess {

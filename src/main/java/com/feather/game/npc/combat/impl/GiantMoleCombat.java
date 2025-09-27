@@ -5,8 +5,8 @@ import com.feather.game.npc.NPC;
 import com.feather.game.npc.combat.CombatScript;
 import com.feather.game.npc.combat.NPCCombatDefinitions;
 import com.feather.game.player.Player;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 public class GiantMoleCombat extends CombatScript {
@@ -37,7 +37,7 @@ public class GiantMoleCombat extends CombatScript {
 			if(player != null)
 				player.getInterfaceManager().sendTab(player.getInterfaceManager().hasResizableScreen() ? 1 : 11, 226);		
 			final WorldTile middle = npc.getMiddleWorldTile();
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 				@Override
 				public void run() {
 					if(player != null)

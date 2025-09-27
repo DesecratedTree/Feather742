@@ -10,8 +10,8 @@ import com.feather.game.player.Player;
 import com.feather.game.player.Skills;
 import com.feather.game.player.content.FadingScreen;
 import com.feather.game.player.content.Magic;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 
 public class SorceressGarden extends Controler {
 	
@@ -98,7 +98,7 @@ public class SorceressGarden extends Controler {
 	public boolean processObjectClick1(WorldObject object) {
 		if (object.getId() == 21764) {
 			player.setNextAnimation(new Animation(5796));
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 
 				@Override
 				public void run() {
@@ -112,7 +112,7 @@ public class SorceressGarden extends Controler {
 		} else if (object.getId() == 21768) {
 			player.setNextAnimation(new Animation(2280));
 			player.getInventory().addItem(10846, 1);
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 				int i = 0;
 				@Override
 				public void run() {
@@ -138,7 +138,7 @@ public class SorceressGarden extends Controler {
 		} else if (object.getId() == 21769) {
 			player.setNextAnimation(new Animation(2280));
 			player.getInventory().addItem(10847, 1);
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 				int i = 0;
 				@Override
 				public void run() {
@@ -164,7 +164,7 @@ public class SorceressGarden extends Controler {
 		} else if (object.getId() == 21766) {
 			player.setNextAnimation(new Animation(2280));
 			player.getInventory().addItem(10845, 1);
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 				int i = 0;
 				@Override
 				public void run() {
@@ -190,7 +190,7 @@ public class SorceressGarden extends Controler {
 		} else if (object.getId() == 21767) {
 			player.setNextAnimation(new Animation(2280));
 			player.getInventory().addItem(10844, 1);
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 				int i = 0;
 				@Override
 				public void run() {
@@ -216,7 +216,7 @@ public class SorceressGarden extends Controler {
 		} else if (object.getDefinitions().name.toLowerCase().contains("gate")) {
 			final Gate gate = Gate.forId(object.getId());
 			if (gate != null) {
-				WorldTasksManager.schedule(new WorldTask() {
+				WorldTasksManager.scheduleTask(new WorldTask() {
 					@Override
 					public void run() {
 						Gate.handleGates(player, gate.getObjectId(), gate.getLeveLReq(), inGardens(player) ? gate.getOutsideTile() : gate.getInsideTile());

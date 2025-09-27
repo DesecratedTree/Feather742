@@ -9,8 +9,8 @@ import com.feather.game.player.CombatDefinitions;
 import com.feather.game.player.Player;
 import com.feather.game.player.Skills;
 import com.feather.game.player.actions.PlayerCombat;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 public abstract class CombatScript {
@@ -28,7 +28,7 @@ public abstract class CombatScript {
 	public static void delayHit(NPC npc, int delay, final Entity target,
 			final Hit... hits) {
 		npc.getCombat().addAttackedByDelay(target);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 
 			@Override
 			public void run() {

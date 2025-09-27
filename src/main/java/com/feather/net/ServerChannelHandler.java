@@ -14,7 +14,7 @@ import org.jboss.netty.channel.group.DefaultChannelGroup;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
 
 import com.feather.Settings;
-import com.feather.cores.GameEngine;
+import com.feather.engine.GameEngine;
 import com.feather.io.InputStream;
 import com.feather.net.decoders.WorldPacketsDecoder;
 import com.feather.utils.Logger;

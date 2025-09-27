@@ -9,8 +9,8 @@ import com.feather.game.npc.combat.NPCCombatDefinitions;
 import com.feather.game.npc.corp.CorporealBeast;
 import com.feather.game.player.Player;
 import com.feather.game.player.Skills;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 public class CorporealBeastCombat extends CombatScript {
@@ -94,7 +94,7 @@ public class CorporealBeastCombat extends CombatScript {
 							getRandomMaxHit(npc, 550,
 									NPCCombatDefinitions.MAGE, target)));
 			if (target instanceof Player) {
-				WorldTasksManager.schedule(new WorldTask() {
+				WorldTasksManager.scheduleTask(new WorldTask() {
 					@Override
 					public void run() {
 						int skill = Utils.getRandom(2);
@@ -122,7 +122,7 @@ public class CorporealBeastCombat extends CombatScript {
 			npc.setNextAnimation(new Animation(10410));
 			final WorldTile tile = new WorldTile(target);
 			World.sendProjectile(npc, tile, 1824, 41, 16, 30, 0, 16, 0);
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 				@Override
 				public void run() {
 					for (int i = 0; i < 6; i++) {
@@ -147,7 +147,7 @@ public class CorporealBeastCombat extends CombatScript {
 													NPCCombatDefinitions.MAGE,
 													t)));
 						}
-						WorldTasksManager.schedule(new WorldTask() {
+						WorldTasksManager.scheduleTask(new WorldTask() {
 							@Override
 							public void run() {
 								World.sendGraphics(npc, new Graphics(1806),

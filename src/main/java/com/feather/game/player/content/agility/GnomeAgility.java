@@ -3,8 +3,8 @@ package com.feather.game.player.content.agility;
 import com.feather.game.WorldTile;
 import com.feather.game.player.Player;
 import com.feather.game.player.Skills;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 
 public class GnomeAgility {
 
@@ -19,7 +19,7 @@ public class GnomeAgility {
 		player.addWalkSteps(2474, 3429, -1, false);
 		player.getPackets().sendGameMessage(
 				"You walk carefully across the slippery log...", true);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			boolean secondloop;
 
 			@Override
@@ -45,7 +45,7 @@ public class GnomeAgility {
 			return;
 		player.getPackets().sendGameMessage("You climb the netting.", true);
 		player.useStairs(828, new WorldTile(player.getX(), 3423, 1), 1, 2);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				if (getGnomeStage(player) == 0)
@@ -59,7 +59,7 @@ public class GnomeAgility {
 		player.getPackets().sendGameMessage("You climb the tree...", true);
 		player.useStairs(828, new WorldTile(2473, 3420, 2), 1, 2,
 				"... to the plantaform above.");
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				if (getGnomeStage(player) == 1)
@@ -77,7 +77,7 @@ public class GnomeAgility {
 		player.setRunHidden(false);
 		player.lock(7);
 		player.addWalkSteps(2477, 3420, -1, false);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			boolean secondloop;
 
 			@Override
@@ -105,7 +105,7 @@ public class GnomeAgility {
 		player.setRunHidden(false);
 		player.lock(7);
 		player.addWalkSteps(2483, 3420, -1, false);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			boolean secondloop;
 
 			@Override
@@ -130,7 +130,7 @@ public class GnomeAgility {
 	public static void climbDownGnomeTreeBranch(final Player player) {
 		player.useStairs(828, new WorldTile(2487, 3421, 0), 1, 2,
 				"You climbed the tree branch succesfully.");
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				if (getGnomeStage(player) == 3)
@@ -146,7 +146,7 @@ public class GnomeAgility {
 		player.getPackets().sendGameMessage("You climb the netting.", true);
 		player.useStairs(828, new WorldTile(player.getX(),
 				player.getY() == 3425 ? 3428 : 3425, 0), 1, 2);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				if (getGnomeStage(player) == 4)
@@ -164,7 +164,7 @@ public class GnomeAgility {
 		player.addWalkSteps(objectX, objectY == 3431 ? 3437 : 3430, -1, false);
 		player.getPackets().sendGameMessage(
 				"You pulled yourself through the pipes.", true);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			boolean secondloop;
 
 			@Override

@@ -6,8 +6,8 @@ import com.feather.game.Graphics;
 import com.feather.game.WorldTile;
 import com.feather.game.npc.NPC;
 import com.feather.game.npc.combat.NPCCombatDefinitions;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 
 @SuppressWarnings("serial")
 public class KalphiteQueen extends NPC {
@@ -25,7 +25,7 @@ public class KalphiteQueen extends NPC {
 		resetWalkSteps();
 		getCombat().removeTarget();
 		setNextAnimation(null);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			int loop;
 
 			@Override
@@ -38,7 +38,7 @@ public class KalphiteQueen extends NPC {
 						transformIntoNPC(1160);
 						setNextGraphics(new Graphics(1055));
 						setNextAnimation(new Animation(6270));
-						WorldTasksManager.schedule(new WorldTask() {
+						WorldTasksManager.scheduleTask(new WorldTask() {
 
 							@Override
 							public void run() {

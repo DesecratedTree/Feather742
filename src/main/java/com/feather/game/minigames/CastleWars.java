@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.TimerTask;
 
-import com.feather.cores.GameEngine;
+import com.feather.engine.GameEngine;
 import com.feather.game.World;
 import com.feather.game.WorldObject;
 import com.feather.game.WorldTile;
@@ -17,8 +17,8 @@ import com.feather.game.player.Player;
 import com.feather.game.player.content.Foods.Food;
 import com.feather.game.player.controlers.castlewars.CastleWarsPlaying;
 import com.feather.game.player.dialogues.CastleWarsScoreboard;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 
 public final class CastleWars {
 	public static final int CW_TICKET = 4067;
@@ -156,7 +156,7 @@ public final class CastleWars {
 				player.stopAll();
 			}
 		}
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				for (int i = 0; i < playing.length; i++)

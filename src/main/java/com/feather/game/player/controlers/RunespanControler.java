@@ -9,8 +9,8 @@ import com.feather.game.npc.NPC;
 import com.feather.game.npc.others.YellowWizard;
 import com.feather.game.player.Player;
 import com.feather.game.player.actions.runecrafting.SiphonActionCreatures;
-import com.feather.game.tasks.WorldTask;
-import com.feather.game.tasks.WorldTasksManager;
+import com.feather.engine.tasks.WorldTask;
+import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.utils.Utils;
 
 /**
@@ -279,7 +279,7 @@ public class RunespanControler extends Controler {
 	
 	public static void enterRunespan(final Player player, boolean high) {
 		player.useStairs(-1, high ? HIGHER_LEVEL : LOWER_LEVEL, 0, 2);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 			@Override
 			public void run() {
 				player.getControlerManager().startControler("RuneSpanControler");
@@ -360,7 +360,7 @@ public class RunespanControler extends Controler {
 		player.lock(7);
 		player.addWalkSteps(object.getX(), object.getY(), 1, false);
 		World.sendGraphics(player, new Graphics(getPlataformGfx(plataform.runes.length)), object);
-		WorldTasksManager.schedule(new WorldTask() {
+		WorldTasksManager.scheduleTask(new WorldTask() {
 
 			private int stage;
 			@Override
@@ -559,7 +559,7 @@ public class RunespanControler extends Controler {
 				player.addWalkSteps(object.getX(), object.getY(), 0, false);
 				player.lock(35);
 				final WorldTile dest = new WorldTile(4367, 6033, 1);
-				WorldTasksManager.schedule(new WorldTask() {
+				WorldTasksManager.scheduleTask(new WorldTask() {
 					private int stage;
 					@Override
 					public void run() {
@@ -583,7 +583,7 @@ public class RunespanControler extends Controler {
 				player.addWalkSteps(object.getX(), object.getY(), 0, false);
 				player.lock(35);
 				final WorldTile dest = new WorldTile(4367, 6062, 1);
-				WorldTasksManager.schedule(new WorldTask() {
+				WorldTasksManager.scheduleTask(new WorldTask() {
 					private int stage;
 					@Override
 					public void run() {
@@ -607,7 +607,7 @@ public class RunespanControler extends Controler {
 		}
 		if(object.getId() == 70508) {
 			player.useStairs(16668, HIGHER_LEVEL, 4, 5); 
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 				@Override
 				public void run() {
 					player.setNextAnimation(new Animation(-1));
@@ -617,7 +617,7 @@ public class RunespanControler extends Controler {
 			return false;
 		} else if (object.getId() == 70509) {
 			player.useStairs(16675, VINE_LADDER, 2, 3); 
-			WorldTasksManager.schedule(new WorldTask() {
+			WorldTasksManager.scheduleTask(new WorldTask() {
 				@Override
 				public void run() {
 					player.setNextAnimation(new Animation(-1));
