@@ -28,6 +28,8 @@ import com.feather.net.decoders.handlers.ButtonHandler;
 import com.feather.net.decoders.handlers.InventoryOptionsHandler;
 import com.feather.net.decoders.handlers.NPCHandler;
 import com.feather.net.decoders.handlers.ObjectHandler;
+import com.feather.plugin.PluginManager;
+import com.feather.plugin.handler.PluginPlayerInteractionListener;
 import com.feather.utils.*;
 import com.feather.utils.huffman.Huffman;
 
@@ -353,6 +355,8 @@ public final class WorldPacketsDecoder extends Decoder {
 				return;
 			if (player.getLockDelay() > Utils.currentTimeMillis())
 				return;
+			if (handlePluginPlayerInteraction(player, p2, 2))
+			    return;
 			player.stopAll(false);
 			player.getActionManager().setAction(new PlayerFollow(p2));
 		} else if (packetId == PLAYER_OPTION_4_PACKET) {
@@ -365,6 +369,8 @@ public final class WorldPacketsDecoder extends Decoder {
 				return;
 			if (player.getLockDelay() > Utils.currentTimeMillis())
 				return;
+			if (handlePluginPlayerInteraction(player, p2, 4))
+			    return;
 			player.stopAll(false);
 			if(player.isCantTrade()) {
 				player.getPackets().sendGameMessage("You are busy.");
@@ -403,6 +409,8 @@ public final class WorldPacketsDecoder extends Decoder {
 			if (player.getLockDelay() > Utils.currentTimeMillis()
 					|| !player.getControlerManager().canPlayerOption1(p2))
 				return;
+			if (handlePluginPlayerInteraction(player, p2, 1))
+			    return;
 			if (!player.isCanPvp())
 				return;
 			if (!player.getControlerManager().canAttack(p2))
@@ -1004,6 +1012,18 @@ public final class WorldPacketsDecoder extends Decoder {
                 World.removeGroundItem(player, item1);
             }, false));
 		}
+	}
+
+	private static boolean handlePluginPlayerInteraction(Player player, Player target, int opNum) {
+	    PluginManager pm = PluginManager.getInstance();
+	    if (!pm.hasPlayerListeners(opNum))
+	        return false;
+
+	    java.util.List<PluginPlayerInteractionListener> listeners = pm.getPlayerListeners(opNum);
+	    for (PluginPlayerInteractionListener listener : listeners) {
+	        listener.accept(player, target, opNum);
+	    }
+	    return true;
 	}
 
 	public void processPackets(final int packetId, InputStream stream,

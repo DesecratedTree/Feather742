@@ -1,6 +1,7 @@
 package com.feather.net.decoders.handlers;
 
 import com.feather.Settings;
+import com.feather.engine.action.WalkToAction;
 import com.feather.game.Animation;
 import com.feather.game.ForceTalk;
 import com.feather.game.World;
@@ -22,6 +23,8 @@ import com.feather.game.player.actions.thieving.PickPocketableNPC;
 import com.feather.game.player.content.PlayerLook;
 import com.feather.game.player.dialogues.FremennikShipmaster;
 import com.feather.io.InputStream;
+import com.feather.plugin.PluginManager;
+import com.feather.plugin.handler.PluginNPCInteractionListener;
 import com.feather.utils.Logger;
 import com.feather.utils.NPCExamines;
 import com.feather.utils.NPCSpawns;
@@ -67,6 +70,10 @@ public class NPCHandler {
 		player.stopAll(false);
 		if(forceRun)
 			player.setRun(forceRun);
+
+		if (handlePluginNPCInteraction(player, npc, 1))
+		    return;
+
 		if (npc.getDefinitions().name.contains("Banker")
 				|| npc.getDefinitions().name.contains("banker")) {
 			player.faceEntity(npc);
@@ -252,6 +259,10 @@ public class NPCHandler {
 		player.stopAll(false);
 		if(forceRun)
 			player.setRun(forceRun);
+
+		if (handlePluginNPCInteraction(player, npc, 2))
+		    return;
+
 		if (npc.getDefinitions().name.contains("Banker")
 				|| npc.getDefinitions().name.contains("banker")) {
 			player.faceEntity(npc);
@@ -385,6 +396,10 @@ public class NPCHandler {
 		player.stopAll(false);
 		if(forceRun)
 			player.setRun(forceRun);
+
+		if (handlePluginNPCInteraction(player, npc, 3))
+		    return;
+
 		player.setRouteEvent(new RouteEvent(npc, () -> {
             npc.resetWalkSteps();
             if (!player.getControlerManager().processNPCClick3(npc))
@@ -414,5 +429,20 @@ public class NPCHandler {
 			System.out.println("cliked 3 at npc id : "
 					+ npc.getId() + ", " + npc.getX() + ", "
 					+ npc.getY() + ", " + npc.getPlane());
+	}
+
+	private static boolean handlePluginNPCInteraction(Player player, NPC npc, int opNum) {
+	    PluginManager pm = PluginManager.getInstance();
+	    if (!pm.hasNPCListeners(npc.getId(), opNum))
+	        return false;
+
+	    java.util.List<PluginNPCInteractionListener> listeners = pm.getNPCListeners(npc.getId(), opNum);
+	    for (PluginNPCInteractionListener listener : listeners) {
+	        WalkToAction.walkTo(player, npc, () -> {
+	            player.faceEntity(npc);
+	            listener.accept(player, npc, opNum);
+	        });
+	    }
+	    return true;
 	}
 }

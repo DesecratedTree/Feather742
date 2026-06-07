@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 import com.feather.engine.events.EventBus;
 import com.feather.engine.events.GameLifecycle;
 import com.feather.engine.processes.*;
+import com.feather.plugin.PluginManager;
 import com.feather.utils.Logger;
 
 public final class GameEngine {
@@ -93,6 +94,7 @@ public final class GameEngine {
 
     private static void initializeLegacyComponents() {
         worldThread.start();
+        PluginManager.getInstance().loadPlugins();
         Logger.log("GameEngine", "Legacy components initialized.");
     }
 

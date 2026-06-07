@@ -2,6 +2,7 @@ package com.feather.net.decoders.handlers;
 
 import com.feather.Settings;
 import com.feather.cache.parser.ObjectDefinitions;
+import com.feather.engine.action.WalkToAction;
 import com.feather.game.*;
 import com.feather.game.item.Item;
 import com.feather.game.minigames.CastleWars;
@@ -48,6 +49,8 @@ import com.feather.game.player.dialogues.quests.CooksAssistant;
 import com.feather.engine.tasks.WorldTask;
 import com.feather.engine.tasks.WorldTasksManager;
 import com.feather.io.InputStream;
+import com.feather.plugin.PluginManager;
+import com.feather.plugin.handler.PluginObjectInteractionListener;
 import com.feather.utils.Logger;
 import com.feather.utils.PkRank;
 import com.feather.utils.Utils;
@@ -114,6 +117,10 @@ public final class ObjectHandler {
 		player.stopAll(false);
 		if(forceRun)
 			player.setRun(forceRun);
+
+		if (handlePluginObjectInteraction(player, object, option))
+		    return;
+
 		switch(option) {
 		case 1:
 			handleOption1(player, object);
@@ -1673,5 +1680,20 @@ public final class ObjectHandler {
                     System.out.println("Item on object: " + object.getId());
             }
         }, false));
+	}
+
+	private static boolean handlePluginObjectInteraction(Player player, WorldObject object, int opNum) {
+	    PluginManager pm = PluginManager.getInstance();
+	    if (!pm.hasObjectListeners(object.getId(), opNum))
+	        return false;
+
+	    java.util.List<PluginObjectInteractionListener> listeners = pm.getObjectListeners(object.getId(), opNum);
+	    for (PluginObjectInteractionListener listener : listeners) {
+	        WalkToAction.walkTo(player, object, () -> {
+	            player.faceObject(object);
+	            listener.accept(player, object, opNum);
+	        });
+	    }
+	    return true;
 	}
 }

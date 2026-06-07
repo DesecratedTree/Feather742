@@ -19,6 +19,9 @@ dependencies {
 
     // Optional: Logging
     implementation("org.slf4j:slf4j-simple:2.0.12")
+
+    // Plugin scanning
+    implementation("org.reflections:reflections:0.9.12")
 }
 
 application {
