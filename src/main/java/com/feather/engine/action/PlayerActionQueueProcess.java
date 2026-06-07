@@ -1,27 +1,23 @@
-package com.feather.engine.processes;
+package com.feather.engine.action;
 
+import com.feather.engine.processes.BaseGameProcess;
 import com.feather.game.World;
 import com.feather.game.player.Player;
-import com.feather.engine.action.ActionQueue;
 import com.feather.utils.Logger;
 
-public class PlayerMainProcess extends BaseGameProcess {
+public class PlayerActionQueueProcess extends BaseGameProcess {
+
     @Override
     protected void doProcess() {
         try {
-            // Main player processing - actions, combat, skills, etc.
             for (Player player : World.getPlayers()) {
                 if (player == null || !player.hasStarted() || player.hasFinished())
                     continue;
 
-                // Process the player's main logic (legacy action system)
-                player.processEntity();
-
-                // Process the new action queue system
                 ActionQueue queue = player.getActionQueue();
                 if (queue != null && !queue.isEmpty()) {
                     queue.process(
-                        player.isLocked() || player.getFreezeDelay() > com.feather.utils.Utils.currentTimeMillis(),
+                        player.isLocked() || player.getFreezeDelay() > System.currentTimeMillis(),
                         player.getInterfaceManager().containsScreenInter(),
                         () -> player.closeInterfaces()
                     );

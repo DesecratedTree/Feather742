@@ -128,6 +128,7 @@ public class Player extends Entity {
 	private transient DialogueManager dialogueManager;
 	private transient HintIconsManager hintIconsManager;
 	private transient ActionManager actionManager;
+	private transient com.feather.engine.action.ActionQueue actionQueue;
 	private transient CutscenesManager cutscenesManager;
 	private transient PriceCheckManager priceCheckManager;
 	private transient CoordsEvent coordsEvent;
@@ -365,6 +366,7 @@ public class Player extends Entity {
 		localPlayerUpdate = new LocalPlayerUpdate(this);
 		localNPCUpdate = new LocalNPCUpdate(this);
 		actionManager = new ActionManager(this);
+		actionQueue = new com.feather.engine.action.ActionQueue();
 		cutscenesManager = new CutscenesManager(this);
 		trade = new Trade(this);
 		// loads player on saved instances
@@ -543,8 +545,11 @@ public class Player extends Entity {
 			resetWalkSteps();
 			//getPackets().sendResetMinimapFlag();
 		}
-		if (stopActions)
+		if (stopActions) {
 			actionManager.forceStop();
+			if (actionQueue != null)
+				actionQueue.clear();
+		}
 		combatDefinitions.resetSpells(false);
 	}
 
@@ -1236,6 +1241,10 @@ public class Player extends Entity {
 
 	public ActionManager getActionManager() {
 		return actionManager;
+	}
+
+	public com.feather.engine.action.ActionQueue getActionQueue() {
+		return actionQueue;
 	}
 
 	public DialogueManager getDialogueManager() {
